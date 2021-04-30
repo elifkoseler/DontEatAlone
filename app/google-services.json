@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "697897488507",
+    "project_id": "donteatalone-26887",
+    "storage_bucket": "donteatalone-26887.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697897488507:android:5321e2a686c467fbc0d2de",
+        "android_client_info": {
+          "package_name": "com.elf.dea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697897488507-ctdpfc2b3fqlo3qnj7da40ucnjvttt03.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVzo5wK-0UeCAflswO8gYJ8QzUyTN62Gk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697897488507-ctdpfc2b3fqlo3qnj7da40ucnjvttt03.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
