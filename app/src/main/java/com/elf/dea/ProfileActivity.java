@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.elf.dea.UserData.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,9 +22,10 @@ import java.util.UUID;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    EditText nameText, usernameText,phoneText;
+    EditText nameText, usernameText, phoneText, locationText, birthYearText;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
+    User user = new User();
 
 
     @Override
@@ -34,6 +36,8 @@ public class ProfileActivity extends AppCompatActivity {
         nameText = findViewById(R.id.NameText);
         usernameText = findViewById(R.id.UsernameText);
         phoneText = findViewById(R.id.PhoneText);
+        locationText = findViewById(R.id.LocationText);
+        birthYearText = findViewById(R.id.BirthYearText);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -41,32 +45,35 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void EditLater(View view){
-        Log.d("myTag","oka");
-
+        Log.d("myTag","EditLater butonuna basıldı!");
         Intent intent = new Intent(ProfileActivity.this,FeedActivity.class);
         startActivity(intent);
         //finish();
-
     }
 
     public void Save(View view){
 
-        UUID uuid = UUID.randomUUID();
+        //UUID uuid = UUID.randomUUID();
 
-        String name = nameText.getText().toString();
-        String username = usernameText.getText().toString();
-        String phone = phoneText.getText().toString();
+        user.name = nameText.getText().toString();
+        user.username = usernameText.getText().toString();
+        user.phone = phoneText.getText().toString();
+        user.location = locationText.getText().toString();
+        user.birthYear = Integer.parseInt(birthYearText.getText().toString());
         //Toast.makeText(ProfileActivity.this,"Save'e bastın !!", Toast.LENGTH_LONG).show();
-
-        String email = firebaseAuth.getCurrentUser().getEmail();
+        user.email = firebaseAuth.getCurrentUser().getEmail();
 
         HashMap<String, Object> postData = new HashMap<>();
-        postData.put("name",name);
-        postData.put("username",username);
-        postData.put("phone",phone);
-        postData.put("email",email);
+        postData.put("name", user.name);
+        postData.put("username", user.username);
+        postData.put("email", user.email);
+        postData.put("phone", user.phone);
+        postData.put("location", user.location);
+        postData.put("birth year", user.birthYear);
 
-        firebaseFirestore.collection("Users").add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+        firebaseFirestore.collection("Users").document(user.username).collection("User Info")
+                .add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Toast.makeText(ProfileActivity.this,"Dbye eklendi!!",Toast.LENGTH_LONG).show();
