@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
         String name = nameText.getText().toString();
         String username = usernameText.getText().toString();
         String phone = phoneText.getText().toString();
-        Toast.makeText(ProfileActivity.this,"Save'e bastın !!", Toast.LENGTH_LONG).show();
+        //Toast.makeText(ProfileActivity.this,"Save'e bastın !!", Toast.LENGTH_LONG).show();
 
         String email = firebaseAuth.getCurrentUser().getEmail();
 
