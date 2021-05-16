@@ -1,6 +1,6 @@
-package com.elf.dea.data;
+package com.elf.dea.UserData;
 
-import java.time.LocalDate;
+import com.elf.dea.MeetingData.Meeting;
 
 public class User {
     public String name;
@@ -10,6 +10,10 @@ public class User {
     public String profilePhotoName;
     public int birthYear;
     public int score;
+
+    public Interest interest = new Interest();
+    public EatingPreferences eatingPreferences = new EatingPreferences();
+    public Meeting meetingPreferences = new Meeting();
 
     public User() {
     }
