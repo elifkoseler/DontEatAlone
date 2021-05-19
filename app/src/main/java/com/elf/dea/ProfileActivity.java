@@ -72,12 +72,12 @@ public class ProfileActivity extends AppCompatActivity {
         postData.put("birth year", user.birthYear);
 
 
-        firebaseFirestore.collection("Users").document(user.username).collection("User Info")
+        firebaseFirestore.collection("Users").document(user.email).collection("User Info")
                 .add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Toast.makeText(ProfileActivity.this,"Dbye eklendi!!",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(ProfileActivity.this,FeedActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, UserPreferenceActivity.class);
                 startActivity(intent);
                 finish();
             }

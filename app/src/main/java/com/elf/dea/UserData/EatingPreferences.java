@@ -16,7 +16,6 @@ public class EatingPreferences {
             this.coffee = coffee;
             this.drink = drink;
         }
-
         public EatingPreferences() {
             this.meat = false;
             this.fish = false;
@@ -25,4 +24,53 @@ public class EatingPreferences {
             this.coffee = false;
             this.drink = false;
         }
+
+
+    public void setMeat(boolean meat) {
+        this.meat = meat;
     }
+
+    public void setFish(boolean fish) {
+        this.fish = fish;
+    }
+
+    public void setFastfood(boolean fastfood) {
+        this.fastfood = fastfood;
+    }
+
+    public void setTraditional(boolean traditional) {
+        this.traditional = traditional;
+    }
+
+    public void setCoffee(boolean coffee) {
+        this.coffee = coffee;
+    }
+
+    public void setDrink(boolean drink) {
+        this.drink = drink;
+    }
+
+    public boolean isMeat() {
+        return meat;
+    }
+
+    public boolean isFish() {
+        return fish;
+    }
+
+    public boolean isFastfood() {
+        return fastfood;
+    }
+
+    public boolean isTraditional() {
+        return traditional;
+    }
+
+    public boolean isCoffee() {
+        return coffee;
+    }
+
+    public boolean isDrink() {
+        return drink;
+    }
+}
