@@ -87,6 +87,8 @@ public class MeetingPreferencesActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 System.out.println("Meeting pref dbye eklendi");
+                Intent intent = new Intent(MeetingPreferencesActivity.this, AvailabilityActivity.class);
+                startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

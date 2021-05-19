@@ -10,114 +10,110 @@
         android:id="@+id/nextButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="21dp"
         android:onClick="Save"
         android:text="Save"
         android:textSize="14sp"
         app:iconPadding="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/editLaterText2"
+        app:layout_constraintStart_toEndOf="@+id/editLaterText2" />
 
     <Button
         android:id="@+id/backButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="21dp"
         android:onClick="Back"
         android:text="Back"
         app:iconPadding="4dp"
         app:layout_constraintBottom_toTopOf="@+id/editLaterText2"
-        app:layout_constraintEnd_toStartOf="@+id/nextButton2"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/editLaterText2" />
 
     <CheckBox
         android:id="@+id/animalCheckBox"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginBottom="190dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Animal Friendly"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editLaterText2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/smokingCheckBox" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <CheckBox
         android:id="@+id/smokingCheckBox"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="325dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="232dp"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="36dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Smoking Area"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/editLaterText2"
+        app:layout_constraintBottom_toTopOf="@+id/animalCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/wifiCheckBox"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/wifiCheckBox" />
 
     <CheckBox
         android:id="@+id/wifiCheckBox"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="272dp"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="163dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="163dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Wifi"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/backButton2"
         app:layout_constraintEnd_toStartOf="@+id/smokingCheckBox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/innerCheckBox" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <CheckBox
         android:id="@+id/outerCheckBox"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="56dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Outer Space"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/smokingCheckBox"
+        app:layout_constraintBottom_toBottomOf="@+id/smokingCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/innerCheckBox"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.589" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <CheckBox
         android:id="@+id/innerCheckBox"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="55dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Inner Space"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/wifiCheckBox"
+        app:layout_constraintBottom_toBottomOf="@+id/smokingCheckBox"
         app:layout_constraintEnd_toStartOf="@+id/outerCheckBox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <TextView
         android:id="@+id/editLaterText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="21dp"
         android:onClick="EditLater"
         android:text="Edit Later"
@@ -125,8 +121,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/smokingCheckBox" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView10"
@@ -144,22 +139,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
-        android:layout_marginBottom="88dp"
         android:text="What do you prefer for the meeting?"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/innerCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="287dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="60dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="62dp"
         android:text="Just a few steps left!"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

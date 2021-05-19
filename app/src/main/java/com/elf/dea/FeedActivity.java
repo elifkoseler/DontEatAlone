@@ -43,13 +43,13 @@ public class FeedActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) { //itemler ne yapacak yazmak için
 
-        if(item.getItemId() == R.id.add_post){
+        if(item.getItemId() == R.id.CreateMeeting){
 
             Intent intentToUpload = new Intent(FeedActivity.this, CreateActivity.class);
             startActivity(intentToUpload);
 
         }
-        else if(item.getItemId() == R.id.sign_out){
+        else if(item.getItemId() == R.id.SignOut){
 
             firebaseAuth.signOut();
 
