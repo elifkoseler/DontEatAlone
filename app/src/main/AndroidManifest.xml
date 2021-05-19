@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dea">
-        <activity android:name=".UserPreferenceActivity"></activity>
+        <activity android:name=".MeetingPreferencesActivity"></activity>
+        <activity android:name=".InterestPreferencesActivity" />
+        <activity android:name=".UserPreferenceActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".FeedActivity" />

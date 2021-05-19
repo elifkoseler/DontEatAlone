@@ -22,4 +22,44 @@ public class Interest {
         this.art = false;
         this.technology = false;
     }
+
+    public void setTravel(boolean travel) {
+        this.travel = travel;
+    }
+
+    public void setSports(boolean sports) {
+        this.sports = sports;
+    }
+
+    public void setMusic(boolean music) {
+        this.music = music;
+    }
+
+    public void setArt(boolean art) {
+        this.art = art;
+    }
+
+    public void setTechnology(boolean technology) {
+        this.technology = technology;
+    }
+
+    public boolean isTravel() {
+        return travel;
+    }
+
+    public boolean isSports() {
+        return sports;
+    }
+
+    public boolean isMusic() {
+        return music;
+    }
+
+    public boolean isArt() {
+        return art;
+    }
+
+    public boolean isTechnology() {
+        return technology;
+    }
 }

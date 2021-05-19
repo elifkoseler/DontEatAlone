@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InterestPreferencesActivity">
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="95dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="Back"
+        android:text="Back"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="Save"
+        android:text="Save"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView7" />
+
+    <CheckBox
+        android:id="@+id/techCheckBox"
+        android:layout_width="130dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="140dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Technology"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/musicCheckBox" />
+
+    <CheckBox
+        android:id="@+id/artCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="96dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Art"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/musicCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/musicCheckBox" />
+
+    <CheckBox
+        android:id="@+id/musicCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="27dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Music"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/techCheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/artCheckBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/travelCheckBox" />
+
+    <CheckBox
+        android:id="@+id/sportsCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="96dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Sports"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/travelCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/travelCheckBox" />
+
+    <CheckBox
+        android:id="@+id/travelCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="38dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Travel"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/musicCheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/sportsCheckBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="383dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="22dp"
+        android:text="Let's get to know you better!"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="393dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="10dp"
+        android:text="Let us know about your interests so that we can make the best matches"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="203dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="54dp"
+        android:text="You can check more than one !"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/travelCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:onClick="EditLater"
+        android:text="Edit Later"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

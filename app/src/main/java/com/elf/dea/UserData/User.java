@@ -32,4 +32,6 @@ public class User {
         this.score = score;
         this.interest = interest;
     }
+
+
 }

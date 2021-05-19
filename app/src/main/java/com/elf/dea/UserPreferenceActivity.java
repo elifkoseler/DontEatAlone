@@ -100,6 +100,8 @@ public class UserPreferenceActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 System.out.println("Eating Pref dbye eklendi.");
+                Intent intent = new Intent(UserPreferenceActivity.this, InterestPreferencesActivity.class);
+                startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -116,13 +118,13 @@ public class UserPreferenceActivity extends AppCompatActivity {
 
     public void Back(View view) {
         System.out.println("Back butonuna basıldı!");
-        Intent intent = new Intent(UserPreferenceActivity.this,ProfileActivity.class);
+        Intent intent = new Intent(UserPreferenceActivity.this, ProfileActivity.class);
         startActivity(intent);
     }
 
     public void EditLater(View view){
         System.out.println("EditLater butonun basıldı!");
-        Intent intent = new Intent(UserPreferenceActivity.this,FeedActivity.class);
+        Intent intent = new Intent(UserPreferenceActivity.this, FeedActivity.class);
         startActivity(intent);
     }
 
