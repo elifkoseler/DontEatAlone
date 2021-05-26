@@ -22,7 +22,7 @@ public class InterestPreferencesActivity extends AppCompatActivity {
 
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
-    User user = new User();
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,10 @@ public class InterestPreferencesActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        user = (User)getIntent().getSerializableExtra("user");
+        System.out.println("InterestActivity: " + user.getName());
+
     }
 
     public void onCheckboxClicked(View view){
@@ -89,7 +93,7 @@ public class InterestPreferencesActivity extends AppCompatActivity {
             public void onSuccess(DocumentReference documentReference) {
                 System.out.println("Interests dbye eklendi");
                 Intent intent = new Intent(InterestPreferencesActivity.this, MeetingPreferencesActivity.class);
-
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {

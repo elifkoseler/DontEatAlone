@@ -1,8 +1,11 @@
 package com.elf.dea.UserData;
 
 import com.elf.dea.MeetingData.Meeting;
+import com.google.firebase.firestore.FieldValue;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 public class User implements Serializable{
 
@@ -14,6 +17,7 @@ public class User implements Serializable{
     String profilePhotoName;
     int birthYear;
     int score;
+    FieldValue registerDate;
 
     public Interest interest = new Interest();
     public EatingPreferences eatingPreferences = new EatingPreferences();
@@ -23,7 +27,7 @@ public class User implements Serializable{
     }
 
     public User(String name, String username, String email, String phone, String location, String profilePhotoName, int birthYear,
-                int score, Interest interest, EatingPreferences eatingPreferences, Meeting meetingPreferences) {
+                int score, Interest interest, EatingPreferences eatingPreferences, Meeting meetingPreferences, FieldValue registerDate) {
         this.name = name;
         this.username = username;
         this.email = email;
@@ -35,6 +39,7 @@ public class User implements Serializable{
         this.interest = interest;
         this.eatingPreferences = eatingPreferences;
         this.meetingPreferences = meetingPreferences;
+        this.registerDate = registerDate;
     }
 
     public String getName() {
@@ -123,5 +128,13 @@ public class User implements Serializable{
 
     public void setMeetingPreferences(Meeting meetingPreferences) {
         this.meetingPreferences = meetingPreferences;
+    }
+
+    public FieldValue getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(FieldValue registerDate) {
+        this.registerDate = registerDate;
     }
 }

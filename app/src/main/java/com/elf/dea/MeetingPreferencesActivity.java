@@ -24,7 +24,7 @@ public class MeetingPreferencesActivity extends AppCompatActivity {
 
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
-    User user = new User();
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,9 @@ public class MeetingPreferencesActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        user = (User) getIntent().getSerializableExtra("user");
     }
+
     public void onCheckboxClicked(View view){
         boolean checked = ((CheckBox) view).isChecked();
         System.out.println("Checked: "+ checked);
@@ -88,6 +90,7 @@ public class MeetingPreferencesActivity extends AppCompatActivity {
             public void onSuccess(DocumentReference documentReference) {
                 System.out.println("Meeting pref dbye eklendi");
                 Intent intent = new Intent(MeetingPreferencesActivity.this, AvailabilityActivity.class);
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {

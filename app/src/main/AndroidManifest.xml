@@ -14,7 +14,7 @@
         <activity android:name=".InterestPreferencesActivity" />
         <activity android:name=".EatingPreferenceActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".CreateActivity" />
+        <activity android:name=".CreateMeetingActivity" />
         <activity android:name=".FeedActivity" />
         <activity android:name=".SignUpActivity">
             <intent-filter>

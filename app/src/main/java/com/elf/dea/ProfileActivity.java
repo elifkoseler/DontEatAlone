@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
@@ -62,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
         user.setBirthYear(Integer.parseInt(birthYearText.getText().toString()));
         //Toast.makeText(ProfileActivity.this,"Save'e bastın !!", Toast.LENGTH_LONG).show();
         user.setEmail(firebaseAuth.getCurrentUser().getEmail());
+        user.setRegisterDate(FieldValue.serverTimestamp());
 
         HashMap<String, Object> postData = new HashMap<>();
         postData.put("name", user.getName());
@@ -70,13 +72,8 @@ public class ProfileActivity extends AppCompatActivity {
         postData.put("phone", user.getPhone());
         postData.put("location", user.getLocation());
         postData.put("birth year", user.getBirthYear());
+        postData.put("register time", user.getRegisterDate());
 
-      /*  Intent intent = new Intent(ProfileActivity.this, EatingPreferenceActivity.class);
-        intent.putExtra("user",user);
-        System.out.println("ekstra sonu");
-        startActivity(intent);
-        System.out.println("intentten çıktı");
-*/
         firebaseFirestore.collection("Users").document(user.getEmail()).collection("User Info")
                 .add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override

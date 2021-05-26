@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.elf.dea.UserData.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +32,7 @@ public class FeedActivity extends AppCompatActivity {
     ArrayList<String> userEmailFromFB;
     ArrayList<String> userCommentFromFB;
     ArrayList<String> userImageFromFB;
+    User user;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { //menuyu bağlamak için
@@ -46,7 +48,7 @@ public class FeedActivity extends AppCompatActivity {
 
         if(item.getItemId() == R.id.CreateMeeting){
 
-            Intent intentToUpload = new Intent(FeedActivity.this, CreateActivity.class);
+            Intent intentToUpload = new Intent(FeedActivity.this, CreateMeetingActivity.class);
             startActivity(intentToUpload);
 
         }
@@ -61,7 +63,7 @@ public class FeedActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void CreateActivity(View view){
-        Intent intent = new Intent(FeedActivity.this, CreateActivity.class);
+        Intent intent = new Intent(FeedActivity.this, CreateMeetingActivity.class);
         startActivity(intent);
     }
 
@@ -76,6 +78,8 @@ public class FeedActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = firebaseFirestore.getInstance();
+
+        user = (User) getIntent().getSerializableExtra("user"); // get ref of user from other activities
 
         getDataFromFirestore();
     }

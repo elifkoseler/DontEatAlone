@@ -22,7 +22,7 @@ public class EatingPreferenceActivity extends AppCompatActivity {
 
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
-    User user = new User();
+    User user;
 
 
     @Override
@@ -103,6 +103,7 @@ public class EatingPreferenceActivity extends AppCompatActivity {
             public void onSuccess(DocumentReference documentReference) {
                 System.out.println("Eating Pref dbye eklendi.");
                 Intent intent = new Intent(EatingPreferenceActivity.this, InterestPreferencesActivity.class);
+                intent.putExtra("user",user);
                 startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {

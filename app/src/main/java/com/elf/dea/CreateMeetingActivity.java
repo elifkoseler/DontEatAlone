@@ -35,7 +35,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class CreateActivity extends AppCompatActivity {
+public class CreateMeetingActivity extends AppCompatActivity {
 
     Bitmap selectedImage;
     ImageView imageView;
@@ -50,7 +50,7 @@ public class CreateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create);
+        setContentView(R.layout.activity_create_meeting);
 
         imageView = findViewById(R.id.imageView3);
         commentText = findViewById(R.id.commentText);
@@ -72,7 +72,7 @@ public class CreateActivity extends AppCompatActivity {
             storageReference.child(imageName).putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(CreateActivity.this,"Uploaded successfully!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(CreateMeetingActivity.this,"Uploaded successfully!",Toast.LENGTH_LONG).show();
                     //Download URL
 
                     StorageReference newReference = FirebaseStorage.getInstance().getReference(imageName); //upload ettiğim imagein yerini bul
@@ -96,7 +96,7 @@ public class CreateActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
 
-                                    Intent intent = new Intent(CreateActivity.this, FeedActivity.class);
+                                    Intent intent = new Intent(CreateMeetingActivity.this, FeedActivity.class);
                                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //tüm aktiviteleri kapatıp uygulamadan çıkıyoruz.
                                     startActivity(intent);
 
@@ -104,7 +104,7 @@ public class CreateActivity extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(CreateActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(CreateMeetingActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
                                 }
                             });
                         }
@@ -115,7 +115,7 @@ public class CreateActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(CreateActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -174,5 +174,6 @@ public class CreateActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
 }
