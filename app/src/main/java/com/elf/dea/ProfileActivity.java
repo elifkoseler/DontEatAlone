@@ -17,8 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -55,31 +55,39 @@ public class ProfileActivity extends AppCompatActivity {
 
         //UUID uuid = UUID.randomUUID();
 
-        user.name = nameText.getText().toString();
-        user.username = usernameText.getText().toString();
-        user.phone = phoneText.getText().toString();
-        user.location = locationText.getText().toString();
-        user.birthYear = Integer.parseInt(birthYearText.getText().toString());
+        user.setName(nameText.getText().toString());
+        user.setUsername(usernameText.getText().toString());
+        user.setPhone(phoneText.getText().toString());
+        user.setLocation(locationText.getText().toString());
+        user.setBirthYear(Integer.parseInt(birthYearText.getText().toString()));
         //Toast.makeText(ProfileActivity.this,"Save'e bastın !!", Toast.LENGTH_LONG).show();
-        user.email = firebaseAuth.getCurrentUser().getEmail();
+        user.setEmail(firebaseAuth.getCurrentUser().getEmail());
 
         HashMap<String, Object> postData = new HashMap<>();
-        postData.put("name", user.name);
-        postData.put("username", user.username);
-        postData.put("email", user.email);
-        postData.put("phone", user.phone);
-        postData.put("location", user.location);
-        postData.put("birth year", user.birthYear);
+        postData.put("name", user.getName());
+        postData.put("username", user.getUsername());
+        postData.put("email", user.getEmail());
+        postData.put("phone", user.getPhone());
+        postData.put("location", user.getLocation());
+        postData.put("birth year", user.getBirthYear());
 
-
-        firebaseFirestore.collection("Users").document(user.email).collection("User Info")
+      /*  Intent intent = new Intent(ProfileActivity.this, EatingPreferenceActivity.class);
+        intent.putExtra("user",user);
+        System.out.println("ekstra sonu");
+        startActivity(intent);
+        System.out.println("intentten çıktı");
+*/
+        firebaseFirestore.collection("Users").document(user.getEmail()).collection("User Info")
                 .add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Toast.makeText(ProfileActivity.this,"Dbye eklendi!!",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(ProfileActivity.this, UserPreferenceActivity.class);
+                System.out.println("Profile OnSuccesstesin");
+                Intent intent = new Intent(ProfileActivity.this, EatingPreferenceActivity.class);
+                intent.putExtra("user",user);
+                System.out.println("ekstra");
                 startActivity(intent);
-                finish();
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

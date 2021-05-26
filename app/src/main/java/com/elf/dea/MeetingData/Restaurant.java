@@ -1,6 +1,8 @@
 package com.elf.dea.MeetingData;
 
-public class Restaurant {
+import java.io.Serializable;
+
+public class Restaurant implements Serializable {
     public String name;
     public double averageExpenses;
     EatType eatType = new EatType();

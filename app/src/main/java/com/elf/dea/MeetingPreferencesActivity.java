@@ -74,7 +74,7 @@ public class MeetingPreferencesActivity extends AppCompatActivity {
 
     public void Save(View view){
         HashMap<String, Object> data = new HashMap<>();
-        user.email = firebaseAuth.getCurrentUser().getEmail();
+        user.setEmail(firebaseAuth.getCurrentUser().getEmail());
 
         data.put("hasInnerSpace", user.meetingPreferences.getRestaurant().getPlaceFeature().isInnerSpace());
         data.put("hasOuterSpace", user.meetingPreferences.getRestaurant().getPlaceFeature().isOuterSpace());
@@ -82,7 +82,7 @@ public class MeetingPreferencesActivity extends AppCompatActivity {
         data.put("hasWifi", user.meetingPreferences.getRestaurant().getPlaceFeature().isWifi());
         data.put("hasAnimal", user.meetingPreferences.getRestaurant().getPlaceFeature().isAvailableForAnimals());
 
-        firebaseFirestore.collection("Users").document(user.email).collection("Meeting Preferences").document("Restaurant").collection("Place Features")
+        firebaseFirestore.collection("Users").document(user.getEmail()).collection("Meeting Preferences").document("Restaurant").collection("Place Features")
                 .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {

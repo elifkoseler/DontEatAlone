@@ -1,6 +1,8 @@
 package com.elf.dea.UserData;
 
-public class Interest {
+import java.io.Serializable;
+
+public class Interest implements Serializable {
     boolean travel;
     boolean sports;
     boolean music;

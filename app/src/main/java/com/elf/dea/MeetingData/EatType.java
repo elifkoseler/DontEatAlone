@@ -1,6 +1,8 @@
 package com.elf.dea.MeetingData;
 
-public class EatType {
+import java.io.Serializable;
+
+public class EatType implements Serializable {
     boolean meat;
     boolean fish;
     boolean fastfood;

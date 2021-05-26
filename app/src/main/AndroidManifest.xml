@@ -12,7 +12,7 @@
         <activity android:name=".AvailabilityActivity"></activity>
         <activity android:name=".MeetingPreferencesActivity" />
         <activity android:name=".InterestPreferencesActivity" />
-        <activity android:name=".UserPreferenceActivity" />
+        <activity android:name=".EatingPreferenceActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".FeedActivity" />

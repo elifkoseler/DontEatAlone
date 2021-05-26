@@ -1,6 +1,8 @@
 package com.elf.dea.UserData;
 
-public class EatingPreferences {
+import java.io.Serializable;
+
+public class EatingPreferences implements Serializable {
         boolean meat;
         boolean fish;
         boolean fastfood;

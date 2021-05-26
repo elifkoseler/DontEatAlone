@@ -1,9 +1,10 @@
 package com.elf.dea.MeetingData;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Meeting {
+public class Meeting implements Serializable {
     public String name;
     public LocalDate date;
     public LocalTime time;

@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-import com.elf.dea.UserData.Interest;
 import com.elf.dea.UserData.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -76,7 +75,7 @@ public class InterestPreferencesActivity extends AppCompatActivity {
 
     public void Save(View view){
         HashMap<String, Object> data = new HashMap<>();
-        user.email = firebaseAuth.getCurrentUser().getEmail();
+        user.setEmail(firebaseAuth.getCurrentUser().getEmail());
 
         data.put("isTravel", user.interest.isTravel());
         data.put("isMusic", user.interest.isMusic());
@@ -84,12 +83,13 @@ public class InterestPreferencesActivity extends AppCompatActivity {
         data.put("isArt", user.interest.isArt());
         data.put("isTech", user.interest.isTechnology());
 
-        firebaseFirestore.collection("Users").document(user.email).collection("Interests")
+        firebaseFirestore.collection("Users").document(user.getEmail()).collection("Interests")
                 .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 System.out.println("Interests dbye eklendi");
                 Intent intent = new Intent(InterestPreferencesActivity.this, MeetingPreferencesActivity.class);
+
                 startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -110,7 +110,7 @@ public class InterestPreferencesActivity extends AppCompatActivity {
 
     public void Back(View view){
         System.out.println("Back butonuna basıldı!");
-        Intent intent = new Intent(InterestPreferencesActivity.this, UserPreferenceActivity.class);
+        Intent intent = new Intent(InterestPreferencesActivity.this, EatingPreferenceActivity.class);
         startActivity(intent);
     }
 }

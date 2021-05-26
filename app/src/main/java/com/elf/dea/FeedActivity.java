@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +59,10 @@ public class FeedActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void CreateActivity(View view){
+        Intent intent = new Intent(FeedActivity.this, CreateActivity.class);
+        startActivity(intent);
     }
 
     @Override

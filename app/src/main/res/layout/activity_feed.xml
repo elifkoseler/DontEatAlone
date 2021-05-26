@@ -29,6 +29,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="60dp"
         android:background="#DD8282"
+        android:onClick="CreateActivity"
         android:text="Create a meetıng"
         android:textColorHighlight="#FFFFFF"
         android:textSize="18sp"

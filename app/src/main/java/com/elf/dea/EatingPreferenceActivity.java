@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -19,26 +18,29 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class UserPreferenceActivity extends AppCompatActivity {
+public class EatingPreferenceActivity extends AppCompatActivity {
 
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
     User user = new User();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_preference);
+        setContentView(R.layout.activity_eating_preference);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-    }
+        user = (User)getIntent().getSerializableExtra("user");
+        System.out.println(user.getName());
 
+    }
 
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
-
+        System.out.println(user.getName());
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.MeatCheckBox:
@@ -82,7 +84,7 @@ public class UserPreferenceActivity extends AppCompatActivity {
     }
 
     public void Save(View view){
-
+        System.out.println(user.getName());
         HashMap<String, Object> data = new HashMap<>();
         data.put("isMeat", user.eatingPreferences.isMeat());
         data.put("isFish", user.eatingPreferences.isFish());
@@ -91,40 +93,40 @@ public class UserPreferenceActivity extends AppCompatActivity {
         data.put("isCoffee", user.eatingPreferences.isCoffee());
         data.put("isDrink", user.eatingPreferences.isDrink());
 
-        user.email = firebaseAuth.getCurrentUser().getEmail();
-        System.out.println(user.email);
+        user.setEmail(firebaseAuth.getCurrentUser().getEmail());
+        System.out.println(user.getEmail());
 
 
-        firebaseFirestore.collection("Users").document(user.email).collection("Eating Preferences")
+        firebaseFirestore.collection("Users").document(user.getEmail()).collection("Eating Preferences")
                 .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 System.out.println("Eating Pref dbye eklendi.");
-                Intent intent = new Intent(UserPreferenceActivity.this, InterestPreferencesActivity.class);
+                Intent intent = new Intent(EatingPreferenceActivity.this, InterestPreferencesActivity.class);
                 startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UserPreferenceActivity.this, e.getLocalizedMessage().toString()
+                Toast.makeText(EatingPreferenceActivity.this, e.getLocalizedMessage().toString()
                 ,Toast.LENGTH_LONG).show();
             }
         });
 
 
 
-        Toast.makeText(UserPreferenceActivity.this, "Next", Toast.LENGTH_LONG).show();
+        Toast.makeText(EatingPreferenceActivity.this, "Next", Toast.LENGTH_LONG).show();
     }
 
     public void Back(View view) {
         System.out.println("Back butonuna basıldı!");
-        Intent intent = new Intent(UserPreferenceActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(EatingPreferenceActivity.this, ProfileActivity.class);
         startActivity(intent);
     }
 
     public void EditLater(View view){
         System.out.println("EditLater butonun basıldı!");
-        Intent intent = new Intent(UserPreferenceActivity.this, FeedActivity.class);
+        Intent intent = new Intent(EatingPreferenceActivity.this, FeedActivity.class);
         startActivity(intent);
     }
 

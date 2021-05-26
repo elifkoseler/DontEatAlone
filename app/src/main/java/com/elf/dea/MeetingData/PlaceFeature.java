@@ -1,6 +1,8 @@
 package com.elf.dea.MeetingData;
 
-public class PlaceFeature {
+import java.io.Serializable;
+
+public class PlaceFeature implements Serializable {
     boolean InnerSpace;
     boolean OuterSpace;
     boolean Wifi;
