@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,11 +16,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.elf.dea.MeetingData.Meeting;
+import com.elf.dea.UserData.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +37,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -39,7 +45,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
     Bitmap selectedImage;
     ImageView imageView;
-    EditText commentText;
+    EditText nameText;
 
     private FirebaseStorage firebaseStorage;   //storage
     private StorageReference storageReference; //storage ref
@@ -47,23 +53,59 @@ public class CreateMeetingActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //kullanıcı auth
     Uri imageData;
 
+    DatePickerDialog picker;
+    EditText eText;
+    User user = new User();
+    Meeting meeting = new Meeting();
+
+    int d, m, y;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_meeting);
 
         imageView = findViewById(R.id.imageView3);
-        commentText = findViewById(R.id.commentText);
+        nameText = findViewById(R.id.nameText);
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        user = (User) getIntent().getSerializableExtra("user"); // get ref of user from other activities
+
+        eText = findViewById(R.id.editText1);
+        eText.setInputType(InputType.TYPE_NULL);
+        eText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(CreateMeetingActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                eText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                System.out.println("Picked Date " + dayOfMonth +  " " + monthOfYear + " "+ year);
+                                d = dayOfMonth;
+                                m = monthOfYear + 1 ;
+                                y = year;
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
     }
 
 
     public void Upload(View view){
+        System.out.println("Picked Date Exit " + d +  " " + m + " "+ y);
+
         if(imageData != null) {
 
             //universal unique id kullanmalıyım, storageda üst üste yazmasın diye
@@ -80,19 +122,18 @@ public class CreateMeetingActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             String downloadUrl = uri.toString();
-                            //System.out.println(downloadUrl);
-                            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                            String userEmail = firebaseUser.getEmail();
+                            /*FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                            String userEmail = firebaseUser.getEmail();*/
 
-                            String comment = commentText.getText().toString();
+                            meeting.setName(nameText.getText().toString());
 
                             HashMap<String, Object> postData = new HashMap<>();
-                            postData.put("useremail",userEmail);
+                            postData.put("useremail",user.getEmail());
                             postData.put("downloadurl",downloadUrl);
-                            postData.put("comment",comment);
+                            postData.put("name",meeting.getName());
                             postData.put("date", FieldValue.serverTimestamp());
 
-                            firebaseFirestore.collection("Posts").add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            firebaseFirestore.collection("Meetings").add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
 

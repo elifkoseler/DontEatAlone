@@ -10,36 +10,52 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
         android:onClick="Upload"
         android:text="Create"
-        tools:layout_editor_absoluteX="160dp"
-        tools:layout_editor_absoluteY="516dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText1" />
 
     <EditText
-        android:id="@+id/commentText"
-        android:layout_width="318dp"
-        android:layout_height="73dp"
+        android:id="@+id/nameText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="37dp"
         android:ems="10"
         android:hint="Enter Meeting Name"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="233dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editText1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginBottom="125dp"
+        android:ems="10"
+        android:hint="Enter Date"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintStart_toStartOf="@+id/nameText"
+        app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="403dp"
-        android:layout_height="146dp"
-        android:onClick="selectImage"
-        app:srcCompat="@drawable/selective"
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="70dp" />
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="showDatePickerDialog"
-        android:text="@string/pick_date"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="362dp" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginBottom="39dp"
+        app:layout_constraintBottom_toTopOf="@+id/nameText"
+        app:layout_constraintStart_toStartOf="@+id/nameText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/selective" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,7 @@ public class User implements Serializable{
     String profilePhotoName;
     int birthYear;
     int score;
-    FieldValue registerDate;
+
 
     public Interest interest = new Interest();
     public EatingPreferences eatingPreferences = new EatingPreferences();
@@ -27,7 +27,7 @@ public class User implements Serializable{
     }
 
     public User(String name, String username, String email, String phone, String location, String profilePhotoName, int birthYear,
-                int score, Interest interest, EatingPreferences eatingPreferences, Meeting meetingPreferences, FieldValue registerDate) {
+                int score, Interest interest, EatingPreferences eatingPreferences, Meeting meetingPreferences) {
         this.name = name;
         this.username = username;
         this.email = email;
@@ -39,7 +39,6 @@ public class User implements Serializable{
         this.interest = interest;
         this.eatingPreferences = eatingPreferences;
         this.meetingPreferences = meetingPreferences;
-        this.registerDate = registerDate;
     }
 
     public String getName() {
@@ -130,11 +129,4 @@ public class User implements Serializable{
         this.meetingPreferences = meetingPreferences;
     }
 
-    public FieldValue getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegisterDate(FieldValue registerDate) {
-        this.registerDate = registerDate;
-    }
 }

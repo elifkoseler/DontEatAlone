@@ -64,6 +64,7 @@ public class FeedActivity extends AppCompatActivity {
     }
     public void CreateActivity(View view){
         Intent intent = new Intent(FeedActivity.this, CreateMeetingActivity.class);
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 

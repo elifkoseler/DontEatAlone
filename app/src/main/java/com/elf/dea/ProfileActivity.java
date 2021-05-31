@@ -63,7 +63,6 @@ public class ProfileActivity extends AppCompatActivity {
         user.setBirthYear(Integer.parseInt(birthYearText.getText().toString()));
         //Toast.makeText(ProfileActivity.this,"Save'e bastın !!", Toast.LENGTH_LONG).show();
         user.setEmail(firebaseAuth.getCurrentUser().getEmail());
-        user.setRegisterDate(FieldValue.serverTimestamp());
 
         HashMap<String, Object> postData = new HashMap<>();
         postData.put("name", user.getName());
@@ -72,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
         postData.put("phone", user.getPhone());
         postData.put("location", user.getLocation());
         postData.put("birth year", user.getBirthYear());
-        postData.put("register time", user.getRegisterDate());
+        postData.put("register time", FieldValue.serverTimestamp());
 
         firebaseFirestore.collection("Users").document(user.getEmail()).collection("User Info")
                 .add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
