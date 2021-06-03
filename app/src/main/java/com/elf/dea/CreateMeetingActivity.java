@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.elf.dea.MeetingData.Meeting;
@@ -54,11 +56,13 @@ public class CreateMeetingActivity extends AppCompatActivity {
     Uri imageData;
 
     DatePickerDialog picker;
-    EditText eText;
+    EditText dateText;
+    EditText timeText;
     User user = new User();
     Meeting meeting = new Meeting();
 
     int d, m, y;
+    int h, min;
 
 
     @Override
@@ -76,9 +80,13 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("user"); // get ref of user from other activities
 
-        eText = findViewById(R.id.editText1);
-        eText.setInputType(InputType.TYPE_NULL);
-        eText.setOnClickListener(new View.OnClickListener() {
+        dateText = findViewById(R.id.editText1);
+        dateText.setInputType(InputType.TYPE_NULL);
+        timeText = findViewById(R.id.editText);
+        timeText.setInputType(InputType.TYPE_NULL);
+
+
+        dateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -90,7 +98,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                eText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                dateText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 System.out.println("Picked Date " + dayOfMonth +  " " + monthOfYear + " "+ year);
                                 d = dayOfMonth;
                                 m = monthOfYear + 1 ;
@@ -98,6 +106,28 @@ public class CreateMeetingActivity extends AppCompatActivity {
                             }
                         }, year, month, day);
                 picker.show();
+            }
+        });
+
+        timeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+
+                mTimePicker = new TimePickerDialog(CreateMeetingActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        timeText.setText( selectedHour + ":" + selectedMinute);
+                        System.out.println("Picked time: " + selectedHour + ":" + selectedMinute);
+                        h = selectedHour;
+                        min = selectedMinute;
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
             }
         });
     }
