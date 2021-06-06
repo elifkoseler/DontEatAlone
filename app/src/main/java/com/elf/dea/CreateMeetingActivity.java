@@ -68,7 +68,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
     int d, m, y;
     int h, min;
-    String location;
+    String district;
 
 
     @Override
@@ -150,7 +150,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         locationText.setText(listItems[i]);
                         System.out.println("Picked county: " + listItems[i]);
-                        location = listItems[i];
+                        district = listItems[i];
                         dialogInterface.dismiss();
                     }
                 });
@@ -162,6 +162,42 @@ public class CreateMeetingActivity extends AppCompatActivity {
     }
 
     public void Next(View view){
+        meeting.setName(nameText.getText().toString());
+        meeting.setDay(d);
+        meeting.setMonth(m);
+        meeting.setYear(y);
+        meeting.setHour(h);
+        meeting.setSecond(min);
+        meeting.setDistrict(district);
+        meeting.getRestaurant().setName(restaurantText.getText().toString());
+
+        if(imageData != null) {
+            UUID uuid = UUID.randomUUID();
+            String imageName = "images/" + uuid + ".jpg";
+
+            storageReference.child(imageName).putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(CreateMeetingActivity.this,"Image is uploaded successfully!",Toast.LENGTH_LONG).show();
+
+                    StorageReference newReference = FirebaseStorage.getInstance().getReference(imageName); //upload ettiğim imagein yerini bul
+                    newReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            meeting.setImageUrl(uri.toString());
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(CreateMeetingActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            });
+
+        }
+
+        System.out.println(meeting.getRestaurant().getName());
         Intent intent = new Intent(CreateMeetingActivity.this, CreateMeetingRestaurantDetailActivity.class);
         intent.putExtra("user", user);
         intent.putExtra("meeting", meeting);
@@ -171,7 +207,6 @@ public class CreateMeetingActivity extends AppCompatActivity {
     public void Upload(View view){
         System.out.println("Picked Date Exit " + d +  " " + m + " "+ y);
 
-        if(imageData != null) {
 
             //universal unique id kullanmalıyım, storageda üst üste yazmasın diye
             UUID uuid = UUID.randomUUID();
@@ -190,7 +225,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                             /*FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             String userEmail = firebaseUser.getEmail();*/
 
-                            meeting.setName(nameText.getText().toString());
+
 
                             HashMap<String, Object> postData = new HashMap<>();
                             postData.put("useremail",user.getEmail());
@@ -225,7 +260,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 }
             });
         }
-    }
+
 
     public void selectImage(View view){
         //izin istendi, izin verildi ya da verilmedi.

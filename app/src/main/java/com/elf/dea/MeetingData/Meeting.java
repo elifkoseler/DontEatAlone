@@ -1,11 +1,6 @@
 package com.elf.dea.MeetingData;
 
-import com.elf.dea.MeetingData.DateTimeData.Date;
-import com.elf.dea.MeetingData.DateTimeData.Time;
-
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class Meeting implements Serializable {
     public String name;
@@ -14,7 +9,9 @@ public class Meeting implements Serializable {
     int year;
     int hour;
     int second;
-    public String location;
+    String district;
+    String address;
+    String imageUrl;
     Restaurant restaurant = new Restaurant();
 
     public Meeting() {
@@ -24,18 +21,21 @@ public class Meeting implements Serializable {
         this.hour = 0;
         this.second = 0;
         this.name = "";
-        this.location = "";
+        this.district = "";
+        this.address = "";
+        this.imageUrl = "";
     }
 
-    public Meeting(String name, int day, int month, int year, int hour, int second, String location, Restaurant restaurant) {
+    public Meeting(String name, int day, int month, int year, int hour, int second, String district, Restaurant restaurant, String address) {
         this.name = name;
         this.day = day;
         this.month = month;
         this.year = year;
         this.hour = hour;
         this.second = second;
-        this.location = location;
+        this.district = district;
         this.restaurant = restaurant;
+        this.address = address;
     }
 
     public String getName() {
@@ -46,12 +46,12 @@ public class Meeting implements Serializable {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setDistrict(String district ) {
+        this.district  = district ;
     }
 
     public Restaurant getRestaurant() {
@@ -100,5 +100,21 @@ public class Meeting implements Serializable {
 
     public void setSecond(int second) {
         this.second = second;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

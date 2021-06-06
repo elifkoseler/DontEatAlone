@@ -145,5 +145,7 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
 
     public void Create(View view){
         System.out.println("Create butonuna basıldı !!");
+        System.out.println(meeting.getRestaurant().getName());
+        System.out.println(meeting.getImageUrl());
     }
 }
