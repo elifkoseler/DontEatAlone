@@ -7,8 +7,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -58,11 +60,15 @@ public class CreateMeetingActivity extends AppCompatActivity {
     DatePickerDialog picker;
     EditText dateText;
     EditText timeText;
-    User user = new User();
+    EditText locationText;
+    EditText restaurantText;
+
+    User user;
     Meeting meeting = new Meeting();
 
     int d, m, y;
     int h, min;
+    String location;
 
 
     @Override
@@ -84,7 +90,9 @@ public class CreateMeetingActivity extends AppCompatActivity {
         dateText.setInputType(InputType.TYPE_NULL);
         timeText = findViewById(R.id.editText);
         timeText.setInputType(InputType.TYPE_NULL);
-
+        locationText = findViewById(R.id.locationText);
+        locationText.setInputType(InputType.TYPE_NULL);
+        restaurantText = findViewById(R.id.editTextRestaurant);
 
         dateText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,8 +138,35 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 mTimePicker.show();
             }
         });
+        String[] listItems = getResources().getStringArray(R.array.istanbul_county);
+
+        locationText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(CreateMeetingActivity.this);
+                mBuilder.setTitle("Please choose the location");
+                mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        locationText.setText(listItems[i]);
+                        System.out.println("Picked county: " + listItems[i]);
+                        location = listItems[i];
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
+            }
+        });
     }
 
+    public void Next(View view){
+        Intent intent = new Intent(CreateMeetingActivity.this, CreateMeetingRestaurantDetailActivity.class);
+        intent.putExtra("user", user);
+        intent.putExtra("meeting", meeting);
+        startActivity(intent);
+    }
 
     public void Upload(View view){
         System.out.println("Picked Date Exit " + d +  " " + m + " "+ y);

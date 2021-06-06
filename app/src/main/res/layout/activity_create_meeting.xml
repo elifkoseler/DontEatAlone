@@ -10,24 +10,26 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="62dp"
-        android:onClick="Upload"
-        android:text="Create"
+        android:layout_marginBottom="57dp"
+        android:onClick="Next"
+        android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRestaurant" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="73dp"
-        android:layout_marginBottom="11dp"
-        android:ems="10"
+        android:layout_marginBottom="14dp"
+        android:ems="0"
         android:hint="Enter Time"
-        app:layout_constraintBottom_toTopOf="@+id/editTextLocation"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/locationText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editText1"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
@@ -37,7 +39,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="73dp"
         android:layout_marginEnd="73dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="7dp"
         android:ems="10"
         android:hint="Enter Meeting Name"
         android:inputType="textPersonName"
@@ -49,30 +51,48 @@
     <EditText
         android:id="@+id/editText1"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="55dp"
         android:layout_marginStart="73dp"
         android:layout_marginEnd="27dp"
-        android:ems="10"
+        android:layout_marginBottom="8dp"
+        android:ems="0"
         android:hint="Enter Date"
-        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/locationText"
         app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
     <EditText
-        android:id="@+id/editTextLocation"
+        android:id="@+id/locationText"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="71dp"
-        android:layout_marginEnd="71dp"
-        android:layout_marginBottom="59dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:hint="Choose Location"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextRestaurant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <EditText
+        android:id="@+id/editTextRestaurant"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="38dp"
+        android:ems="10"
+        android:hint="Enter Restaurant"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/locationText" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -80,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="41dp"
-        android:layout_marginBottom="39dp"
+        android:layout_marginBottom="14dp"
         app:layout_constraintBottom_toTopOf="@+id/nameText"
         app:layout_constraintStart_toStartOf="@+id/nameText"
         app:layout_constraintTop_toTopOf="parent"
