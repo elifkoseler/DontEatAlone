@@ -1,10 +1,10 @@
 package com.elf.dea;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.elf.dea.UserData.User;
 
@@ -22,14 +22,14 @@ public class AvailabilityActivity extends AppCompatActivity {
 
     public void Save(View view){
         System.out.println("Takvim ayarlanacak");
-        Intent intent = new Intent(AvailabilityActivity.this, FeedActivity.class);
+        Intent intent = new Intent(AvailabilityActivity.this, StartActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
 
     }
     public void EditLater(View view){
         System.out.println("EditLater butonun basıldı!");
-        Intent intent = new Intent(AvailabilityActivity.this, FeedActivity.class);
+        Intent intent = new Intent(AvailabilityActivity.this, StartActivity.class);
         startActivity(intent);
 
     }

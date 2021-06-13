@@ -1,11 +1,5 @@
 package com.elf.dea;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -27,14 +21,17 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.elf.dea.MeetingData.Meeting;
 import com.elf.dea.UserData.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -42,7 +39,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.UUID;
 
 public class CreateMeetingActivity extends AppCompatActivity {
@@ -55,7 +51,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
     private StorageReference storageReference; //storage ref
     private FirebaseFirestore firebaseFirestore; //database
     private FirebaseAuth firebaseAuth; //kullanıcı auth
-    Uri imageData;
+    Uri imageData, tempUri;
 
     DatePickerDialog picker;
     EditText dateText;
@@ -159,6 +155,8 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 mDialog.show();
             }
         });
+        //System.out.println("From Feed to create"+user.getEmail());
+        System.out.println(firebaseAuth.getCurrentUser().getEmail());
     }
 
     public void Next(View view){
@@ -184,7 +182,12 @@ public class CreateMeetingActivity extends AppCompatActivity {
                     newReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            meeting.setImageUrl(uri.toString());
+                            tempUri = uri;
+                            meeting.setImageUrl(tempUri.toString());
+                            Intent intent = new Intent(CreateMeetingActivity.this, CreateMeetingRestaurantDetailActivity.class);
+                            intent.putExtra("user", user);
+                            intent.putExtra("meeting", meeting);
+                            startActivity(intent);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -196,15 +199,13 @@ public class CreateMeetingActivity extends AppCompatActivity {
             });
 
         }
+        //System.out.println(tempUri.toString());
+       // meeting.setImageUrl(tempUri.toString());
+        //System.out.println(meeting.getRestaurant().getName());
 
-        System.out.println(meeting.getRestaurant().getName());
-        Intent intent = new Intent(CreateMeetingActivity.this, CreateMeetingRestaurantDetailActivity.class);
-        intent.putExtra("user", user);
-        intent.putExtra("meeting", meeting);
-        startActivity(intent);
     }
 
-    public void Upload(View view){
+   /* public void Upload(View view){
         System.out.println("Picked Date Exit " + d +  " " + m + " "+ y);
 
 
@@ -226,7 +227,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                             String userEmail = firebaseUser.getEmail();*/
 
 
-
+/*
                             HashMap<String, Object> postData = new HashMap<>();
                             postData.put("useremail",user.getEmail());
                             postData.put("downloadurl",downloadUrl);
@@ -261,7 +262,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
             });
         }
 
-
+*/
     public void selectImage(View view){
         //izin istendi, izin verildi ya da verilmedi.
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)

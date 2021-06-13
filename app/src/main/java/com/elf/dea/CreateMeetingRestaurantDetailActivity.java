@@ -1,8 +1,5 @@
 package com.elf.dea;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,15 +10,17 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.elf.dea.MeetingData.Meeting;
 import com.elf.dea.UserData.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-
 
 import java.util.HashMap;
 
@@ -34,6 +33,8 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
 
     EditText expenseText;
     EditText addressText;
+    String tempExpense;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         expenseText.setText(expenses[i]);
                         System.out.println("Average expense: " + expenses[i]);
+                        tempExpense = expenses[i];
                        // location = expenses[i];
                         dialogInterface.dismiss();
                     }
@@ -164,13 +166,11 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
         System.out.println("Create butonuna basıldı !!");
         System.out.println(meeting.getRestaurant().getName());
         System.out.println(meeting.getImageUrl());
+        meeting.setAddress(addressText.getText().toString());
 
         HashMap<String, Object> data = new HashMap<>();
         //user.setEmail(firebaseAuth.getCurrentUser().getEmail());
-        System.out.println(firebaseAuth.getCurrentUser().getEmail());
-        System.out.println(user.getEmail());
-        System.out.println(user.getName());
-
+        data.put("creator user", firebaseAuth.getCurrentUser().getEmail());
         data.put("name", meeting.getName());
         data.put("year", meeting.getYear());
         data.put("month", meeting.getMonth());
@@ -179,12 +179,15 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
         data.put("second", meeting.getSecond());
         data.put("district", meeting.getDistrict());
         data.put("address", meeting.getAddress());
+        data.put("create date", FieldValue.serverTimestamp());
+        data.put("imageurl", meeting.getImageUrl());
+        data.put("restaurant name", meeting.getRestaurant().getName());
 
         /*LocalDate localDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         System.out.println(localDate.format(formatter));
         //String docname = meeting.getName() + localDate.format(formatter);*/
-        String docname =  meeting.getName();
+        String docname = firebaseAuth.getCurrentUser().getEmail() ;
 
         firebaseFirestore.collection("Meetings").document(docname).collection("Meeting Info")
                 .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -199,8 +202,9 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
 
             }
         });
-/*
+
         HashMap<String, Object> restaurantData = new HashMap<>();
+        meeting.getRestaurant().setAverageExpenses(tempExpense);
 
         restaurantData.put("name", meeting.getRestaurant().getName());
         restaurantData.put("expenses", meeting.getRestaurant().getAverageExpenses());
@@ -244,11 +248,11 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
+            public void onFailure(@NonNull Exception e) {
                 System.out.println(e.getLocalizedMessage().toString());
             }
         });
-*/
+
         System.out.println("DB işlemleri DONE");
 
     }

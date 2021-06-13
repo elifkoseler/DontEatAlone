@@ -1,13 +1,13 @@
 package com.elf.dea;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.elf.dea.UserData.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -107,7 +107,7 @@ public class InterestPreferencesActivity extends AppCompatActivity {
 
     public void EditLater(View view){
         System.out.println("EditLater butonun basıldı!");
-        Intent intent = new Intent(InterestPreferencesActivity.this, FeedActivity.class);
+        Intent intent = new Intent(InterestPreferencesActivity.this, StartActivity.class);
         startActivity(intent);
 
     }

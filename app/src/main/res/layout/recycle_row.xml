@@ -2,25 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
 
     <TextView
-        android:id="@+id/recycler_row_useremail_text"
-        android:layout_width="match_parent"
+        android:id="@+id/meetingNameText"
+        android:layout_width="189dp"
         android:layout_height="wrap_content"
-        android:text="User eMail Text"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="80dp" />
+        android:text="meeting name"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="338dp" />
 
     <ImageView
         android:id="@+id/recycler_row_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="214dp"
+        android:layout_height="146dp"
         android:layout_gravity="center"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
@@ -30,13 +31,19 @@
         tools:layout_editor_absoluteY="200dp" />
 
     <TextView
-        android:id="@+id/recycler_row_comment_text"
+        android:id="@+id/datetimeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comment"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="338dp" />
+        android:text="date time" />
+
+    <TextView
+        android:id="@+id/districtText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="district" />
+    <TextView
+        android:id="@+id/restaurantText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="restaurant name" />
 </LinearLayout>

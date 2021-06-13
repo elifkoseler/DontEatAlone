@@ -9,7 +9,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
 public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapter.PostHolder> {
+
+    private ArrayList<String> meetingNameList;
+    private ArrayList<String> meetingRestaurantNameList;
+    private ArrayList<String> meetingDateTimeList;
+    private ArrayList<String> meetingDistrictList;
+    private ArrayList<String> meetingImageList;
+
+    public FeedRecyclerAdapter(ArrayList<String> meetingNameList,
+                               ArrayList<String> meetingRestaurantNameList, ArrayList<String> meetingDateTimeList,
+                               ArrayList<String> meetingDistrictList, ArrayList<String> meetingImageList) {
+        this.meetingNameList = meetingNameList;
+        this.meetingRestaurantNameList = meetingRestaurantNameList;
+        this.meetingDateTimeList = meetingDateTimeList;
+        this.meetingDistrictList = meetingDistrictList;
+        this.meetingImageList = meetingImageList;
+    }
 
     @NonNull
     @Override
@@ -23,30 +43,37 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PostHolder holder, int position) {
+        System.out.println("FeedRecycleAdapter > onBindViewHolder !!");
 
-        holder.userEmailText.setText("");
-        holder.commentText.setText("");
+        holder.meetingNameText.setText(meetingNameList.get(position));
+        holder.meetingRestaurantNameText.setText(meetingRestaurantNameList.get(position));
+        holder.meetingDistrictText.setText(meetingDistrictList.get(position));
+        holder.meetingDateTimeText.setText(meetingDateTimeList.get(position));
+        Picasso.get().load(meetingImageList.get(position)).into(holder.imageView);
 
     }
 
     @Override
     public int getItemCount() { //recycleviewda kaç tane row olacak
-        return 0;
+        return meetingNameList.size();
     }
 
     class PostHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView userEmailText;
-        TextView commentText;
+        TextView meetingNameText;
+        TextView meetingRestaurantNameText;
+        TextView meetingDateTimeText;
+        TextView meetingDistrictText;
 
         public PostHolder(@NonNull View itemView) {
             super(itemView);
-
+            System.out.println("FeedRecycleAdapter > Post Holder!!");
             imageView = itemView.findViewById(R.id.recycler_row_imageView);
-            userEmailText = itemView.findViewById(R.id.recycler_row_useremail_text);
-            commentText = itemView.findViewById(R.id.recycler_row_comment_text);
-
+            meetingNameText = itemView.findViewById(R.id.meetingNameText);
+            meetingDateTimeText = itemView.findViewById(R.id.datetimeText);
+            meetingDistrictText = itemView.findViewById(R.id.districtText);
+            meetingRestaurantNameText = itemView.findViewById(R.id.restaurantText);
 
 
         }

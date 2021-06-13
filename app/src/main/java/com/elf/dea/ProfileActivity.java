@@ -1,14 +1,14 @@
 package com.elf.dea;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.elf.dea.UserData.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -18,7 +18,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.Serializable;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -47,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void EditLater(View view){
         Log.d("myTag","EditLater butonuna basıldı!");
-        Intent intent = new Intent(ProfileActivity.this,FeedActivity.class);
+        Intent intent = new Intent(ProfileActivity.this, StartActivity.class);
         startActivity(intent);
         //finish();
     }
@@ -64,6 +65,9 @@ public class ProfileActivity extends AppCompatActivity {
         //Toast.makeText(ProfileActivity.this,"Save'e bastın !!", Toast.LENGTH_LONG).show();
         user.setEmail(firebaseAuth.getCurrentUser().getEmail());
 
+        HashMap<String, Object> emailData = new HashMap<>();
+        emailData.put("mail", user.getEmail());
+
         HashMap<String, Object> postData = new HashMap<>();
         postData.put("name", user.getName());
         postData.put("username", user.getUsername());
@@ -72,6 +76,21 @@ public class ProfileActivity extends AppCompatActivity {
         postData.put("location", user.getLocation());
         postData.put("birth year", user.getBirthYear());
         postData.put("register time", FieldValue.serverTimestamp());
+
+        firebaseFirestore.collection("UserMails").add(emailData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(ProfileActivity.this,"UserMail Dbye eklendi!!",Toast.LENGTH_LONG).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                Toast.makeText(ProfileActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+        //User maili bi yerde komple tutmam gerekiyor
 
         firebaseFirestore.collection("Users").document(user.getEmail()).collection("User Info")
                 .add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

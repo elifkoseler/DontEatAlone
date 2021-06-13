@@ -1,11 +1,8 @@
 package com.elf.dea.UserData;
 
 import com.elf.dea.MeetingData.Meeting;
-import com.google.firebase.firestore.FieldValue;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.sql.Timestamp;
 
 public class User implements Serializable{
 
@@ -17,6 +14,7 @@ public class User implements Serializable{
     String profilePhotoName;
     int birthYear;
     int score;
+    int count;
 
 
     public Interest interest = new Interest();
@@ -129,4 +127,11 @@ public class User implements Serializable{
         this.meetingPreferences = meetingPreferences;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }
