@@ -71,6 +71,10 @@ public class FeedActivity extends AppCompatActivity {
             Intent intentToSignUp = new Intent(FeedActivity.this,SignUpActivity.class);
             startActivity(intentToSignUp);
         }
+        else if(item.getItemId() == R.id.MyMeetings){
+            Intent intent = new Intent(FeedActivity.this,MyMeetingsActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
