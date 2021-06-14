@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapter.PostHolder> {
+public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapter.ViewHolder> {
 
     private ArrayList<String> meetingNameList;
     private ArrayList<String> meetingRestaurantNameList;
@@ -33,16 +33,16 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
 
     @NonNull
     @Override
-    public PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.recycle_row,parent,false);
 
-        return new PostHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         System.out.println("FeedRecycleAdapter > onBindViewHolder !!");
 
         holder.meetingNameText.setText(meetingNameList.get(position));
@@ -55,10 +55,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
 
     @Override
     public int getItemCount() { //recycleviewda kaç tane row olacak
+
         return meetingNameList.size();
     }
 
-    class PostHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         TextView meetingNameText;
@@ -66,7 +67,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
         TextView meetingDateTimeText;
         TextView meetingDistrictText;
 
-        public PostHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             System.out.println("FeedRecycleAdapter > Post Holder!!");
             imageView = itemView.findViewById(R.id.recycler_row_imageView);
