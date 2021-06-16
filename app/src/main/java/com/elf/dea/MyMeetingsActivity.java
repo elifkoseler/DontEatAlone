@@ -65,17 +65,29 @@ public class MyMeetingsActivity extends AppCompatActivity {
 
             firebaseAuth.signOut();
 
-            Intent intentToSignUp = new Intent(MyMeetingsActivity.this,SignUpActivity.class);
+            Intent intentToSignUp = new Intent(MyMeetingsActivity.this, SignUpActivity.class);
             startActivity(intentToSignUp);
         }
+        else if(item.getItemId() == R.id.EditProfile){
+            //yazılacak
+
+        }
         else if(item.getItemId() == R.id.MyMeetings){
-            Intent intent = new Intent(MyMeetingsActivity.this,MyMeetingsActivity.class);
+            Intent intent = new Intent(MyMeetingsActivity.this, MyMeetingsActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.ShowAll) {
+            Intent intent = new Intent(MyMeetingsActivity.this, FeedActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.ShowMatches) {
+            Intent intent = new Intent(MyMeetingsActivity.this, MatchingActivity.class);
             startActivity(intent);
         }
 
+
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

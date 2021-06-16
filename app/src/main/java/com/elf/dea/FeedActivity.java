@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,19 +28,18 @@ import java.util.Map;
 public class FeedActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    FeedRecyclerAdapter feedRecyclerAdapter;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
+
     ArrayList<String> usernameFromDB;
     ArrayList<String> meetingNameFromDB;
     ArrayList<String> meetingImageFromDB;
     ArrayList<String> meetingDateTimeFromDB;
     ArrayList<String> meetingDistrictFromDB;
     ArrayList<String> meetingRestaurantNameFromDB;
-
     ArrayList<String> allMails;
-    FeedRecyclerAdapter feedRecyclerAdapter;
-    TextView meetingText;
 
 
     User user; //bu user refi burda işlevsiz tam burada dbden tüm user çekilmeli
@@ -54,6 +52,7 @@ public class FeedActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) { //itemler ne yapacak yazmak için
@@ -68,13 +67,26 @@ public class FeedActivity extends AppCompatActivity {
 
             firebaseAuth.signOut();
 
-            Intent intentToSignUp = new Intent(FeedActivity.this,SignUpActivity.class);
+            Intent intentToSignUp = new Intent(FeedActivity.this, SignUpActivity.class);
             startActivity(intentToSignUp);
         }
-        else if(item.getItemId() == R.id.MyMeetings){
-            Intent intent = new Intent(FeedActivity.this,MyMeetingsActivity.class);
+        else if(item.getItemId() == R.id.EditProfile){
+            //yazılacak
+
+        }
+        else if(item.getItemId() == R.id.ShowAll) {
+            Intent intent = new Intent(FeedActivity.this, FeedActivity.class);
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.ShowMatches) {
+            Intent intent = new Intent(FeedActivity.this, MatchingActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.MyMeetings) {
+            Intent intent = new Intent(FeedActivity.this, MyMeetingsActivity.class);
+            startActivity(intent);
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -92,7 +104,6 @@ public class FeedActivity extends AppCompatActivity {
         meetingDateTimeFromDB = new ArrayList<>();
         meetingDistrictFromDB = new ArrayList<>();
         meetingRestaurantNameFromDB = new ArrayList<>();
-
 
         allMails = new ArrayList<>();
 
@@ -176,9 +187,9 @@ public class FeedActivity extends AppCompatActivity {
     public void getDataFromFirestore(String mail){
         System.out.println("getDataFromFB methoduna girdi");
         //System.out.println("allMails" + allMails.get(0));
-        CollectionReference userCollectionReference = firebaseFirestore.collection("Meetings");
+        CollectionReference meetingCollectionReference = firebaseFirestore.collection("Meetings");
 
-            userCollectionReference.document(mail).collection("Meeting Info").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            meetingCollectionReference.document(mail).collection("Meeting Info").addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
                     if (error != null) {
@@ -206,20 +217,19 @@ public class FeedActivity extends AppCompatActivity {
                             String restaurantname = (String) data.get("restaurant name");
                             String imageurl = (String) data.get("imageurl");
 
-                            System.out.println("Databaseden gelen meetingname: " + meetingname);
-                            System.out.println("Databaseden gelen datetime: " + datetime);
-                            System.out.println("Databaseden gelen district: " + district);
-                            System.out.println("Databaseden gelen restaurantname: " + restaurantname);
-                            System.out.println("Databaseden gelen imageurl: " + imageurl);
+                           //System.out.println("Databaseden gelen meetingname: " + meetingname);
+                           //System.out.println("Databaseden gelen datetime: " + datetime);
+                           //System.out.println("Databaseden gelen district: " + district);
+                           //System.out.println("Databaseden gelen restaurantname: " + restaurantname);
+                           //System.out.println("Databaseden gelen imageurl: " + imageurl);
 
-                            //meetingText.setText(meetingname);
 
                             meetingNameFromDB.add(meetingname);
                             meetingDateTimeFromDB.add(datetime);
                             meetingDistrictFromDB.add(district);
                             meetingImageFromDB.add(imageurl);
                             meetingRestaurantNameFromDB.add(restaurantname);
-                            //System.out.println("Liste:" +  meetingDistrictFromDB.get(0));
+
                             feedRecyclerAdapter.notifyDataSetChanged();
 
                         }

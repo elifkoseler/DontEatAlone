@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dea">
-        <activity android:name=".MyMeetingsActivity"></activity>
+        <activity android:name=".MatchingActivity"></activity>
+        <activity android:name=".MyMeetingsActivity" />
         <activity android:name=".StartActivity" />
         <activity android:name=".CreateMeetingRestaurantDetailActivity" />
         <activity android:name=".AvailabilityActivity" />

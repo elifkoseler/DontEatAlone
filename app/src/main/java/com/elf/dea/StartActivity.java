@@ -53,6 +53,18 @@ public class StartActivity extends AppCompatActivity {
         else if(item.getItemId() == R.id.EditProfile){
             //yazılacak
         }
+        else if(item.getItemId() == R.id.ShowAll) {
+            Intent intent = new Intent(StartActivity.this, FeedActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.ShowMatches) {
+            Intent intent = new Intent(StartActivity.this, MatchingActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.MyMeetings) {
+            Intent intent = new Intent(StartActivity.this, MyMeetingsActivity.class);
+            startActivity(intent);
+        }
 
 
         return super.onOptionsItemSelected(item);
@@ -65,7 +77,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void ShowAll(View view){
-        Intent intent = new Intent(StartActivity.this, FeedActivity.class);
+        Intent intent = new Intent(StartActivity.this, MatchingActivity.class);
         startActivity(intent);
     }
 }
