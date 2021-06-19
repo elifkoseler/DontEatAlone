@@ -321,11 +321,6 @@ public class MatchingActivity extends AppCompatActivity {
                         String restaurantname = (String) data.get("restaurant name");
                         String imageurl = (String) data.get("imageurl");
 
-                        meetingNameFromDB.add(meetingname);
-                        meetingDateTimeFromDB.add(datetime);
-                        meetingDistrictFromDB.add(district);
-                        meetingImageFromDB.add(imageurl);
-                        meetingRestaurantNameFromDB.add(restaurantname);
 
                         meeting.setName(meetingname);
                         meeting.setDistrict(district);
@@ -334,8 +329,16 @@ public class MatchingActivity extends AppCompatActivity {
                         meeting.setYear(Integer.parseInt(String.valueOf(year)));
                         meeting.setHour(Integer.parseInt(String.valueOf(hour)));
                         meeting.setSecond(Integer.parseInt(String.valueOf(second)));
+                        meeting.getRestaurant().setName(restaurantname);
 
                         getMeetingRestaurantFromDB(user, meeting, mail);
+
+
+                        meetingNameFromDB.add(meeting.getName());
+                        meetingDateTimeFromDB.add(datetime);
+                        meetingDistrictFromDB.add(meeting.getDistrict());
+                        meetingImageFromDB.add(imageurl);
+                        meetingRestaurantNameFromDB.add(restaurantname);
 
                         meetingList.add(meeting);
 
@@ -343,6 +346,7 @@ public class MatchingActivity extends AppCompatActivity {
                         System.out.println("-- MATCH DB: " + meeting.getDistrict());
                         System.out.println("__get INTERESTMEET: " + user.getEatingPreferences().isCoffee());
                         feedRecyclerAdapter.notifyDataSetChanged();
+
 
                     }
                 }
@@ -354,7 +358,7 @@ public class MatchingActivity extends AppCompatActivity {
     public void getMeetingRestaurantFromDB(User user, Meeting meeting, String mail){
 
         CollectionReference meetingCollectionReference = firebaseFirestore.collection("Meetings");
-        meetingCollectionReference.document(mail).collection("Restaurant").orderBy("create date", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        meetingCollectionReference.document(mail).collection("Restaurant").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
                 if (error != null) {
@@ -367,14 +371,14 @@ public class MatchingActivity extends AppCompatActivity {
 
                         String resname = (String) data.get("name");
 
-                        boolean hasAnimal = (boolean) data.get("hasAnimal");
+//                        boolean hasAnimal = (boolean) data.get("hasAnimal");
                         boolean hasOuterSpace = (boolean) data.get("hasOuterSpace");
                         boolean hasInnerSpace = (boolean) data.get("hasInnerSpace");
                         boolean hasSmokingArea = (boolean) data.get("hasSmokingArea");
                         boolean hasWifi = (boolean) data.get("hasWifi");
 
-                        boolean isCoffee = (boolean) data.get("isCafe");
-                        boolean isDrink = (boolean) data.get("isBar");
+                        boolean isCafe = (boolean) data.get("isCafe");
+                        boolean isBar = (boolean) data.get("isBar");
                         boolean isFastFood = (boolean) data.get("isFastFood");
                         boolean isFish = (boolean) data.get("isFish");
                         boolean isMeat = (boolean) data.get("isMeat");
@@ -382,22 +386,33 @@ public class MatchingActivity extends AppCompatActivity {
 
                         String expenses = (String) data.get("expenses");
 
-                        meeting.getRestaurant().getPlaceFeature().setAvailableForAnimals(hasAnimal);
+                       // meeting.getRestaurant().getPlaceFeature().setAvailableForAnimals(hasAnimal);
                         meeting.getRestaurant().getPlaceFeature().setSmokingArea(hasSmokingArea);
                         meeting.getRestaurant().getPlaceFeature().setWifi(hasWifi);
                         meeting.getRestaurant().getPlaceFeature().setOuterSpace(hasOuterSpace);
                         meeting.getRestaurant().getPlaceFeature().setInnerSpace(hasInnerSpace);
 
+
+                        meeting.getRestaurant().getEatType().setFish(isFish);
+                        meeting.getRestaurant().getEatType().setMeat(isMeat);
+                        meeting.getRestaurant().getEatType().setBar(isBar);
+                        meeting.getRestaurant().getEatType().setCafe(isCafe);
+                        meeting.getRestaurant().getEatType().setFastfood(isFastFood);
+                        meeting.getRestaurant().getEatType().setTraditional(isTraditional);
+
+                        meeting.getRestaurant().setExpenses(expenses);
+                        meeting.getRestaurant().setName(resname);
+
                         //burada kaldın dbden tüm meet rest özelliklerini çekip aşağıda matchlemeyi dene
                         //sonrasında bu çıkan puanların meetleriyle creatora gidip userin interestlerini karşılaştırıcaz.
                         //en son feedrecycle için basıcaz feed kaç puan üstü olacak henüz karar veremedim
 
+                        System.out.println("-- LAST MATCH DB: " + meeting.getDistrict());
+                        System.out.println("-- LAST : user:  " + user.getEatingPreferences().isCoffee());
 
                         meetingList.add(meeting);
 
                         MatchingCalculator(user, meeting);
-                        System.out.println("-- MATCH DB: " + meeting.getDistrict());
-                        System.out.println("__get INTERESTMEET: " + user.getEatingPreferences().isCoffee());
 
 
                     }
@@ -558,6 +573,7 @@ public class MatchingActivity extends AppCompatActivity {
         System.out.println("DatePoint = "+ datePoint);
         System.out.println("TimePoint = " + timePoint);
         System.out.println("LocPoint = " + locPoint);
+        System.out.println("EatPoint = " + eatPoint);
         res = datePoint + timePoint + eatPoint + intPoint + locPoint;
         System.out.println("++ Result => " + res);
     }

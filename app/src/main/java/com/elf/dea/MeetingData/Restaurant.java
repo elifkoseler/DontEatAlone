@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Restaurant implements Serializable {
     public String name;
-    public String averageExpenses;
+    public String expenses;
     EatType eatType = new EatType();
     PlaceFeature placeFeature = new PlaceFeature();
     public int score;
@@ -20,12 +20,12 @@ public class Restaurant implements Serializable {
         this.name = name;
     }
 
-    public String getAverageExpenses() {
-        return averageExpenses;
+    public String getExpenses() {
+        return expenses;
     }
 
-    public void setAverageExpenses(String averageExpenses) {
-        this.averageExpenses = averageExpenses;
+    public void setExpenses(String expenses) {
+        this.expenses = expenses;
     }
 
     public EatType getEatType() {

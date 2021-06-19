@@ -204,10 +204,10 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
         });
 
         HashMap<String, Object> restaurantData = new HashMap<>();
-        meeting.getRestaurant().setAverageExpenses(tempExpense);
+        meeting.getRestaurant().setExpenses(tempExpense);
 
         restaurantData.put("name", meeting.getRestaurant().getName());
-        restaurantData.put("expenses", meeting.getRestaurant().getAverageExpenses());
+        restaurantData.put("expenses", meeting.getRestaurant().getExpenses());
 
         restaurantData.put("hasInnerSpace", meeting.getRestaurant().getPlaceFeature().isInnerSpace());
         restaurantData.put("hasOuterSpace", meeting.getRestaurant().getPlaceFeature().isOuterSpace());
