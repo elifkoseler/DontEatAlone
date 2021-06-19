@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public class MatchingActivity extends AppCompatActivity {
         firebaseFirestore = firebaseFirestore.getInstance();
 
         //user = (User) getIntent().getSerializableExtra("user"); // get ref of user from other activities //şurda diğerlerinden almak daha kolay olabilir uğraşmamak adına? bi yerde mutlaka çekmek gerekecek ama?
-        getMailDataFromFirestore();
+
         getUserEatingPreferenceFromDB();
 
         feedRecyclerAdapter = new FeedRecyclerAdapter(meetingNameFromDB, meetingRestaurantNameFromDB,
@@ -194,7 +195,7 @@ public class MatchingActivity extends AppCompatActivity {
     }
 
     public void getUserInterestFromDB(User user){
-        User tempUser;
+
         CollectionReference userCollectionReference = firebaseFirestore.collection("Users");
         userCollectionReference.document(firebaseAuth.getCurrentUser().getEmail()).collection("Interests").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -215,6 +216,40 @@ public class MatchingActivity extends AppCompatActivity {
                         user.getInterest().setTechnology(tech);
                         user.getInterest().setTravel(travel);
 
+                        getUserAvailabilityInfoFromDB(user);
+                        System.out.println("__get INTEREST: " + user.getEatingPreferences().isCoffee());
+
+
+                    }
+                }
+            }
+        });
+    }
+
+    public void getUserAvailabilityInfoFromDB(User user) {
+        CollectionReference userCollectionReference = firebaseFirestore.collection("Users");
+        userCollectionReference.document(firebaseAuth.getCurrentUser().getEmail()).collection("Availability").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                if(value != null ){
+                    for (DocumentSnapshot snapshot : value.getDocuments()) {
+                        Map<String, Object> data = snapshot.getData();
+
+                        String district = (String) data.get("district");
+                        Number year = (Number) data.get("year");
+                        Number month = (Number) data.get("month");
+                        Number day = (Number) data.get("day");
+                        Number hour = (Number) data.get("hour");
+                        Number second = (Number) data.get("second");
+
+                        user.getMeetingPreferences().setDistrict(district);
+                        user.getMeetingPreferences().setDay(Integer.parseInt(String.valueOf(day)));
+                        user.getMeetingPreferences().setMonth(Integer.parseInt(String.valueOf(month)));
+                        user.getMeetingPreferences().setYear(Integer.parseInt(String.valueOf(year)));
+                        user.getMeetingPreferences().setHour(Integer.parseInt(String.valueOf(hour)));
+                        user.getMeetingPreferences().setSecond(Integer.parseInt(String.valueOf(second)));
+
+                        getMailDataFromFirestore(user);
 
                         System.out.println("__get INTEREST: " + user.getEatingPreferences().isCoffee());
 
@@ -225,15 +260,13 @@ public class MatchingActivity extends AppCompatActivity {
         });
     }
 
-    public User getUser(User user, Meeting meeting){
+    /*public User getUser(User user){
         return user;
-    }
+    }*/
 
-    public void UserMatchingCalculator(User user){
 
-    }
 
-    public void getMailDataFromFirestore(){
+    public void getMailDataFromFirestore(User user){
         System.out.println("MATCHING >> getDataFromFB methoduna girdi > mail getirme kısmı");
 
         CollectionReference usermailCollectionReference = firebaseFirestore.collection("UserMails");
@@ -246,7 +279,7 @@ public class MatchingActivity extends AppCompatActivity {
 
                         String mail = (String) mailData.get("mail");
                         //System.out.println("Tüm mailler: " + mail);
-                        getAllMeetingDataFromFirestore(mail);
+                        getAllMeetingDataFromFirestore(mail, user);
 
                         allMails.add(mail);
                         //System.out.println("allMails" + allMails.get(0));
@@ -259,11 +292,11 @@ public class MatchingActivity extends AppCompatActivity {
     }
     // meetinge yolla useri zaten user tek
 
-    public void getAllMeetingDataFromFirestore(String mail) {
+    public void getAllMeetingDataFromFirestore(String mail, User user) {
         System.out.println("MATCHING >> getDataFromFB methoduna girdi");
         Meeting meeting = new Meeting();
         CollectionReference meetingCollectionReference = firebaseFirestore.collection("Meetings");
-        meetingCollectionReference.document(mail).collection("Meeting Info").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        meetingCollectionReference.document(mail).collection("Meeting Info").orderBy("create date", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
                 if (error != null) {
@@ -302,10 +335,13 @@ public class MatchingActivity extends AppCompatActivity {
                         meeting.setHour(Integer.parseInt(String.valueOf(hour)));
                         meeting.setSecond(Integer.parseInt(String.valueOf(second)));
 
+                        getMeetingRestaurantFromDB(user, meeting, mail);
+
                         meetingList.add(meeting);
 
+                        //MatchingCalculator(user, meeting);
                         System.out.println("-- MATCH DB: " + meeting.getDistrict());
-
+                        System.out.println("__get INTERESTMEET: " + user.getEatingPreferences().isCoffee());
                         feedRecyclerAdapter.notifyDataSetChanged();
 
                     }
@@ -315,7 +351,215 @@ public class MatchingActivity extends AppCompatActivity {
         });
 
     }
+    public void getMeetingRestaurantFromDB(User user, Meeting meeting, String mail){
+
+        CollectionReference meetingCollectionReference = firebaseFirestore.collection("Meetings");
+        meetingCollectionReference.document(mail).collection("Restaurant").orderBy("create date", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    System.out.println("DB ERROR");
+                }
+
+                if (value != null) {
+                    for (DocumentSnapshot snapshot : value.getDocuments()) {
+                        Map<String, Object> data = snapshot.getData();
+
+                        String resname = (String) data.get("name");
+
+                        boolean hasAnimal = (boolean) data.get("hasAnimal");
+                        boolean hasOuterSpace = (boolean) data.get("hasOuterSpace");
+                        boolean hasInnerSpace = (boolean) data.get("hasInnerSpace");
+                        boolean hasSmokingArea = (boolean) data.get("hasSmokingArea");
+                        boolean hasWifi = (boolean) data.get("hasWifi");
+
+                        boolean isCoffee = (boolean) data.get("isCafe");
+                        boolean isDrink = (boolean) data.get("isBar");
+                        boolean isFastFood = (boolean) data.get("isFastFood");
+                        boolean isFish = (boolean) data.get("isFish");
+                        boolean isMeat = (boolean) data.get("isMeat");
+                        boolean isTraditional = (boolean) data.get("isTraditional");
+
+                        String expenses = (String) data.get("expenses");
+
+                        meeting.getRestaurant().getPlaceFeature().setAvailableForAnimals(hasAnimal);
+                        meeting.getRestaurant().getPlaceFeature().setSmokingArea(hasSmokingArea);
+                        meeting.getRestaurant().getPlaceFeature().setWifi(hasWifi);
+                        meeting.getRestaurant().getPlaceFeature().setOuterSpace(hasOuterSpace);
+                        meeting.getRestaurant().getPlaceFeature().setInnerSpace(hasInnerSpace);
+
+                        //burada kaldın dbden tüm meet rest özelliklerini çekip aşağıda matchlemeyi dene
+                        //sonrasında bu çıkan puanların meetleriyle creatora gidip userin interestlerini karşılaştırıcaz.
+                        //en son feedrecycle için basıcaz feed kaç puan üstü olacak henüz karar veremedim
 
 
+                        meetingList.add(meeting);
+
+                        MatchingCalculator(user, meeting);
+                        System.out.println("-- MATCH DB: " + meeting.getDistrict());
+                        System.out.println("__get INTERESTMEET: " + user.getEatingPreferences().isCoffee());
+
+
+                    }
+                }
+
+            }
+        });
+    }
+
+    public void MatchingCalculator(User user, Meeting meeting){
+
+        int res = 0;
+        int datePoint = 0;
+        int timePoint = 0;
+        int eatPoint = 0;
+        int locPoint = 0;
+        int intPoint = 0;
+
+        ArrayList<String> Europe = new ArrayList<>();
+        ArrayList<String> Anatolia = new ArrayList<>();
+        ArrayList<String> Popular = new ArrayList<>();
+
+        Popular.add("Beşiktaş"); Popular.add("Kadıköy"); Popular.add("Bakırköy"); Popular.add("Şişli"); Popular.add("Fatih");
+
+        Europe.add("Arnavutköy"); Europe.add("Avcılar"); Europe.add("Bağcılar");
+        Europe.add("Bahçelievler"); Europe.add("Bakırköy"); Europe.add("Başakşehir");
+        Europe.add("Bayrampaşa"); Europe.add("Beşiktaş"); Europe.add("Beylikdüzü");
+        Europe.add("Beyoğlu"); Europe.add("Büyükçekmece"); Europe.add("Çatalca");
+        Europe.add("Esenler"); Europe.add("Esenyurt"); Europe.add("Eyüpsultan");
+        Europe.add("Fatih"); Europe.add("Gaziosmanpaşa"); Europe.add("Güngören");
+        Europe.add("Fatih"); Europe.add("Gaziosmanpaşa"); Europe.add("Güngören");
+        Europe.add("Kâğıthane"); Europe.add("Küçükçekmece"); Europe.add("Sarıyer");
+        Europe.add("Silivri"); Europe.add("Sultangazi"); Europe.add("Şişli");
+        Europe.add("Zeytinburnu");
+
+        Anatolia.add("Adalar"); Anatolia.add("Ataşehir"); Anatolia.add("Beykoz");
+        Anatolia.add("Çekmeköy"); Anatolia.add("Kadıköy"); Anatolia.add("Kartal");
+        Anatolia.add("Maltepe"); Anatolia.add("Pendik"); Anatolia.add("Sancaktepe");
+        Anatolia.add("Sultanbeyli"); Anatolia.add("Şile"); Anatolia.add("Tuzla");
+        Anatolia.add("Ümraniye"); Anatolia.add("Üsküdar");
+
+        //Date matching----------------------------------------------------------------------------
+        if(user.getMeetingPreferences().getYear() == meeting.getYear()){ //yıllar eşitse
+            System.out.println("DatePoint = "+ datePoint);
+
+            if(user.getMeetingPreferences().getMonth() == meeting.getMonth()){
+                datePoint += 10;
+                System.out.println("DatePoint = "+ datePoint);
+
+                if(user.getMeetingPreferences().getDay() == meeting.getDay()){ //perfect match
+                    datePoint += 10;
+                    System.out.println("DatePoint = "+ datePoint);
+
+                }
+                else if(Math.abs(user.getMeetingPreferences().getDay() - meeting.getDay()) <= 7){
+                    datePoint += 5;
+                    System.out.println("DatePoint = "+ datePoint);
+
+                }
+                else if(Math.abs(user.getMeetingPreferences().getDay() - meeting.getDay()) > 7 && Math.abs(user.getMeetingPreferences().getDay() - meeting.getDay()) <= 14){
+                    datePoint += 3;
+                    System.out.println("DatePoint = "+ datePoint);
+
+                }
+                else{
+                    datePoint += 0;
+                }
+            }
+
+            else if(Math.abs(user.getMeetingPreferences().getMonth() - meeting.getMonth()) == 1){
+                datePoint += 2;
+            }
+        }
+        else{
+            datePoint = 0;
+        }
+
+        //Time matching---------------------------------------------------------------------------------------------------
+        if(user.getMeetingPreferences().getHour() == meeting.getHour()){
+            timePoint += 15;
+            if(user.getMeetingPreferences().getSecond() == meeting.getSecond()){ //perfect match
+                timePoint = 15;
+            }
+        }
+        else if(Math.abs(user.getMeetingPreferences().getHour() - meeting.getHour()) <= 4){
+            timePoint += 10;
+        }
+        else if(Math.abs(user.getMeetingPreferences().getHour() - meeting.getHour()) <= 8 && Math.abs(user.getMeetingPreferences().getHour() - meeting.getHour()) > 4){
+            timePoint += 5;
+        }
+
+        else{
+            timePoint += 0;
+        }
+
+
+        //Location matching
+        String userLoc = user.getMeetingPreferences().getDistrict();
+        String meetLoc = meeting.getDistrict();
+
+        if(userLoc.equals(meetLoc)){
+            locPoint += 15;
+        }
+        else if(Europe.contains(userLoc) && Europe.contains(meetLoc)){
+            locPoint +=10;
+        }
+        else if(Anatolia.contains(userLoc) && Anatolia.contains(meetLoc)){
+            locPoint +=10;
+        }
+        else if(Anatolia.contains(userLoc) && Anatolia.contains(meetLoc) && Popular.contains(userLoc) && Popular.contains(meetLoc)){
+            System.out.println("LocPoint = " + locPoint);
+            locPoint += 2;
+        }
+        else if(Europe.contains(userLoc) && Europe.contains(meetLoc) && Popular.contains(userLoc) && Popular.contains(meetLoc)){
+            locPoint += 2;
+        }
+
+        //Eating Pref matching
+
+        if(user.getEatingPreferences().isCoffee() == meeting.getRestaurant().getEatType().isCafe()){
+            eatPoint += 3;
+        }
+        else if(user.getEatingPreferences().isDrink() == meeting.getRestaurant().getEatType().isBar()){
+            eatPoint += 3;
+        }
+        else if(user.getEatingPreferences().isFastfood() == meeting.getRestaurant().getEatType().isFastfood()){
+            eatPoint += 3;
+        }
+        else if(user.getEatingPreferences().isTraditional() == meeting.getRestaurant().getEatType().isTraditional()){
+            eatPoint += 3;
+        }
+        else if(user.getEatingPreferences().isMeat() == meeting.getRestaurant().getEatType().isMeat()){
+            eatPoint += 3;
+        }
+        else if(user.getEatingPreferences().isFish() == meeting.getRestaurant().getEatType().isFish()){
+            eatPoint += 3;
+        } else if (user.getEatingPreferences().isCoffee() == meeting.getRestaurant().getEatType().isCafe()
+                && user.getEatingPreferences().isDrink() == meeting.getRestaurant().getEatType().isBar()
+                && user.getEatingPreferences().isFastfood() == meeting.getRestaurant().getEatType().isFastfood()
+                && user.getEatingPreferences().isTraditional() == meeting.getRestaurant().getEatType().isTraditional()
+                && user.getEatingPreferences().isMeat() == meeting.getRestaurant().getEatType().isMeat()
+                && user.getEatingPreferences().isFish() == meeting.getRestaurant().getEatType().isFish()) {
+            eatPoint += 2;
+        }
+
+        //Meeting Pref matching
+
+        if(user.getMeetingPreferences().getRestaurant().getPlaceFeature().isAvailableForAnimals() == meeting.getRestaurant().getPlaceFeature().isAvailableForAnimals()){
+
+        }
+
+
+
+
+
+        System.out.println("-- MATCH MATCH: " + meeting.getDistrict());
+        System.out.println("-- MATCH MATCH: " + user.getMeetingPreferences().getDistrict());
+        System.out.println("DatePoint = "+ datePoint);
+        System.out.println("TimePoint = " + timePoint);
+        System.out.println("LocPoint = " + locPoint);
+        res = datePoint + timePoint + eatPoint + intPoint + locPoint;
+        System.out.println("++ Result => " + res);
+    }
 
 }

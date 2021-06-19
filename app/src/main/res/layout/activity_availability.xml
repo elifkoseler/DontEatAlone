@@ -10,63 +10,100 @@
         android:id="@+id/nextButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
         android:layout_marginEnd="12dp"
+        android:layout_marginBottom="65dp"
         android:onClick="Save"
         android:text="Save"
         android:textSize="14sp"
         app:iconPadding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backButton3"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <Button
         android:id="@+id/backButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginBottom="16dp"
         android:onClick="Back"
         android:text="Back"
         app:iconPadding="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/editLaterText3"
         app:layout_constraintEnd_toStartOf="@+id/nextButton3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="35dp"
+    <EditText
+        android:id="@+id/locationText2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="158dp"
+        android:ems="10"
+        android:hint="Choose Location"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/editLaterText3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView12"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/timeText" />
+
+    <EditText
+        android:id="@+id/dateText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="24dp"
+        android:ems="0"
+        android:hint="Enter Date"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/timeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <EditText
+        android:id="@+id/timeText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="20dp"
+        android:ems="0"
+        android:hint="Enter Time"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/locationText2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
     <TextView
         android:id="@+id/editLaterText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="30dp"
         android:onClick="EditLater"
         android:text="Edit Later"
         android:textColor="#121212"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backButton3"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/locationText2" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="205dp"
         android:layout_height="0dp"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="407dp"
         android:text="The final step!"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintBottom_toTopOf="@+id/nextButton3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -75,13 +112,13 @@
         android:id="@+id/textView12"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="414dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="67dp"
         android:text="Let us know your availability"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/editLaterText3"
+        app:layout_constraintBottom_toTopOf="@+id/dateText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/calendarView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 </androidx.constraintlayout.widget.ConstraintLayout>

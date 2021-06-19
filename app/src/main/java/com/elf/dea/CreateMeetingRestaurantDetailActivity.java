@@ -212,7 +212,7 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
         restaurantData.put("hasInnerSpace", meeting.getRestaurant().getPlaceFeature().isInnerSpace());
         restaurantData.put("hasOuterSpace", meeting.getRestaurant().getPlaceFeature().isOuterSpace());
         restaurantData.put("hasSmokingArea", meeting.getRestaurant().getPlaceFeature().isSmokingArea());
-        restaurantData.put("hasInnerSpace", meeting.getRestaurant().getPlaceFeature().isAvailableForAnimals());
+        restaurantData.put("hasAnimal", meeting.getRestaurant().getPlaceFeature().isAvailableForAnimals());
         restaurantData.put("hasWifi", meeting.getRestaurant().getPlaceFeature().isWifi());
 
         restaurantData.put("isMeat", meeting.getRestaurant().getEatType().isMeat());

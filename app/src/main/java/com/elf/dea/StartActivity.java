@@ -77,7 +77,11 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void ShowAll(View view){
-        Intent intent = new Intent(StartActivity.this, MatchingActivity.class);
+        Intent intent = new Intent(StartActivity.this, FeedActivity.class);
         startActivity(intent);
     }
+
+    public void ShowMatch (View view) {
+        Intent intent = new Intent(StartActivity.this, MatchingActivity.class);
+        startActivity(intent);    }
 }

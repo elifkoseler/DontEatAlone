@@ -13,7 +13,7 @@
         android:layout_width="409dp"
         android:layout_height="60dp"
         android:layout_marginBottom="15dp"
-        android:onClick="ShowAll"
+        android:onClick="ShowMatch"
         android:text="Show me match"
         android:textColorHighlight="#FFFFFF"
         android:textSize="18sp"
