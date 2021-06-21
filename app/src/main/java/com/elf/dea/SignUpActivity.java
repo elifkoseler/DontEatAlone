@@ -1,13 +1,13 @@
 package com.elf.dea;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Intent intent = new Intent(SignUpActivity.this,ProfileActivity.class);
+                Intent intent = new Intent(SignUpActivity.this,StartActivity.class);
                 startActivity(intent);
                 finish();
             }

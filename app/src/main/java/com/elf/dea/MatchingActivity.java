@@ -44,8 +44,11 @@ public class MatchingActivity extends AppCompatActivity {
     ArrayList<Meeting> meetingList;
     ArrayList<Meeting> tempMeetingList;
     ArrayList<User> userList;
+
     boolean coffee;
     User user;
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { //menuyu bağlamak için
@@ -233,10 +236,10 @@ public class MatchingActivity extends AppCompatActivity {
             public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
                 if(value != null ){
                     for (DocumentSnapshot snapshot : value.getDocuments()) {
-                        Map<String, Object> data = snapshot.getData();
+                            Map<String, Object> data = snapshot.getData();
 
-                        String district = (String) data.get("district");
-                        Number year = (Number) data.get("year");
+                            String district = (String) data.get("district");
+                            Number year = (Number) data.get("year");
                         Number month = (Number) data.get("month");
                         Number day = (Number) data.get("day");
                         Number hour = (Number) data.get("hour");
@@ -251,7 +254,7 @@ public class MatchingActivity extends AppCompatActivity {
 
                         getMailDataFromFirestore(user);
 
-                        System.out.println("__get INTEREST: " + user.getEatingPreferences().isCoffee());
+                        System.out.println("__get AVAİLABLE: " + user.getEatingPreferences().isCoffee());
 
 
                     }
@@ -259,10 +262,6 @@ public class MatchingActivity extends AppCompatActivity {
             }
         });
     }
-
-    /*public User getUser(User user){
-        return user;
-    }*/
 
 
 
@@ -289,11 +288,14 @@ public class MatchingActivity extends AppCompatActivity {
 
         });
 
+
     }
     // meetinge yolla useri zaten user tek
 
     public void getAllMeetingDataFromFirestore(String mail, User user) {
         System.out.println("MATCHING >> getDataFromFB methoduna girdi");
+        System.out.println("MAİL: " + mail);
+
         Meeting meeting = new Meeting();
         CollectionReference meetingCollectionReference = firebaseFirestore.collection("Meetings");
         meetingCollectionReference.document(mail).collection("Meeting Info").orderBy("create date", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -321,6 +323,7 @@ public class MatchingActivity extends AppCompatActivity {
                         String restaurantname = (String) data.get("restaurant name");
                         String imageurl = (String) data.get("imageurl");
 
+                        String creator = (String) data.get("creator user");
 
                         meeting.setName(meetingname);
                         meeting.setDistrict(district);
@@ -330,22 +333,16 @@ public class MatchingActivity extends AppCompatActivity {
                         meeting.setHour(Integer.parseInt(String.valueOf(hour)));
                         meeting.setSecond(Integer.parseInt(String.valueOf(second)));
                         meeting.getRestaurant().setName(restaurantname);
+                        meeting.setImageUrl(imageurl);
+                        meeting.setCreator(creator);
 
+                        meetingList.add(meeting);
                         getMeetingRestaurantFromDB(user, meeting, mail);
 
 
-                        meetingNameFromDB.add(meeting.getName());
-                        meetingDateTimeFromDB.add(datetime);
-                        meetingDistrictFromDB.add(meeting.getDistrict());
-                        meetingImageFromDB.add(imageurl);
-                        meetingRestaurantNameFromDB.add(restaurantname);
-
-                        meetingList.add(meeting);
-
                         //MatchingCalculator(user, meeting);
-                        System.out.println("-- MATCH DB: " + meeting.getDistrict());
+
                         System.out.println("__get INTERESTMEET: " + user.getEatingPreferences().isCoffee());
-                        feedRecyclerAdapter.notifyDataSetChanged();
 
 
                     }
@@ -355,7 +352,13 @@ public class MatchingActivity extends AppCompatActivity {
         });
 
     }
+
+
     public void getMeetingRestaurantFromDB(User user, Meeting meeting, String mail){
+        for (Meeting meet : meetingList){
+            System.out.println("MEETLİST => " + meetingList.indexOf(meet)+ " => " +meet.getDistrict());
+        }
+        System.out.println("+++ Second Meeting Func =>  " + meeting.getDistrict());
 
         CollectionReference meetingCollectionReference = firebaseFirestore.collection("Meetings");
         meetingCollectionReference.document(mail).collection("Restaurant").addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -371,7 +374,7 @@ public class MatchingActivity extends AppCompatActivity {
 
                         String resname = (String) data.get("name");
 
-//                        boolean hasAnimal = (boolean) data.get("hasAnimal");
+                        boolean hasAnimal = (boolean) data.get("hasAnimal");
                         boolean hasOuterSpace = (boolean) data.get("hasOuterSpace");
                         boolean hasInnerSpace = (boolean) data.get("hasInnerSpace");
                         boolean hasSmokingArea = (boolean) data.get("hasSmokingArea");
@@ -386,7 +389,7 @@ public class MatchingActivity extends AppCompatActivity {
 
                         String expenses = (String) data.get("expenses");
 
-                       // meeting.getRestaurant().getPlaceFeature().setAvailableForAnimals(hasAnimal);
+                        meeting.getRestaurant().getPlaceFeature().setAvailableForAnimals(hasAnimal); //dbye yanlış basmışız creatingmeeting detailde
                         meeting.getRestaurant().getPlaceFeature().setSmokingArea(hasSmokingArea);
                         meeting.getRestaurant().getPlaceFeature().setWifi(hasWifi);
                         meeting.getRestaurant().getPlaceFeature().setOuterSpace(hasOuterSpace);
@@ -410,9 +413,8 @@ public class MatchingActivity extends AppCompatActivity {
                         System.out.println("-- LAST MATCH DB: " + meeting.getDistrict());
                         System.out.println("-- LAST : user:  " + user.getEatingPreferences().isCoffee());
 
-                        meetingList.add(meeting);
 
-                        MatchingCalculator(user, meeting);
+                        MeetingMatchingCalculator(user, meeting);
 
 
                     }
@@ -422,13 +424,14 @@ public class MatchingActivity extends AppCompatActivity {
         });
     }
 
-    public void MatchingCalculator(User user, Meeting meeting){
+    public void MeetingMatchingCalculator(User user, Meeting meeting){
 
         int res = 0;
         int datePoint = 0;
         int timePoint = 0;
         int eatPoint = 0;
         int locPoint = 0;
+        int placePoint = 0;
         int intPoint = 0;
 
         ArrayList<String> Europe = new ArrayList<>();
@@ -522,34 +525,36 @@ public class MatchingActivity extends AppCompatActivity {
         else if(Anatolia.contains(userLoc) && Anatolia.contains(meetLoc)){
             locPoint +=10;
         }
-        else if(Anatolia.contains(userLoc) && Anatolia.contains(meetLoc) && Popular.contains(userLoc) && Popular.contains(meetLoc)){
+        if(Anatolia.contains(userLoc) && Anatolia.contains(meetLoc) && Popular.contains(userLoc) && Popular.contains(meetLoc)){
             System.out.println("LocPoint = " + locPoint);
             locPoint += 2;
         }
-        else if(Europe.contains(userLoc) && Europe.contains(meetLoc) && Popular.contains(userLoc) && Popular.contains(meetLoc)){
+        if(Europe.contains(userLoc) && Europe.contains(meetLoc) && Popular.contains(userLoc) && Popular.contains(meetLoc)){
             locPoint += 2;
         }
+
 
         //Eating Pref matching
 
         if(user.getEatingPreferences().isCoffee() == meeting.getRestaurant().getEatType().isCafe()){
             eatPoint += 3;
         }
-        else if(user.getEatingPreferences().isDrink() == meeting.getRestaurant().getEatType().isBar()){
+        if(user.getEatingPreferences().isDrink() == meeting.getRestaurant().getEatType().isBar()){
             eatPoint += 3;
         }
-        else if(user.getEatingPreferences().isFastfood() == meeting.getRestaurant().getEatType().isFastfood()){
+        if(user.getEatingPreferences().isFastfood() == meeting.getRestaurant().getEatType().isFastfood()){
             eatPoint += 3;
         }
-        else if(user.getEatingPreferences().isTraditional() == meeting.getRestaurant().getEatType().isTraditional()){
+        if(user.getEatingPreferences().isTraditional() == meeting.getRestaurant().getEatType().isTraditional()){
             eatPoint += 3;
         }
-        else if(user.getEatingPreferences().isMeat() == meeting.getRestaurant().getEatType().isMeat()){
+        if(user.getEatingPreferences().isMeat() == meeting.getRestaurant().getEatType().isMeat()){
             eatPoint += 3;
         }
-        else if(user.getEatingPreferences().isFish() == meeting.getRestaurant().getEatType().isFish()){
+        if(user.getEatingPreferences().isFish() == meeting.getRestaurant().getEatType().isFish()){
             eatPoint += 3;
-        } else if (user.getEatingPreferences().isCoffee() == meeting.getRestaurant().getEatType().isCafe()
+        }
+        if (user.getEatingPreferences().isCoffee() == meeting.getRestaurant().getEatType().isCafe()
                 && user.getEatingPreferences().isDrink() == meeting.getRestaurant().getEatType().isBar()
                 && user.getEatingPreferences().isFastfood() == meeting.getRestaurant().getEatType().isFastfood()
                 && user.getEatingPreferences().isTraditional() == meeting.getRestaurant().getEatType().isTraditional()
@@ -558,14 +563,33 @@ public class MatchingActivity extends AppCompatActivity {
             eatPoint += 2;
         }
 
+
         //Meeting Pref matching
 
-        if(user.getMeetingPreferences().getRestaurant().getPlaceFeature().isAvailableForAnimals() == meeting.getRestaurant().getPlaceFeature().isAvailableForAnimals()){
-
+        if(user.getMeetingPreferences().getRestaurant().getPlaceFeature().isAvailableForAnimals()
+                == meeting.getRestaurant().getPlaceFeature().isAvailableForAnimals()){
+            placePoint += 2;
+        }
+        if(user.getMeetingPreferences().getRestaurant().getPlaceFeature().isInnerSpace()
+                == meeting.getRestaurant().getPlaceFeature().isInnerSpace()){
+            placePoint += 2 ;
+        }
+        if(user.getMeetingPreferences().getRestaurant().getPlaceFeature().isOuterSpace()
+                == meeting.getRestaurant().getPlaceFeature().isOuterSpace()){
+            placePoint += 2 ;
+        }
+        if(user.getMeetingPreferences().getRestaurant().getPlaceFeature().isSmokingArea()
+                == meeting.getRestaurant().getPlaceFeature().isSmokingArea()){
+            placePoint += 2 ;
+        }
+        if(user.getMeetingPreferences().getRestaurant().getPlaceFeature().isWifi()
+                == meeting.getRestaurant().getPlaceFeature().isWifi()){
+            placePoint += 2 ;
         }
 
+        System.out.println("Creator => " + meeting.getCreator());
 
-
+//Buraya if koşulu gelecek şu puanı geçen meetin interestine bakılacak şeklidne sonrasında getUserInterestFormatch funcına yollanacak
 
 
         System.out.println("-- MATCH MATCH: " + meeting.getDistrict());
@@ -574,8 +598,98 @@ public class MatchingActivity extends AppCompatActivity {
         System.out.println("TimePoint = " + timePoint);
         System.out.println("LocPoint = " + locPoint);
         System.out.println("EatPoint = " + eatPoint);
-        res = datePoint + timePoint + eatPoint + intPoint + locPoint;
+        System.out.println("PlacePoint = " + placePoint);
+
+        res = datePoint + timePoint + eatPoint + intPoint + locPoint + placePoint;
+        if( res >= 50){
+            getUserInterestFromDBforMatching(user, meeting, res);
+
+        }
+        else{
+            System.out.println("First RES is smaller than 50!!!!!!");
+        }
+
         System.out.println("++ Result => " + res);
     }
 
+    public void getUserInterestFromDBforMatching(User user, Meeting meeting, int res){
+        String creatorMail = meeting.getCreator();
+        User tempUser = new User();
+
+        CollectionReference userCollectionReference = firebaseFirestore.collection("Users");
+        userCollectionReference.document(creatorMail).collection("Interests").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                if(value != null ){
+                    for (DocumentSnapshot snapshot : value.getDocuments()) {
+                        Map<String, Object> data = snapshot.getData();
+
+                        boolean art = (boolean) data.get("isArt");
+                        boolean music = (boolean) data.get("isMusic");
+                        boolean sport = (boolean) data.get("isSports");
+                        boolean tech = (boolean) data.get("isTech");
+                        boolean travel = (boolean) data.get("isTravel");
+
+                        tempUser.getInterest().setArt(art);
+                        tempUser.getInterest().setMusic(music);
+                        tempUser.getInterest().setSports(sport);
+                        tempUser.getInterest().setTechnology(tech);
+                        tempUser.getInterest().setTravel(travel);
+
+                        System.out.println("TEMP USER Interest: " + tempUser.getInterest().isArt());
+
+                        UserMatchingCalculator(user, tempUser, meeting, res);
+                    }
+                }
+            }
+        });
+    }
+
+    public void UserMatchingCalculator(User user, User userToMatch, Meeting meeting, int res){
+
+        int intPoint = 0;
+        if(user.getInterest().isArt() == userToMatch.getInterest().isArt()){
+
+            intPoint += 4;
+            System.out.println("Intpoint1 = " + intPoint);
+
+        }
+        if(user.getInterest().isMusic() == userToMatch.getInterest().isMusic()){
+            intPoint += 4;
+            System.out.println("Intpoint2 = " + intPoint);
+
+        }
+        if(user.getInterest().isSports() == userToMatch.getInterest().isSports()){
+            intPoint += 4;
+            System.out.println("Intpoint3 = " + intPoint);
+
+        }
+        if(user.getInterest().isTechnology() == userToMatch.getInterest().isTechnology()){
+            intPoint += 4;
+            System.out.println("Intpoint4 = " + intPoint);
+
+        }
+        if(user.getInterest().isTravel() == userToMatch.getInterest().isTravel()){
+            intPoint += 4;
+            System.out.println("Intpoint5 = " + intPoint);
+
+        }
+
+        res += intPoint;
+        System.out.println("IntpointLAST = " + intPoint);
+
+        System.out.println("++ LAST Result => " + res);
+
+        String datetime = String.valueOf(meeting.getDay()) + "/" + String.valueOf(meeting.getMonth()) + "/" + String.valueOf(meeting.getYear()) +
+                " " + String.valueOf(meeting.getHour()) + ":" + String.valueOf(meeting.getSecond());
+
+        meetingNameFromDB.add(meeting.getName());
+        meetingDateTimeFromDB.add(datetime);
+        meetingDistrictFromDB.add(meeting.getDistrict());
+        meetingImageFromDB.add(meeting.getImageUrl());
+        meetingRestaurantNameFromDB.add(meeting.getRestaurant().getName());
+
+        feedRecyclerAdapter.notifyDataSetChanged();
+        //buraya da en son çıkan resulta göre feedrecycle çıkar geç
+    }
 }

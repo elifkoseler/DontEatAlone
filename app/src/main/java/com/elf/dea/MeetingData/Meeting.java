@@ -13,6 +13,23 @@ public class Meeting implements Serializable {
     String address;
     String imageUrl;
     Restaurant restaurant = new Restaurant();
+    String creator;
+
+    public Meeting(String name, int day, int month, int year, int hour, int second, String district, String address, String imageUrl, Restaurant restaurant, String creator) {
+        this.name = name;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.hour = hour;
+        this.second = second;
+        this.district = district;
+        this.address = address;
+        this.imageUrl = imageUrl;
+        this.restaurant = restaurant;
+        this.creator = creator;
+    }
+
+
 
     public Meeting() {
         this.day = 0;
@@ -26,17 +43,6 @@ public class Meeting implements Serializable {
         this.imageUrl = "";
     }
 
-    public Meeting(String name, int day, int month, int year, int hour, int second, String district, Restaurant restaurant, String address) {
-        this.name = name;
-        this.day = day;
-        this.month = month;
-        this.year = year;
-        this.hour = hour;
-        this.second = second;
-        this.district = district;
-        this.restaurant = restaurant;
-        this.address = address;
-    }
 
     public String getName() {
         return name;
@@ -116,5 +122,13 @@ public class Meeting implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

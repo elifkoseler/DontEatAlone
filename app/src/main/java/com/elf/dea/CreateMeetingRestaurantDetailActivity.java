@@ -253,7 +253,12 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
             }
         });
 
+
         System.out.println("DB işlemleri DONE");
 
+        Intent intent = new Intent(CreateMeetingRestaurantDetailActivity.this, FeedActivity.class);
+        intent.putExtra("user", user);
+        intent.putExtra("meeting", meeting);
+        startActivity(intent);
     }
 }
