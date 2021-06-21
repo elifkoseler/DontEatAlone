@@ -601,7 +601,7 @@ public class MatchingActivity extends AppCompatActivity {
         System.out.println("PlacePoint = " + placePoint);
 
         res = datePoint + timePoint + eatPoint + intPoint + locPoint + placePoint;
-        if( res >= 50){
+        if( res >= 50 && meeting.getCreator() != firebaseAuth.getCurrentUser().getEmail()){
             getUserInterestFromDBforMatching(user, meeting, res);
 
         }
