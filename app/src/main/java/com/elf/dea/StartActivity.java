@@ -50,8 +50,9 @@ public class StartActivity extends AppCompatActivity {
             Intent intentToSignUp = new Intent(StartActivity.this, SignUpActivity.class);
             startActivity(intentToSignUp);
         }
-        else if(item.getItemId() == R.id.EditProfile){
-            //yazılacak
+        else if(item.getItemId() == R.id.MyProfile){
+            Intent intent = new Intent(StartActivity.this, MyProfileActivity.class);
+            startActivity(intent);
         }
         else if(item.getItemId() == R.id.ShowAll) {
             Intent intent = new Intent(StartActivity.this, FeedActivity.class);
@@ -78,7 +79,7 @@ public class StartActivity extends AppCompatActivity {
 
     public void ShowAll(View view){
         Intent intent = new Intent(StartActivity.this, FeedActivity.class);
-        startActivity(intent);
+        startActivity(intent);  
     }
 
     public void ShowMatch (View view) {

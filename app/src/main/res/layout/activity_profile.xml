@@ -81,11 +81,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100sp"
-        android:layout_height="0dp"
+        android:layout_width="116dp"
+        android:layout_height="87dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
-        android:onClick="UploadProfilePhoto"
+        android:onClick="uploadProfileImage"
         app:layout_constraintBottom_toTopOf="@+id/NameText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

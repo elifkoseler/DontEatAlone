@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dea</string>
+    <string name="app_name">DEA</string>
     <string-array name="istanbul_county">
         <item>Adalar</item>
         <item>Arnavutköy</item>

@@ -45,7 +45,6 @@ public class MatchingActivity extends AppCompatActivity {
     ArrayList<Meeting> tempMeetingList;
     ArrayList<User> userList;
 
-    boolean coffee;
     User user;
 
 
@@ -75,9 +74,9 @@ public class MatchingActivity extends AppCompatActivity {
             Intent intentToSignUp = new Intent(MatchingActivity.this, SignUpActivity.class);
             startActivity(intentToSignUp);
         }
-        else if(item.getItemId() == R.id.EditProfile){
-            //yazılacak
-
+        else if(item.getItemId() == R.id.MyProfile){
+            Intent intent = new Intent(MatchingActivity.this, MyProfileActivity.class);
+            startActivity(intent);
         }
         else if(item.getItemId() == R.id.MyMeetings){
             Intent intent = new Intent(MatchingActivity.this, MyMeetingsActivity.class);

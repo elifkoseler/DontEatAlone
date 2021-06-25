@@ -68,9 +68,9 @@ public class MyMeetingsActivity extends AppCompatActivity {
             Intent intentToSignUp = new Intent(MyMeetingsActivity.this, SignUpActivity.class);
             startActivity(intentToSignUp);
         }
-        else if(item.getItemId() == R.id.EditProfile){
-            //yazılacak
-
+        else if(item.getItemId() == R.id.MyProfile){
+            Intent intent = new Intent(MyMeetingsActivity.this, MyProfileActivity.class);
+            startActivity(intent);
         }
         else if(item.getItemId() == R.id.MyMeetings){
             Intent intent = new Intent(MyMeetingsActivity.this, MyMeetingsActivity.class);

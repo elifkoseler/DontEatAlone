@@ -70,8 +70,9 @@ public class FeedActivity extends AppCompatActivity {
             Intent intentToSignUp = new Intent(FeedActivity.this, SignUpActivity.class);
             startActivity(intentToSignUp);
         }
-        else if(item.getItemId() == R.id.EditProfile){
-            //yazılacak
+        else if(item.getItemId() == R.id.MyProfile){
+            Intent intentToUpload = new Intent(FeedActivity.this, MyProfileActivity.class);
+            startActivity(intentToUpload);
 
         }
         else if(item.getItemId() == R.id.ShowAll) {

@@ -244,7 +244,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="484dp"
-        android:text="If you dont have any idea you can skip"
+        android:text="Please share with us the details of the restaurant as far as you know!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
