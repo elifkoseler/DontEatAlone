@@ -1,5 +1,7 @@
 package com.elf.dea;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,8 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elf.dea.UserData.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class FeedActivity extends AppCompatActivity implements FeedRecyclerAdapter.RecyclerViewClickListener {
@@ -129,7 +135,7 @@ public class FeedActivity extends AppCompatActivity implements FeedRecyclerAdapt
     public void recyclerViewListClicked(View v, int position){
         if(v instanceof Button){
             System.out.println("Button " + meetingNameFromDB.get(position));
-            //butonla katılım
+            join(meetingCreators.get(position), position);
         }
         else{
             System.out.println("View " + meetingNameFromDB.get(position));
@@ -145,6 +151,55 @@ public class FeedActivity extends AppCompatActivity implements FeedRecyclerAdapt
 
             startActivity(intent);
         }
+
+    }
+    public void join(String creator, int position){
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("participant", firebaseAuth.getCurrentUser().getEmail());
+
+        HashMap<String, Object> meetingData = new HashMap<>();
+        meetingData.put("meeting name", meetingNameFromDB.get(position));
+        meetingData.put("creator of meeting", creator);
+
+        firebaseFirestore.collection("Meetings").document(creator).collection("Participants")
+                .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                System.out.println("Participant: " + firebaseAuth.getCurrentUser().getEmail() + " added to: " + meetingNameFromDB.get(position));
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(FeedActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).collection("Meetings I've joined")
+                .add(meetingData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                System.out.println("Participant: " + firebaseAuth.getCurrentUser().getEmail() + " added to: " + meetingNameFromDB.get(position));
+                AlertDialog alertDialog = new AlertDialog.Builder(FeedActivity.this).create();
+                alertDialog.setTitle("Successfully");
+                alertDialog.setMessage("You have joined the meeting!");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(FeedActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+
+            }
+        });
 
     }
 
