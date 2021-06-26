@@ -86,6 +86,11 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
             Intent intent = new Intent(MyMeetingsActivity.this, MatchingActivity.class);
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.JoinedMeetings){
+            Intent intent = new Intent(MyMeetingsActivity.this, JoinedMeetingActivity.class);
+            startActivity(intent);
+        }
+
 
 
         return super.onOptionsItemSelected(item);

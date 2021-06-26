@@ -159,52 +159,68 @@ public class FeedActivity extends AppCompatActivity implements FeedRecyclerAdapt
     }
     public void join(String creator, int position){
         HashMap<String, Object> data = new HashMap<>();
+        HashMap<String, Object> meetingData = new HashMap<>();
+        //bir meete iki defa katılmama da engellenebilir dbdenbakıp
         data.put("participant", firebaseAuth.getCurrentUser().getEmail());
 
-        HashMap<String, Object> meetingData = new HashMap<>();
-        meetingData.put("meeting name", meetingNameFromDB.get(position));
-        meetingData.put("creator of meeting", creator);
+        if(creator.equals(firebaseAuth.getCurrentUser().getEmail())){
+            System.out.println("ILK IF");
+            AlertDialog alertDialog1 = new AlertDialog.Builder(FeedActivity.this).create();
+            alertDialog1.setTitle("YOU CAN'T JOIN THIS MEETING");
+            alertDialog1.setMessage("It is already yours!");
+            alertDialog1.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog1, int which) {
+                    Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                }
+            });
+            alertDialog1.show();
 
-        firebaseFirestore.collection("Meetings").document(creator).collection("Participants")
-                .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                System.out.println("Participant: " + firebaseAuth.getCurrentUser().getEmail() + " added to: " + meetingNameFromDB.get(position));
+        }
+        else if (!creator.equals(firebaseAuth.getCurrentUser().getEmail())){
+            System.out.println("IKINCI IF");
+            meetingData.put("meeting name", meetingNameFromDB.get(position));
+            meetingData.put("creator of meeting", creator);
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(FeedActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+            firebaseFirestore.collection("Meetings").document(creator).collection("Participants")
+                    .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    System.out.println("Participant: " + firebaseAuth.getCurrentUser().getEmail() + " added to: " + meetingNameFromDB.get(position));
 
-            }
-        });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(FeedActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
 
-        firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).collection("Meetings I've joined")
-                .add(meetingData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                System.out.println("Participant: " + firebaseAuth.getCurrentUser().getEmail() + " added to: " + meetingNameFromDB.get(position));
-                AlertDialog alertDialog = new AlertDialog.Builder(FeedActivity.this).create();
-                alertDialog.setTitle("Successfully");
-                alertDialog.setMessage("You have joined the meeting!");
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                }
+            });
 
-                alertDialog.show();
+            firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).collection("Meetings I've joined")
+                    .add(meetingData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    System.out.println("Participant: " + firebaseAuth.getCurrentUser().getEmail() + " added to: " + meetingNameFromDB.get(position));
+                    AlertDialog alertDialog = new AlertDialog.Builder(FeedActivity.this).create();
+                    alertDialog.setTitle("Successfully");
+                    alertDialog.setMessage("You have joined the meeting!");
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(FeedActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+                    alertDialog.show();
 
-            }
-        });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(FeedActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
 
+                }
+            });
+        }
     }
 
 

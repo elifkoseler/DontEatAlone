@@ -78,7 +78,7 @@ public class JoinedMeetingActivity extends AppCompatActivity implements JoinedRe
 
             System.out.println("Button " + meetingNameFromDB.get(position));
 
-            Intent intent = new Intent(JoinedMeetingActivity.this, MeetingActivity.class);
+            Intent intent = new Intent(JoinedMeetingActivity.this, GiveScoreActivity.class);
             intent.putExtra("position", position);
             intent.putExtra("meetingNameFromDB", meetingNameFromDB);
             intent.putExtra("meetingDateTimeFromDB", meetingDateTimeFromDB);

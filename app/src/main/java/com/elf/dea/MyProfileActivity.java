@@ -78,6 +78,10 @@ public class MyProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(MyProfileActivity.this, MyMeetingsActivity.class);
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.JoinedMeetings){
+            Intent intent = new Intent(MyProfileActivity.this, JoinedMeetingActivity.class);
+            startActivity(intent);
+        }
 
 
         return super.onOptionsItemSelected(item);
@@ -270,7 +274,9 @@ public class MyProfileActivity extends AppCompatActivity {
 
     public void showProfile(User user){
         emailText.setText(user.getEmail());
+        if(user.getProfileImageUrl() != null){
         Picasso.get().load(user.getProfileImageUrl()).into(profileImage);
+        }
 
         String eatPref = "";
         String meetPref = "";
