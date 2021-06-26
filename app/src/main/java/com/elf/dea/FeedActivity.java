@@ -96,6 +96,10 @@ public class FeedActivity extends AppCompatActivity implements FeedRecyclerAdapt
             Intent intent = new Intent(FeedActivity.this, MyMeetingsActivity.class);
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.JoinedMeetings){
+            Intent intent = new Intent(FeedActivity.this, JoinedMeetingActivity.class);
+            startActivity(intent);
+        }
 
 
         return super.onOptionsItemSelected(item);

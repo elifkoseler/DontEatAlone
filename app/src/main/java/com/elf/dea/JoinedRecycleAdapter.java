@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapter.ViewHolder> {
+public class JoinedRecycleAdapter extends RecyclerView.Adapter<JoinedRecycleAdapter.ViewHolder> {
 
     private ArrayList<String> meetingNameList;
     private ArrayList<String> meetingRestaurantNameList;
@@ -22,12 +22,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
     private ArrayList<String> meetingDistrictList;
     private ArrayList<String> meetingImageList;
 
-    private static RecyclerViewClickListener itemListener;
+    private static JoinedRecyclerViewClickListener itemListener;
 
 
-    public FeedRecyclerAdapter(ArrayList<String> meetingNameList,
+    public JoinedRecycleAdapter(ArrayList<String> meetingNameList,
                                ArrayList<String> meetingRestaurantNameList, ArrayList<String> meetingDateTimeList,
-                               ArrayList<String> meetingDistrictList, ArrayList<String> meetingImageList, RecyclerViewClickListener itemListener) {
+                               ArrayList<String> meetingDistrictList, ArrayList<String> meetingImageList, JoinedRecyclerViewClickListener itemListener) {
         this.meetingNameList = meetingNameList;
         this.meetingRestaurantNameList = meetingRestaurantNameList;
         this.meetingDateTimeList = meetingDateTimeList;
@@ -42,7 +42,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recycle_row,parent,false);
+        View view = layoutInflater.inflate(R.layout.activity_joined_recycle_adapter,parent,false);
 
         return new ViewHolder(view);
     }
@@ -85,18 +85,16 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
             button = itemView.findViewById(R.id.joinedButton);
             button.setOnClickListener(this);
 
-            itemView.setOnClickListener(this);
-
 
         }
         @Override
         public void onClick(View v) {
-            itemListener.recyclerViewListClicked(v, this.getLayoutPosition());
+            itemListener.JoinedRecyclerViewListClicked(v, this.getLayoutPosition());
 
         }
     }
-    public interface RecyclerViewClickListener {
-        void recyclerViewListClicked(View v, int position);
+    public interface JoinedRecyclerViewClickListener {
+        void JoinedRecyclerViewListClicked(View v, int position);
     }
 }
 

@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dea">
-        <activity android:name=".MeetingActivity"></activity>
+        <activity android:name=".GiveScoreActivity"></activity>
+        <activity android:name=".JoinedRecycleAdapter" />
+        <activity android:name=".JoinedMeetingActivity" />
+        <activity android:name=".MeetingActivity" />
         <activity android:name=".MyProfileActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".MatchingActivity" />
