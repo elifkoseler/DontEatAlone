@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,7 +39,7 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
     ArrayList<String> meetingDateTimeFromDB;
     ArrayList<String> meetingDistrictFromDB;
     ArrayList<String> meetingRestaurantNameFromDB;
-
+    ArrayList<String> meetingCreators;
     FeedRecyclerAdapter feedRecyclerAdapter;
 
 
@@ -102,6 +103,7 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
         meetingDateTimeFromDB = new ArrayList<>();
         meetingDistrictFromDB = new ArrayList<>();
         meetingRestaurantNameFromDB = new ArrayList<>();
+        meetingCreators = new ArrayList<>();
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = firebaseFirestore.getInstance();
@@ -140,6 +142,7 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
                         Number day = (Number) data.get("day");
                         Number hour = (Number) data.get("hour");
                         Number second = (Number) data.get("second");
+                        String creator = (String) data.get("creator user");
 
                         //String datetime = day + " / " + month + " / " + year + " " + hour +" : " + second;
                         String datetime = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year) +
@@ -161,6 +164,7 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
                         meetingDistrictFromDB.add(district);
                         meetingImageFromDB.add(imageurl);
                         meetingRestaurantNameFromDB.add(restaurantname);
+                        meetingCreators.add(creator);
                         //System.out.println("Liste:" +  meetingDistrictFromDB.get(0));
                         feedRecyclerAdapter.notifyDataSetChanged();
 
@@ -172,6 +176,25 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
+        if(v instanceof Button){
+            System.out.println("Button " + meetingNameFromDB.get(position));
+            //butonla katılım
+        }
+        else{
+            System.out.println("View " + meetingNameFromDB.get(position));
+
+            Intent intent = new Intent(MyMeetingsActivity.this, MeetingActivity.class);
+            intent.putExtra("position", position);
+            intent.putExtra("meetingNameFromDB", meetingNameFromDB);
+            intent.putExtra("meetingDateTimeFromDB", meetingDateTimeFromDB);
+            intent.putExtra("meetingRestaurantNameFromDB",meetingRestaurantNameFromDB);
+            intent.putExtra("meetingDistrictFromDB", meetingDistrictFromDB);
+            intent.putExtra("meetingImageFromDB", meetingImageFromDB);
+            intent.putExtra("meetingCreators", meetingCreators);
+
+            startActivity(intent);
+        }
 
     }
+
 }

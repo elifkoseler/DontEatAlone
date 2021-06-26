@@ -6,20 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MatchingActivity">
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="409dp"
-        android:layout_height="45dp"
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
         android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:text="Perfect Matches for You"
-        android:textAlignment="center"
-        android:textSize="28sp"
-        android:textStyle="bold"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toTopOf="@+id/matchRecycle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/perfect" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/matchRecycle"
@@ -27,9 +26,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 </androidx.constraintlayout.widget.ConstraintLayout>

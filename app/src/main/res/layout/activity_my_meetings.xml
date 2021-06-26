@@ -8,59 +8,28 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="64dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="259dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView7"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/woman"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="54dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="2dp"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toTopOf="@+id/rec"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/man"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="410dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="1dp"
-
-        android:layout_marginEnd="1dp"
-        android:text="My Meetings"
-        android:textAlignment="center"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintVertical_bias="0.21"
-        tools:ignore="MissingConstraints" />
+        app:srcCompat="@drawable/my" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

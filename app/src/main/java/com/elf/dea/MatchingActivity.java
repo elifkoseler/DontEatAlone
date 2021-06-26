@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +42,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
     ArrayList<String> meetingDistrictFromDB;
     ArrayList<String> meetingRestaurantNameFromDB;
     ArrayList<String> allMails;
+    ArrayList<String> meetingCreators;
 
     ArrayList<Meeting> meetingList;
     ArrayList<Meeting> tempMeetingList;
@@ -108,6 +110,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
         meetingDateTimeFromDB = new ArrayList<>();
         meetingDistrictFromDB = new ArrayList<>();
         meetingRestaurantNameFromDB = new ArrayList<>();
+        meetingCreators = new ArrayList<>();
         allMails = new ArrayList<>();
 
         userList = new ArrayList<>();
@@ -688,13 +691,31 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
         meetingDistrictFromDB.add(meeting.getDistrict());
         meetingImageFromDB.add(meeting.getImageUrl());
         meetingRestaurantNameFromDB.add(meeting.getRestaurant().getName());
-
+        meetingCreators.add(meeting.getCreator());
         feedRecyclerAdapter.notifyDataSetChanged();
         //buraya da en son çıkan resulta göre feedrecycle çıkar geç
     }
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
+        if(v instanceof Button){
+            System.out.println("Button " + meetingNameFromDB.get(position));
+            //butonla katılım
+        }
+        else{
+            System.out.println("View " + meetingNameFromDB.get(position));
+
+            Intent intent = new Intent(MatchingActivity.this, MeetingActivity.class);
+            intent.putExtra("position", position);
+            intent.putExtra("meetingNameFromDB", meetingNameFromDB);
+            intent.putExtra("meetingDateTimeFromDB", meetingDateTimeFromDB);
+            intent.putExtra("meetingRestaurantNameFromDB",meetingRestaurantNameFromDB);
+            intent.putExtra("meetingDistrictFromDB", meetingDistrictFromDB);
+            intent.putExtra("meetingImageFromDB", meetingImageFromDB);
+            intent.putExtra("meetingCreators", meetingCreators);
+
+            startActivity(intent);
+        }
 
     }
 }
