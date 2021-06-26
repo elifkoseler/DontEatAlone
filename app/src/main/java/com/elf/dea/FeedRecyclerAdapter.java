@@ -3,6 +3,7 @@ package com.elf.dea;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,14 +22,19 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
     private ArrayList<String> meetingDistrictList;
     private ArrayList<String> meetingImageList;
 
+    private static RecyclerViewClickListener itemListener;
+
+
     public FeedRecyclerAdapter(ArrayList<String> meetingNameList,
                                ArrayList<String> meetingRestaurantNameList, ArrayList<String> meetingDateTimeList,
-                               ArrayList<String> meetingDistrictList, ArrayList<String> meetingImageList) {
+                               ArrayList<String> meetingDistrictList, ArrayList<String> meetingImageList, RecyclerViewClickListener itemListener) {
         this.meetingNameList = meetingNameList;
         this.meetingRestaurantNameList = meetingRestaurantNameList;
         this.meetingDateTimeList = meetingDateTimeList;
         this.meetingDistrictList = meetingDistrictList;
         this.meetingImageList = meetingImageList;
+        this.itemListener = itemListener;
+
     }
 
     @NonNull
@@ -59,13 +65,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
         return meetingNameList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView imageView;
         TextView meetingNameText;
         TextView meetingRestaurantNameText;
         TextView meetingDateTimeText;
         TextView meetingDistrictText;
+        Button button;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,9 +82,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
             meetingDateTimeText = itemView.findViewById(R.id.datetimeText);
             meetingDistrictText = itemView.findViewById(R.id.districtText);
             meetingRestaurantNameText = itemView.findViewById(R.id.restaurantText);
+            button = itemView.findViewById(R.id.button10);
+            button.setOnClickListener(this);
+
+            itemView.setOnClickListener(this);
 
 
         }
+        @Override
+        public void onClick(View v) {
+            itemListener.recyclerViewListClicked(v, this.getLayoutPosition());
+
+        }
+    }
+    public interface RecyclerViewClickListener {
+        void recyclerViewListClicked(View v, int position);
     }
 }
 

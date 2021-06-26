@@ -21,6 +21,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.Map;
 
@@ -94,8 +95,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
         profileImage = findViewById(R.id.profileImage);
         emailText = findViewById(R.id.emailText2);
-        usernameText = findViewById(R.id.usernameText);
-        phoneText = findViewById(R.id.phoneText);
         eatPrefText = findViewById(R.id.eatPrefText);
         meetPrefText = findViewById(R.id.meetPrefText);
         availableText = findViewById(R.id.availableText);
@@ -252,12 +251,13 @@ public class MyProfileActivity extends AppCompatActivity {
 
                         String username = (String) data.get("username");
                         String phone = (String) data.get("phone");
+                        String imageUrl = (String) data.get("profile image url");
                         String mail = firebaseAuth.getCurrentUser().getEmail();
                         //imagei alıp basmak lazım dbde olmadığı için almadım hata alıcam yoksa
                         user.setEmail(mail);
                         user.setUsername(username);
                         user.setPhone(phone);
-
+                        user.setProfileImageUrl(imageUrl);
                         showProfile(user);
                         System.out.println("__get AVAİLABLE: " + user.getEatingPreferences().isCoffee());
 
@@ -270,8 +270,8 @@ public class MyProfileActivity extends AppCompatActivity {
 
     public void showProfile(User user){
         emailText.setText(user.getEmail());
-        usernameText.setText(user.getUsername());
-        phoneText.setText(user.getPhone());
+        Picasso.get().load(user.getProfileImageUrl()).into(profileImage);
+
         String eatPref = "";
         String meetPref = "";
         String availablity = "";

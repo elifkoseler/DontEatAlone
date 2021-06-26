@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class MatchingActivity extends AppCompatActivity {
+public class MatchingActivity extends AppCompatActivity implements FeedRecyclerAdapter.RecyclerViewClickListener {
     private RecyclerView recyclerView;
     FeedRecyclerAdapter feedRecyclerAdapter;
 
@@ -123,7 +124,7 @@ public class MatchingActivity extends AppCompatActivity {
         getUserEatingPreferenceFromDB();
 
         feedRecyclerAdapter = new FeedRecyclerAdapter(meetingNameFromDB, meetingRestaurantNameFromDB,
-                meetingDateTimeFromDB, meetingDistrictFromDB, meetingImageFromDB);
+                meetingDateTimeFromDB, meetingDistrictFromDB, meetingImageFromDB, this);
 
         recyclerView.setAdapter(feedRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -690,5 +691,10 @@ public class MatchingActivity extends AppCompatActivity {
 
         feedRecyclerAdapter.notifyDataSetChanged();
         //buraya da en son çıkan resulta göre feedrecycle çıkar geç
+    }
+
+    @Override
+    public void recyclerViewListClicked(View v, int position) {
+
     }
 }

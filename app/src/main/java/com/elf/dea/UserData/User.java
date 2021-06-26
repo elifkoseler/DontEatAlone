@@ -11,7 +11,7 @@ public class User implements Serializable{
     String email;
     String phone;
     String location; //spinner ile seçenek sunulacak
-    String profilePhotoName;
+    String profileImageUrl;
     int birthYear;
     int score;
     int count;
@@ -24,14 +24,14 @@ public class User implements Serializable{
     public User() {
     }
 
-    public User(String name, String username, String email, String phone, String location, String profilePhotoName, int birthYear,
+    public User(String name, String username, String email, String phone, String location, String profileImageUrl, int birthYear,
                 int score, Interest interest, EatingPreferences eatingPreferences, Meeting meetingPreferences) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.location = location;
-        this.profilePhotoName = profilePhotoName;
+        this.profileImageUrl = profileImageUrl;
         this.birthYear = birthYear;
         this.score = score;
         this.interest = interest;
@@ -79,12 +79,12 @@ public class User implements Serializable{
         this.location = location;
     }
 
-    public String getProfilePhotoName() {
-        return profilePhotoName;
+    public String getProfileImageUrl() {
+        return profileImageUrl;
     }
 
-    public void setProfilePhotoName(String profilePhotoName) {
-        this.profilePhotoName = profilePhotoName;
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     public int getBirthYear() {

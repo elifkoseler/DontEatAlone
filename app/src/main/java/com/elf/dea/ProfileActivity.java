@@ -68,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
 
     }
@@ -138,11 +139,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        }
-
-
-     //image urlini fbye yazman sonrasında myprofilde çekip ile basman lazım
-    public void uploadProfileImage(View view) {
         if (imageData != null) {
             UUID uuid = UUID.randomUUID();
             String imageName = "images/" + uuid + ".jpg";
@@ -156,6 +152,8 @@ public class ProfileActivity extends AppCompatActivity {
                     newReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+                            String url = uri.toString();
+                            sendImageUrltoDB(url);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -167,7 +165,35 @@ public class ProfileActivity extends AppCompatActivity {
             });
 
         }
+
+
+        }
+
+
+     //image urlini fbye yazman sonrasında myprofilde çekip ile basman lazım
+    public void uploadProfileImage(View view) {
+
     }
+
+    public void sendImageUrltoDB(String url){
+        HashMap<String, Object> postData = new HashMap<>();
+        postData.put("profile image url", url);
+
+        firebaseFirestore.collection("Users").document(user.getEmail()).collection("User Info")
+                .add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ProfileActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
 
     public void selectImage(View view){
         //izin istendi, izin verildi ya da verilmedi.

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,7 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class FeedActivity extends AppCompatActivity {
+public class FeedActivity extends AppCompatActivity implements FeedRecyclerAdapter.RecyclerViewClickListener {
 
     private RecyclerView recyclerView;
     FeedRecyclerAdapter feedRecyclerAdapter;
@@ -39,6 +41,7 @@ public class FeedActivity extends AppCompatActivity {
     ArrayList<String> meetingDateTimeFromDB;
     ArrayList<String> meetingDistrictFromDB;
     ArrayList<String> meetingRestaurantNameFromDB;
+    ArrayList<String> meetingCreators;
     ArrayList<String> allMails;
 
 
@@ -106,6 +109,7 @@ public class FeedActivity extends AppCompatActivity {
         meetingDistrictFromDB = new ArrayList<>();
         meetingRestaurantNameFromDB = new ArrayList<>();
 
+        meetingCreators = new ArrayList<>();
         allMails = new ArrayList<>();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -114,13 +118,36 @@ public class FeedActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user"); // get ref of user from other activities
         getMailDataFromFirestore();
 
-        feedRecyclerAdapter = new FeedRecyclerAdapter(meetingNameFromDB, meetingRestaurantNameFromDB, meetingDateTimeFromDB, meetingDistrictFromDB, meetingImageFromDB);
+        feedRecyclerAdapter = new FeedRecyclerAdapter(meetingNameFromDB, meetingRestaurantNameFromDB, meetingDateTimeFromDB, meetingDistrictFromDB, meetingImageFromDB,  this);
 
         recyclerView.setAdapter(feedRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
     }
+
+    public void recyclerViewListClicked(View v, int position){
+        if(v instanceof Button){
+            System.out.println("Button " + meetingNameFromDB.get(position));
+            //butonla katılım
+        }
+        else{
+            System.out.println("View " + meetingNameFromDB.get(position));
+
+            Intent intent = new Intent(FeedActivity.this, MeetingActivity.class);
+            intent.putExtra("position", position);
+            intent.putExtra("meetingNameFromDB", meetingNameFromDB);
+            intent.putExtra("meetingDateTimeFromDB", meetingDateTimeFromDB);
+            intent.putExtra("meetingRestaurantNameFromDB",meetingRestaurantNameFromDB);
+            intent.putExtra("meetingDistrictFromDB", meetingDistrictFromDB);
+            intent.putExtra("meetingImageFromDB", meetingImageFromDB);
+            intent.putExtra("meetingCreators", meetingCreators);
+
+            startActivity(intent);
+        }
+
+    }
+
 
     public void getMailDataFromFirestore(){ //datayı firestoredan alma
         //firebaseFirestore.collection().addSnapShotListener(same things here) //daha basit yöntem referencelamaktansa
@@ -210,6 +237,7 @@ public class FeedActivity extends AppCompatActivity {
                             Number day = (Number) data.get("day");
                             Number hour = (Number) data.get("hour");
                             Number second = (Number) data.get("second");
+                            String creator = (String) data.get("creator user");
 
                             //String datetime = day + " / " + month + " / " + year + " " + hour +" : " + second;
                             String datetime = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year) +
@@ -230,6 +258,7 @@ public class FeedActivity extends AppCompatActivity {
                             meetingDistrictFromDB.add(district);
                             meetingImageFromDB.add(imageurl);
                             meetingRestaurantNameFromDB.add(restaurantname);
+                            meetingCreators.add(creator);
 
                             feedRecyclerAdapter.notifyDataSetChanged();
 
@@ -238,5 +267,13 @@ public class FeedActivity extends AppCompatActivity {
                 }
             });
     }
+    public void join(View view){
+        System.out.println("Joine basıldı.");
+        System.out.println(meetingNameFromDB.get(0));
+    }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

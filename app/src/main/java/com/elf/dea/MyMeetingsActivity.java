@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Map;
 //şimdilik duruyor ama edit butonu vs özelleştirilerek başka bir recycle adapter yazılmalı!!
 
-public class MyMeetingsActivity extends AppCompatActivity {
+public class MyMeetingsActivity extends AppCompatActivity implements FeedRecyclerAdapter.RecyclerViewClickListener {
     private RecyclerView recyclerView;
 
     private FirebaseAuth firebaseAuth;
@@ -108,7 +109,7 @@ public class MyMeetingsActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user"); // get ref of user from other activities
         getDataFromFirestore();
 
-        feedRecyclerAdapter = new FeedRecyclerAdapter(meetingNameFromDB, meetingRestaurantNameFromDB, meetingDateTimeFromDB, meetingDistrictFromDB, meetingImageFromDB);
+        feedRecyclerAdapter = new FeedRecyclerAdapter(meetingNameFromDB, meetingRestaurantNameFromDB, meetingDateTimeFromDB, meetingDistrictFromDB, meetingImageFromDB,this );
 
         recyclerView.setAdapter(feedRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -167,5 +168,10 @@ public class MyMeetingsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void recyclerViewListClicked(View v, int position) {
+
     }
 }
