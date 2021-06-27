@@ -6,17 +6,262 @@
     android:layout_height="match_parent"
     tools:context=".EditProfileActivity">
 
-    <ImageView
-        android:id="@+id/imageView18"
+    <Button
+        android:id="@+id/button14"
         android:layout_width="0dp"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="50dp"
+        android:onClick="Submit"
+        android:text="SUbmıt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animalCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/innerCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Inner Space"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/outerCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fastFoodCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/wifiCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Wifi"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/animalCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outerCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/smokingCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="24dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Smoking Area"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/wifiCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/outerCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/outerCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="24dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Outer Space"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/wifiCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/innerCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/animalCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="10dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Animal Friendly"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/button14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wifiCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/meatCheckBox3"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="24dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Meat"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/drinkCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView18" />
+
+    <CheckBox
+        android:id="@+id/fastFoodCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="50dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Fast-Food"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/innerCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coffeeCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/drinkCheckBox3"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="23dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Drink"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/coffeeCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meatCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/fishCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="24dp"
+        android:buttonTint="#673AB7"
+        android:checked="false"
+        android:onClick="onCheckboxClicked"
+        android:text="Fish"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/drinkCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/meatCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/coffeeCheckBox3"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Coffee"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/fastFoodCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drinkCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/traditionalCheckBox3"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="24dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Traditional"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/coffeeCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/drinkCheckBox3" />
+
+
+    <ImageView
+        android:id="@+id/imageVieweidt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005"
+        app:srcCompat="@drawable/eatpref" />
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="415dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/meatCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/edit" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="240dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageVieweidt"
+        app:srcCompat="@drawable/meetpref" />
+
+    <View
+        android:layout_width="300dp"
+        android:layout_height="3dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView18"
+        app:layout_constraintVertical_bias="0.125"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:onClick="EditLater"
+        android:text="Edit Later"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.972" />
 </androidx.constraintlayout.widget.ConstraintLayout>

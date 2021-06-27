@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileAvailabilityActivity">
+
+    <Button
+        android:id="@+id/button16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="38dp"
+        android:onClick="Submit"
+        android:text="Submıt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editlocatext" />
+
+    <CheckBox
+        android:id="@+id/sportsCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="28dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Sports"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView23"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/artCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/artCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Art"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/sportsCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/travelCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/techCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="25dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Technology"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/artCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/musicCheckBox3" />
+
+    <CheckBox
+        android:id="@+id/musicCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="24dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Music"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/travelCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView21" />
+
+    <CheckBox
+        android:id="@+id/travelCheckBox3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:buttonTint="#673AB7"
+        android:onClick="onCheckboxClicked"
+        android:text="Travel"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/artCheckBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/musicCheckBox3" />
+
+    <EditText
+        android:id="@+id/editdatetext"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="11dp"
+        android:ems="10"
+        android:hint="Enter date"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/edittimetext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edittimetext"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="13dp"
+        android:ems="10"
+        android:hint="Enter time"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/editlocatext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView23" />
+
+    <EditText
+        android:id="@+id/editlocatext"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="92dp"
+        android:ems="10"
+        android:hint="Enter location"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView19" />
+
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="326dp"
+        app:layout_constraintBottom_toTopOf="@+id/editlocatext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/interest" />
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginBottom="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/musicCheckBox3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView19"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit" />
+
+    <ImageView
+        android:id="@+id/imageView23"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/edittimetext"
+        app:layout_constraintStart_toStartOf="@+id/editdatetext"
+        app:layout_constraintTop_toBottomOf="@+id/sportsCheckBox3"
+        app:srcCompat="@drawable/available" />
+
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:onClick="EditLater"
+        android:text="Edit Later"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.972" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="300dp"
+        android:layout_height="3dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView21"
+        app:layout_constraintVertical_bias="0.116"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

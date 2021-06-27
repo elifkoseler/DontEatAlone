@@ -10,151 +10,142 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="19dp"
         android:onClick="Back"
         android:text="Back"
         app:iconPadding="4dp"
         app:layout_constraintBottom_toTopOf="@+id/EditLaterText"
-        app:layout_constraintEnd_toEndOf="@+id/EditLaterText"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/EditLaterText" />
 
     <Button
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginEnd="95dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginBottom="19dp"
         android:onClick="Save"
         android:text="Save"
         android:textSize="14sp"
         app:iconPadding="4dp"
         app:layout_constraintBottom_toTopOf="@+id/EditLaterText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/EditLaterText" />
 
     <CheckBox
         android:id="@+id/DrinkCheckBox"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="88dp"
         android:layout_height="44dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="31dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Drink"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/CoffeeCheckBox"
         app:layout_constraintEnd_toEndOf="@+id/FastFoodCheckBox"
-        app:layout_constraintStart_toEndOf="@+id/CoffeeCheckBox" />
+        app:layout_constraintStart_toEndOf="@+id/CoffeeCheckBox"
+        app:layout_constraintTop_toBottomOf="@+id/FastFoodCheckBox" />
 
     <CheckBox
         android:id="@+id/TraditionalCheckBox"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="122dp"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
         android:layout_marginStart="68dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Traditional"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/FastFoodCheckBox"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/FastFoodCheckBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/FastFoodCheckBox" />
 
     <CheckBox
         android:id="@+id/FastFoodCheckBox"
         android:layout_width="117dp"
         android:layout_height="44dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="69dp"
+        android:layout_marginTop="209dp"
+        android:layout_marginBottom="209dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Fast-Food"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/DrinkCheckBox"
+        app:layout_constraintBottom_toTopOf="@+id/EditLaterText"
         app:layout_constraintStart_toEndOf="@+id/TraditionalCheckBox"
-        app:layout_constraintTop_toTopOf="@+id/FishCheckBox" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <CheckBox
         android:id="@+id/FishCheckBox"
-        android:layout_width="86dp"
+        android:layout_width="0dp"
         android:layout_height="44dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="31dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="67dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Fish"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/MeatCheckBox"
-        app:layout_constraintEnd_toEndOf="@+id/FastFoodCheckBox"
-        app:layout_constraintStart_toEndOf="@+id/MeatCheckBox" />
+        app:layout_constraintBottom_toBottomOf="@+id/FastFoodCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/DrinkCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/FastFoodCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <CheckBox
         android:id="@+id/CoffeeCheckBox"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="100dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="185dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="186dp"
+        android:layout_height="0dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Coffee"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/nextButton"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/TraditionalCheckBox"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/DrinkCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/TraditionalCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/DrinkCheckBox" />
 
     <CheckBox
         android:id="@+id/MeatCheckBox"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="0dp"
         android:layout_height="44dp"
-        android:layout_marginTop="46dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Meat"
         android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/FishCheckBox"
         app:layout_constraintEnd_toEndOf="@+id/TraditionalCheckBox"
-        app:layout_constraintStart_toStartOf="@+id/CoffeeCheckBox"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="@+id/CoffeeCheckBox" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="30dp"
         android:text="Let's meet!"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="130dp"
         android:text="What is your eating preferences ?"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         android:text="You can check more than one !"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +156,7 @@
         android:id="@+id/EditLaterText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="22dp"
         android:onClick="EditLater"
         android:text="Edit Later"
         android:textColor="#121212"

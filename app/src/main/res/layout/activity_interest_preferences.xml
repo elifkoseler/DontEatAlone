@@ -10,33 +10,34 @@
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginEnd="91dp"
         android:layout_marginBottom="20dp"
         android:onClick="Back"
         android:text="Back"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="@+id/techCheckBox"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="95dp"
+        android:layout_marginStart="91dp"
+        android:layout_marginEnd="91dp"
         android:layout_marginBottom="20dp"
         android:onClick="Save"
         android:text="Save"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView7" />
+        app:layout_constraintStart_toStartOf="@+id/techCheckBox" />
 
     <CheckBox
         android:id="@+id/techCheckBox"
         android:layout_width="130dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="140dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginBottom="144dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Technology"
@@ -44,115 +45,108 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/musicCheckBox" />
+        app:layout_constraintTop_toTopOf="@+id/sportsCheckBox" />
 
     <CheckBox
         android:id="@+id/artCheckBox"
-        android:layout_width="0dp"
+        android:layout_width="95dp"
         android:layout_height="45dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="161dp"
+        android:layout_marginBottom="162dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Art"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/musicCheckBox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/musicCheckBox" />
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="@+id/techCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <CheckBox
         android:id="@+id/musicCheckBox"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="83dp"
+        android:layout_width="95dp"
+        android:layout_height="36dp"
         android:layout_marginEnd="42dp"
-        android:layout_marginBottom="27dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Music"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/techCheckBox"
-        app:layout_constraintEnd_toStartOf="@+id/artCheckBox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/travelCheckBox" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/artCheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/artCheckBox" />
 
     <CheckBox
         android:id="@+id/sportsCheckBox"
         android:layout_width="0dp"
         android:layout_height="45dp"
-        android:layout_marginEnd="96dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Sports"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/travelCheckBox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/travelCheckBox" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/artCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/artCheckBox"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/travelCheckBox"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="83dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="38dp"
+        android:layout_height="36dp"
         android:buttonTint="#673AB7"
         android:onClick="onCheckboxClicked"
         android:text="Travel"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/musicCheckBox"
-        app:layout_constraintEnd_toStartOf="@+id/sportsCheckBox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/sportsCheckBox"
+        app:layout_constraintEnd_toEndOf="@+id/musicCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/musicCheckBox" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="383dp"
+        android:layout_width="0dp"
         android:layout_height="54dp"
-        android:layout_marginStart="62dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="42dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginEnd="14dp"
         android:text="Let's get to know you better!"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="393dp"
-        android:layout_height="71dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="9dp"
+        android:layout_marginTop="21dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="11dp"
         android:text="Let us know about your interests so that we can make the best matches"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="203dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="54dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="97dp"
+        android:layout_marginBottom="95dp"
         android:text="You can check more than one !"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/travelCheckBox"
+        app:layout_constraintBottom_toBottomOf="@+id/sportsCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="23dp"
         android:onClick="EditLater"
         android:text="Edit Later"
         android:textColor="#000000"

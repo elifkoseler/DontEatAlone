@@ -107,8 +107,13 @@ public class MyProfileActivity extends AppCompatActivity {
         getUserEatingPreferenceFromDB();
     }
 
-    public void Edit(View view) {
+    public void EditChoices(View view) {
         Intent intent = new Intent(MyProfileActivity.this, EditProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void EditAvailability(View view) {
+        Intent intent = new Intent(MyProfileActivity.this, EditProfileAvailabilityActivity.class);
         startActivity(intent);
     }
 

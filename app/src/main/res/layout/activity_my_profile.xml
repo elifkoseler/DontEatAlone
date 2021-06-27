@@ -8,25 +8,37 @@
 
     <Button
         android:id="@+id/button12"
-        android:layout_width="373dp"
-        android:layout_height="40dp"
+        android:layout_width="184dp"
+        android:layout_height="55dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="11dp"
-        android:onClick="Edit"
-        android:text="Edit"
-        android:textSize="12sp"
+        android:layout_marginEnd="21dp"
+        android:onClick="EditChoices"
+        android:text="Edıt choıces"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView10"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailText2" />
 
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="179dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="EditAvailability"
+        android:text="Edıt avaılabılıty"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button12"
+        app:layout_constraintTop_toTopOf="@+id/button12" />
+
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="406dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
+        android:layout_width="0dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toTopOf="@+id/profileImage"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,14 +48,11 @@
 
     <ImageView
         android:id="@+id/profileImage"
-        android:layout_width="435dp"
-        android:layout_height="133dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="436dp"
+        android:layout_height="137dp"
         app:layout_constraintBottom_toTopOf="@+id/emailText2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button15"
+        app:layout_constraintStart_toStartOf="@+id/button15"
         app:layout_constraintTop_toBottomOf="@+id/imageView8"
         app:srcCompat="@drawable/who" />
 
@@ -51,7 +60,7 @@
         android:id="@+id/imageView10"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="3dp"
         app:layout_constraintBottom_toTopOf="@+id/eatPrefText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,8 +71,9 @@
         android:id="@+id/imageView11"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toTopOf="@+id/meetPrefText"
-        app:layout_constraintStart_toStartOf="@+id/meetPrefText"
+        app:layout_constraintStart_toStartOf="@+id/eatPrefText"
         app:layout_constraintTop_toBottomOf="@+id/eatPrefText"
         app:srcCompat="@drawable/meetpref" />
 
@@ -71,23 +81,23 @@
         android:id="@+id/imageView12"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="21dp"
-        app:layout_constraintBottom_toBottomOf="@+id/availableText"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="75dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView13"
         app:layout_constraintStart_toStartOf="@+id/meetPrefText"
-        app:layout_constraintTop_toTopOf="@+id/meetPrefText"
+        app:layout_constraintTop_toTopOf="@+id/imageView11"
         app:srcCompat="@drawable/available" />
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="413dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="21dp"
         android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/availableText"
         app:srcCompat="@drawable/interest" />
 
     <TextView
@@ -139,10 +149,11 @@
 
     <TextView
         android:id="@+id/emailText2"
-        android:layout_width="408dp"
+        android:layout_width="415dp"
         android:layout_height="32dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="7dp"
         android:text="Email"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -156,7 +167,7 @@
         android:id="@+id/eatPrefText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="1dp"
         android:text="EatPref"
         android:textAlignment="center"
         android:textSize="16sp"
