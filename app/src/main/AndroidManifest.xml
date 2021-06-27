@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dea">
-        <activity android:name=".EditProfileAvailabilityActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".EditMeetingActivity" />
+        <activity android:name=".MyMeetingsAdapter" />
+        <activity android:name=".EditProfileAvailabilityActivity" />
         <activity android:name=".GiveScoreActivity" />
         <activity android:name=".JoinedRecycleAdapter" />
         <activity android:name=".JoinedMeetingActivity" />
@@ -34,6 +37,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

@@ -8,7 +8,7 @@
     android:backgroundTint="#FFFFFF">
 
     <Button
-        android:id="@+id/joinedButton"
+        android:id="@+id/editButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="22dp"
@@ -19,22 +19,22 @@
         android:textAllCaps="true"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/joineddatetimeText"
-        app:layout_constraintStart_toEndOf="@+id/joineddatetimeText"
-        app:layout_constraintTop_toBottomOf="@+id/joinedRestaurantText"
+        app:layout_constraintEnd_toEndOf="@+id/editdatetimeText"
+        app:layout_constraintStart_toEndOf="@+id/editdatetimeText"
+        app:layout_constraintTop_toBottomOf="@+id/editRestaurantText"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/JoinedImageView"
+        android:id="@+id/editImageView"
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:layout_marginBottom="2dp"
         android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/joinedDistrictText"
-        app:layout_constraintEnd_toEndOf="@+id/joineddatetimeText"
-        app:layout_constraintStart_toEndOf="@+id/joineddatetimeText"
-        app:layout_constraintTop_toBottomOf="@+id/joinedmeetingNameText"
-        app:srcCompat="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toTopOf="@+id/editDistrictText"
+        app:layout_constraintEnd_toEndOf="@+id/editdatetimeText"
+        app:layout_constraintStart_toEndOf="@+id/editdatetimeText"
+        app:layout_constraintTop_toBottomOf="@+id/editmeetingNameText"
+        app:srcCompat="@drawable/ic_launcher_foreground"
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
@@ -43,8 +43,8 @@
         android:layout_height="376dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/joineddatetimeText"
-        app:layout_constraintStart_toEndOf="@+id/joineddatetimeText"
+        app:layout_constraintEnd_toEndOf="@+id/editdatetimeText"
+        app:layout_constraintStart_toEndOf="@+id/editdatetimeText"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/joinedDistrictText"
+        android:id="@+id/editDistrictText"
         android:layout_width="0dp"
         android:layout_height="32dp"
         android:layout_marginEnd="1dp"
@@ -61,28 +61,28 @@
         android:textColor="#311B92"
         android:textSize="16sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/joinedRestaurantText"
+        app:layout_constraintBottom_toTopOf="@+id/editRestaurantText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/joineddatetimeText"
-        app:layout_constraintTop_toBottomOf="@+id/JoinedImageView"
+        app:layout_constraintStart_toEndOf="@+id/editdatetimeText"
+        app:layout_constraintTop_toBottomOf="@+id/editImageView"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/joinedRestaurantText"
+        android:id="@+id/editRestaurantText"
         android:layout_width="409dp"
         android:layout_height="32dp"
         android:layout_marginBottom="6dp"
         android:text="restaurantname"
         android:textAlignment="center"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/joinedButton"
-        app:layout_constraintEnd_toEndOf="@+id/joineddatetimeText"
-        app:layout_constraintStart_toEndOf="@+id/joineddatetimeText"
-        app:layout_constraintTop_toBottomOf="@+id/joinedDistrictText"
+        app:layout_constraintBottom_toTopOf="@+id/editButton"
+        app:layout_constraintEnd_toEndOf="@+id/editdatetimeText"
+        app:layout_constraintStart_toEndOf="@+id/editdatetimeText"
+        app:layout_constraintTop_toBottomOf="@+id/editDistrictText"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/joinedmeetingNameText"
+        android:id="@+id/editmeetingNameText"
         android:layout_width="0dp"
         android:layout_height="32dp"
         android:layout_marginStart="1dp"
@@ -91,14 +91,14 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/JoinedImageView"
+        app:layout_constraintBottom_toTopOf="@+id/editImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/joineddatetimeText"
+        android:id="@+id/editdatetimeText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -108,10 +108,10 @@
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/joinedRestaurantText"
-        app:layout_constraintEnd_toStartOf="@+id/joinedDistrictText"
+        app:layout_constraintBottom_toTopOf="@+id/editRestaurantText"
+        app:layout_constraintEnd_toStartOf="@+id/editDistrictText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/joinedDistrictText"
+        app:layout_constraintTop_toTopOf="@+id/editDistrictText"
         tools:ignore="MissingConstraints" />
 
     <View
@@ -120,7 +120,7 @@
         android:layout_height="1dp"
         android:layout_marginBottom="1dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toTopOf="@+id/joinedmeetingNameText"
+        app:layout_constraintBottom_toTopOf="@+id/editmeetingNameText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Map;
 //şimdilik duruyor ama edit butonu vs özelleştirilerek başka bir recycle adapter yazılmalı!!
 
-public class MyMeetingsActivity extends AppCompatActivity implements FeedRecyclerAdapter.RecyclerViewClickListener {
+public class MyMeetingsActivity extends AppCompatActivity implements MyMeetingsAdapter.MyMeetingsRecyclerViewListClickListener {
     private RecyclerView recyclerView;
 
     private FirebaseAuth firebaseAuth;
@@ -40,7 +40,7 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
     ArrayList<String> meetingDistrictFromDB;
     ArrayList<String> meetingRestaurantNameFromDB;
     ArrayList<String> meetingCreators;
-    FeedRecyclerAdapter feedRecyclerAdapter;
+    MyMeetingsAdapter recycleAdapter;
 
 
     User user; //bu user refi burda işlevsiz tam burada dbden tüm user çekilmeli
@@ -116,9 +116,9 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
         user = (User) getIntent().getSerializableExtra("user"); // get ref of user from other activities
         getDataFromFirestore();
 
-        feedRecyclerAdapter = new FeedRecyclerAdapter(meetingNameFromDB, meetingRestaurantNameFromDB, meetingDateTimeFromDB, meetingDistrictFromDB, meetingImageFromDB,this );
+        recycleAdapter = new MyMeetingsAdapter(meetingNameFromDB, meetingRestaurantNameFromDB, meetingDateTimeFromDB, meetingDistrictFromDB, meetingImageFromDB,this );
 
-        recyclerView.setAdapter(feedRecyclerAdapter);
+        recyclerView.setAdapter(recycleAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -171,7 +171,7 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
                         meetingRestaurantNameFromDB.add(restaurantname);
                         meetingCreators.add(creator);
                         //System.out.println("Liste:" +  meetingDistrictFromDB.get(0));
-                        feedRecyclerAdapter.notifyDataSetChanged();
+                        recycleAdapter.notifyDataSetChanged();
 
                     }
                 }
@@ -180,10 +180,14 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
     }
 
     @Override
-    public void recyclerViewListClicked(View v, int position) {
+    public void MyMeetingsRecyclerViewListClicked(View v, int position) {
         if(v instanceof Button){
-            System.out.println("Button " + meetingNameFromDB.get(position));
-            //butonla katılım
+            System.out.println("Button meeting" + meetingNameFromDB.get(position));
+
+            Intent intent = new Intent(MyMeetingsActivity.this, EditMeetingActivity.class);
+            startActivity(intent);
+
+
         }
         else{
             System.out.println("View " + meetingNameFromDB.get(position));
@@ -201,5 +205,6 @@ public class MyMeetingsActivity extends AppCompatActivity implements FeedRecycle
         }
 
     }
+
 
 }

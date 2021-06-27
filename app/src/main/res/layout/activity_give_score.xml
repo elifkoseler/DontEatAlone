@@ -15,7 +15,7 @@
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="78dp"
         android:onClick="submit"
-        android:text="Sumbıt"
+        android:text="Submıt"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

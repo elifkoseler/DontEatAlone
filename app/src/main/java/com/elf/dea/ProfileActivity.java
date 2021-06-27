@@ -1,6 +1,8 @@
 package com.elf.dea;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -51,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
     User user = new User();
     Uri imageData, tempUri;
     ImageView imageView;
+    String district;
 
 
 
@@ -65,11 +69,36 @@ public class ProfileActivity extends AppCompatActivity {
         locationText = findViewById(R.id.LocationText);
         birthYearText = findViewById(R.id.BirthYearText);
         imageView = findViewById(R.id.imageView);
+        locationText.setInputType(InputType.TYPE_NULL);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
+
+        String[] listItems = getResources().getStringArray(R.array.istanbul_county);
+
+        locationText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileActivity.this);
+                mBuilder.setTitle("Please choose the location");
+                mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        locationText.setText(listItems[i]);
+                        System.out.println("Picked county: " + listItems[i]);
+                        district = listItems[i];
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
+            }
+        });
+
+
 
     }
 
@@ -87,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity {
         user.setName(nameText.getText().toString());
         user.setUsername(usernameText.getText().toString());
         user.setPhone(phoneText.getText().toString());
-        user.setLocation(locationText.getText().toString());
+        user.setLocation(district);
         user.setBirthYear(Integer.parseInt(birthYearText.getText().toString()));
         //Toast.makeText(ProfileActivity.this,"Save'e bastın !!", Toast.LENGTH_LONG).show();
         user.setEmail(firebaseAuth.getCurrentUser().getEmail());

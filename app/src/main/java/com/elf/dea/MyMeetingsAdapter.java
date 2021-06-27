@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapter.ViewHolder> {
+public class MyMeetingsAdapter extends RecyclerView.Adapter<MyMeetingsAdapter.ViewHolder> {
 
     private ArrayList<String> meetingNameList;
     private ArrayList<String> meetingRestaurantNameList;
@@ -22,12 +22,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
     private ArrayList<String> meetingDistrictList;
     private ArrayList<String> meetingImageList;
 
-    private static RecyclerViewClickListener itemListener;
+    private static MyMeetingsRecyclerViewListClickListener itemListener;
 
 
-    public FeedRecyclerAdapter(ArrayList<String> meetingNameList,
-                               ArrayList<String> meetingRestaurantNameList, ArrayList<String> meetingDateTimeList,
-                               ArrayList<String> meetingDistrictList, ArrayList<String> meetingImageList, RecyclerViewClickListener itemListener) {
+    public MyMeetingsAdapter(ArrayList<String> meetingNameList,
+                                ArrayList<String> meetingRestaurantNameList, ArrayList<String> meetingDateTimeList,
+                                ArrayList<String> meetingDistrictList, ArrayList<String> meetingImageList, MyMeetingsRecyclerViewListClickListener itemListener) {
         this.meetingNameList = meetingNameList;
         this.meetingRestaurantNameList = meetingRestaurantNameList;
         this.meetingDateTimeList = meetingDateTimeList;
@@ -42,14 +42,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recycle_row,parent,false);
+        View view = layoutInflater.inflate(R.layout.activity_my_meetings_adapter,parent,false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        System.out.println("FeedRecycleAdapter > onBindViewHolder !!");
 
         holder.meetingNameText.setText(meetingNameList.get(position));
         holder.meetingRestaurantNameText.setText(meetingRestaurantNameList.get(position));
@@ -85,18 +84,16 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<FeedRecyclerAdapte
             button = itemView.findViewById(R.id.editButton);
             button.setOnClickListener(this);
 
-            itemView.setOnClickListener(this);
-
 
         }
         @Override
         public void onClick(View v) {
-            itemListener.recyclerViewListClicked(v, this.getLayoutPosition());
+            itemListener.MyMeetingsRecyclerViewListClicked(v, this.getLayoutPosition());
 
         }
     }
-    public interface RecyclerViewClickListener {
-        void recyclerViewListClicked(View v, int position);
+    public interface MyMeetingsRecyclerViewListClickListener {
+        void  MyMeetingsRecyclerViewListClicked(View v, int position);
     }
-}
 
+}

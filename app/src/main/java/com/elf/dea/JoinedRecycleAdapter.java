@@ -77,12 +77,12 @@ public class JoinedRecycleAdapter extends RecyclerView.Adapter<JoinedRecycleAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             System.out.println("FeedRecycleAdapter > Post Holder!!");
-            imageView = itemView.findViewById(R.id.JoinedImageView);
-            meetingNameText = itemView.findViewById(R.id.joinedmeetingNameText);
-            meetingDateTimeText = itemView.findViewById(R.id.joineddatetimeText);
-            meetingDistrictText = itemView.findViewById(R.id.joinedDistrictText);
-            meetingRestaurantNameText = itemView.findViewById(R.id.joinedRestaurantText);
-            button = itemView.findViewById(R.id.joinedButton);
+            imageView = itemView.findViewById(R.id.editImageView);
+            meetingNameText = itemView.findViewById(R.id.editmeetingNameText);
+            meetingDateTimeText = itemView.findViewById(R.id.editdatetimeText);
+            meetingDistrictText = itemView.findViewById(R.id.editDistrictText);
+            meetingRestaurantNameText = itemView.findViewById(R.id.editRestaurantText);
+            button = itemView.findViewById(R.id.editButton);
             button.setOnClickListener(this);
 
 

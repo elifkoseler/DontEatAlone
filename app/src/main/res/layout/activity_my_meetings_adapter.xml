@@ -14,7 +14,7 @@
         android:layout_marginBottom="22dp"
         android:background="#BEA2DF"
         android:backgroundTint="#FFFFFF"
-        android:text="Give Score"
+        android:text="Edıt"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textStyle="bold"
@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="@+id/editdatetimeText"
         app:layout_constraintStart_toEndOf="@+id/editdatetimeText"
         app:layout_constraintTop_toBottomOf="@+id/editRestaurantText"
-        tools:ignore="MissingConstraints"/>
+        tools:ignore="MissingConstraints" />
 
 
     <ImageView

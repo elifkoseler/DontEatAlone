@@ -90,4 +90,9 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     }
+
+    public void ForgotPassword(View view){
+        Intent intent = new Intent(SignUpActivity.this,ForgotPasswordActivity.class);
+        startActivity(intent);
+    }
 }
