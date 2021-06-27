@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/CreateMeeting" android:title="Create Meeting"></item>
     <item android:id="@+id/ShowMatches" android:title="View Matches"></item>
-    <item android:id="@+id/ShowAll" android:title="View All Meetings"></item>
+    <item android:id="@+id/ShowAll" android:title="All Meetings"></item>
     <item android:id="@+id/MyMeetings" android:title="My Meetings"></item>
-    <item android:id="@+id/JoinedMeetings" android:title="View Joined Meetings"></item>
+    <item android:id="@+id/JoinedMeetings" android:title="Joined Meetings"></item>
     <item android:id="@+id/MyProfile" android:title="My Profile"></item>
     <item android:id="@+id/SignOut" android:title="Sign Out"></item>
 </menu>

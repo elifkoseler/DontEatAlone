@@ -3,6 +3,7 @@ package com.elf.dea.UserData;
 import com.elf.dea.MeetingData.Meeting;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class User implements Serializable{
 
@@ -16,10 +17,28 @@ public class User implements Serializable{
     int score;
     int count;
 
+    ArrayList<String> joinedMeetings = new ArrayList<>();
 
     public Interest interest = new Interest();
     public EatingPreferences eatingPreferences = new EatingPreferences();
     public Meeting meetingPreferences = new Meeting();
+
+
+    public User(String name, String username, String email, String phone, String location, String profileImageUrl, int birthYear, int score, int count, ArrayList<String> joinedMeetings, Interest interest, EatingPreferences eatingPreferences, Meeting meetingPreferences) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.location = location;
+        this.profileImageUrl = profileImageUrl;
+        this.birthYear = birthYear;
+        this.score = score;
+        this.count = count;
+        this.joinedMeetings = joinedMeetings;
+        this.interest = interest;
+        this.eatingPreferences = eatingPreferences;
+        this.meetingPreferences = meetingPreferences;
+    }
 
     public User() {
     }
@@ -133,5 +152,13 @@ public class User implements Serializable{
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public ArrayList<String> getJoinedMeetings() {
+        return joinedMeetings;
+    }
+
+    public void setJoinedMeetings(ArrayList<String> joinedMeetings) {
+        this.joinedMeetings = joinedMeetings;
     }
 }

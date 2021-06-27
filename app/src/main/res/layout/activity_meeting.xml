@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginBottom="12dp"
         android:onClick="join"
         android:text="joın"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,14 +22,14 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="409dp"
-        android:layout_height="203dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/creatorText"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="414dp"
+        android:layout_height="292dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginBottom="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/datetimeText2"
+        app:layout_constraintEnd_toEndOf="@+id/datetimeText2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetNameText"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
@@ -43,103 +43,95 @@
         app:layout_constraintBottom_toTopOf="@+id/button13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetText" />
+        app:layout_constraintTop_toBottomOf="@+id/eatText" />
 
     <TextView
         android:id="@+id/meetText"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="46dp"
         android:layout_marginStart="1dp"
+        android:layout_marginTop="46dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="45dp"
         android:text="meet Text"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/intText"
+        app:layout_constraintBottom_toBottomOf="@+id/intText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eatText" />
+        app:layout_constraintTop_toTopOf="@+id/eatText" />
 
     <TextView
         android:id="@+id/meetNameText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="418dp"
+        android:layout_height="49dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="250dp"
         android:text="name"
         android:textAlignment="center"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/creatorText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:text="creator"
-        android:textAlignment="center"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/datetimeText2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/datetimeText2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
+        android:layout_height="40dp"
         android:text="datetime"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/restText"
-        app:layout_constraintEnd_toStartOf="@+id/locText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creatorText" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.598" />
 
     <TextView
         android:id="@+id/locText"
         android:layout_width="0dp"
-        android:layout_height="45sp"
+        android:layout_height="0dp"
         android:layout_marginEnd="2dp"
         android:text="location"
         android:textAlignment="center"
         android:textColor="#311B92"
         android:textSize="18sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBaseline_toBaselineOf="@+id/datetimeText2"
+        app:layout_constraintBottom_toTopOf="@+id/restText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/datetimeText2" />
+        app:layout_constraintStart_toEndOf="@+id/datetimeText2"
+        app:layout_constraintTop_toBottomOf="@+id/datetimeText2" />
 
     <TextView
         android:id="@+id/restText"
-        android:layout_width="0dp"
+        android:layout_width="409dp"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
         android:text="restaurant name"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/eatText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/datetimeText2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/datetimeText2"
         app:layout_constraintTop_toBottomOf="@+id/datetimeText2" />
 
     <TextView
         android:id="@+id/eatText"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="45dp"
         android:text="eatText"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/meetText"
+        app:layout_constraintBottom_toTopOf="@+id/intText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restText" />

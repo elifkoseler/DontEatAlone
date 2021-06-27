@@ -1,6 +1,7 @@
 package com.elf.dea.MeetingData;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Meeting implements Serializable {
     public String name;
@@ -14,6 +15,22 @@ public class Meeting implements Serializable {
     String imageUrl;
     Restaurant restaurant = new Restaurant();
     String creator;
+    ArrayList<String> participants = new ArrayList<>();
+
+    public Meeting(String name, int day, int month, int year, int hour, int second, String district, String address, String imageUrl, Restaurant restaurant, String creator, ArrayList<String> participants) {
+        this.name = name;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.hour = hour;
+        this.second = second;
+        this.district = district;
+        this.address = address;
+        this.imageUrl = imageUrl;
+        this.restaurant = restaurant;
+        this.creator = creator;
+        this.participants = participants;
+    }
 
     public Meeting(String name, int day, int month, int year, int hour, int second, String district, String address, String imageUrl, Restaurant restaurant, String creator) {
         this.name = name;
@@ -130,5 +147,13 @@ public class Meeting implements Serializable {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public ArrayList<String> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(ArrayList<String> participants) {
+        this.participants = participants;
     }
 }

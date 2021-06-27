@@ -1,25 +1,17 @@
 package com.elf.dea;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.elf.dea.MeetingData.Meeting;
 import com.elf.dea.UserData.User;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,10 +20,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
-public class MeetingActivity extends AppCompatActivity {
+public class CreatedMeetingActivity extends AppCompatActivity {
     int position;
     ArrayList<String> usernameFromDB;
     ArrayList<String> meetingNameFromDB;
@@ -41,9 +32,13 @@ public class MeetingActivity extends AppCompatActivity {
     ArrayList<String> meetingRestaurantNameFromDB;
     ArrayList<String> meetingCreators;
 
+    ArrayList<String> participantList;
+    ArrayList<String> participantUsernameList;
+
     TextView name, datetime, location, restName , eatType, meetpr, interestText;
     ImageView imageView;
     TextView creator;
+    TextView participantText;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
@@ -54,8 +49,7 @@ public class MeetingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meeting);
-
+        setContentView(R.layout.activity_created_meeting);
         firebaseAuth =FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -67,6 +61,9 @@ public class MeetingActivity extends AppCompatActivity {
         meetingRestaurantNameFromDB = new ArrayList<>();
 
         meetingCreators = new ArrayList<>();
+
+        participantList = new ArrayList<>();
+        participantUsernameList = new ArrayList<>();
 
         Intent intent = getIntent();
         position = intent.getIntExtra("position", 0);
@@ -90,19 +87,19 @@ public class MeetingActivity extends AppCompatActivity {
         meetpr = findViewById(R.id.meetText);
         interestText = findViewById(R.id.intText);
         imageView = findViewById(R.id.imageView9);
+        participantText = findViewById(R.id.participantText);
+
 
 
         String name1 = meetingNameFromDB.get(position);
-
         name.setText(name1);
         datetime.setText(meetingDateTimeFromDB.get(position));
         location.setText(meetingDistrictFromDB.get(position));
         restName.setText(meetingRestaurantNameFromDB.get(position));
         Picasso.get().load(meetingImageFromDB.get(position)).into(imageView);
-
         getUserInterestFromDB(meetingCreators.get(position));
-    }
 
+    }
     public void getUserInterestFromDB(String creator){
 
         CollectionReference userCollectionReference = firebaseFirestore.collection("Users");
@@ -172,6 +169,7 @@ public class MeetingActivity extends AppCompatActivity {
                         meeting.getRestaurant().getPlaceFeature().setWifi(hasWifi);
                         meeting.getRestaurant().getPlaceFeature().setOuterSpace(hasOuterSpace);
                         meeting.getRestaurant().getPlaceFeature().setInnerSpace(hasInnerSpace);
+                        System.out.println("EAT TYPE1122: "+isBar);
 
 
                         meeting.getRestaurant().getEatType().setFish(isFish);
@@ -180,19 +178,69 @@ public class MeetingActivity extends AppCompatActivity {
                         meeting.getRestaurant().getEatType().setCafe(isCafe);
                         meeting.getRestaurant().getEatType().setFastfood(isFastFood);
                         meeting.getRestaurant().getEatType().setTraditional(isTraditional);
+                        System.out.println("EAT TYPE11: "+ meeting.getRestaurant().getEatType().isBar());
 
                         meeting.getRestaurant().setExpenses(expenses);
                         meeting.getRestaurant().setName(resname);
+                        getParticipantsFromDB(user, meeting, mail);
 
-                        showMeeting(user, meeting);
                     }
                 }
 
             }
         });
     }
+    public void getParticipantsFromDB(User user, Meeting meeting, String mail){
+        CollectionReference meetingCollectionReference = firebaseFirestore.collection("Meetings");
+        meetingCollectionReference.document(mail).collection("Participants").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    System.out.println("DB ERROR");
+                }
+                if (value != null) {
+                    for (DocumentSnapshot snapshot : value.getDocuments()) {
+                        Map<String, Object> data = snapshot.getData();
 
-    public  void showMeeting(User user, Meeting meeting){
+                        String participant = (String) data.get("participant");
+                        participantList.add(participant);
+                        meeting.getParticipants().add(participant);
+                        getUsernameFromDB(user, meeting, mail);
+                    }
+                }
+
+            }
+        });
+
+    }
+
+    public void getUsernameFromDB(User user,Meeting meeting, String mail){
+        CollectionReference userCollectionRef = firebaseFirestore.collection("Users");
+
+        for (String email : meeting.getParticipants()){
+               userCollectionRef.document(email).collection("User Info").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                   @Override
+                   public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                       if (error != null) {
+                           System.out.println("DB ERROR");
+                       }
+                       if (value != null) {
+                           for (DocumentSnapshot snapshot : value.getDocuments()) {
+                               Map<String, Object> data = snapshot.getData();
+
+                               String participantUsername = (String) data.get("username");
+                               participantUsernameList.add(participantUsername);
+                               showMeeting(user, meeting, participantUsernameList);
+
+                           }
+                       }
+                   }
+               });
+        }
+
+    }
+
+    public void showMeeting(User user, Meeting meeting, ArrayList<String> participantList){
         String eatPref = "";
         String meetPref = "";
         String availablity = "";
@@ -218,6 +266,7 @@ public class MeetingActivity extends AppCompatActivity {
             eatPref += " Bar /";
         }
         eatType.setText(eatPref);
+        System.out.println("EAT TYPE: "+ meeting.getRestaurant().getEatType().isBar());
         //////////meetPref
         if(meeting.getRestaurant().getPlaceFeature().isWifi()){
             meetPref += " WiFi /";
@@ -253,57 +302,13 @@ public class MeetingActivity extends AppCompatActivity {
             interest += " Music /";
         }
         interestText.setText(interest);
-    }
 
-    public void join(View view){
-        String creator = meetingCreators.get(position);
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("participant", firebaseAuth.getCurrentUser().getEmail());
+        String participants = "PARTICIPANTS: \n";
 
-        HashMap<String, Object> meetingData = new HashMap<>();
-        meetingData.put("meeting name", meetingNameFromDB.get(position));
-        meetingData.put("creator of meeting", creator);
-
-        firebaseFirestore.collection("Meetings").document(creator).collection("Participants")
-                .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                System.out.println("Participant: " + firebaseAuth.getCurrentUser().getEmail() + " added to: " + meetingNameFromDB.get(position));
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MeetingActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
-
-            }
-        });
-
-        firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).collection("Meetings I've joined")
-                .add(meetingData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                System.out.println("Participant: " + firebaseAuth.getCurrentUser().getEmail() + " added to: " + meetingNameFromDB.get(position));
-                AlertDialog alertDialog = new AlertDialog.Builder(MeetingActivity.this).create();
-                alertDialog.setTitle("Successfully");
-                alertDialog.setMessage("You have joined the meeting!");
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                alertDialog.show();
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MeetingActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
-
-            }
-        });
-
+        for (String part: participantList){
+            participants += part + "\n";
+        }
+        participantText.setText(participants);
     }
 
 }

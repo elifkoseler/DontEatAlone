@@ -192,7 +192,7 @@ public class MyMeetingsActivity extends AppCompatActivity implements MyMeetingsA
         else{
             System.out.println("View " + meetingNameFromDB.get(position));
 
-            Intent intent = new Intent(MyMeetingsActivity.this, MeetingActivity.class);
+            Intent intent = new Intent(MyMeetingsActivity.this, CreatedMeetingActivity.class);
             intent.putExtra("position", position);
             intent.putExtra("meetingNameFromDB", meetingNameFromDB);
             intent.putExtra("meetingDateTimeFromDB", meetingDateTimeFromDB);

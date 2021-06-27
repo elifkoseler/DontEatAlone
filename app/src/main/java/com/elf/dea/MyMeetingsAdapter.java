@@ -83,7 +83,7 @@ public class MyMeetingsAdapter extends RecyclerView.Adapter<MyMeetingsAdapter.Vi
             meetingRestaurantNameText = itemView.findViewById(R.id.editRestaurantText);
             button = itemView.findViewById(R.id.editButton);
             button.setOnClickListener(this);
-
+            itemView.setOnClickListener(this);
 
         }
         @Override
