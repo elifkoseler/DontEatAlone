@@ -136,7 +136,7 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseFirestore.collection("UserMails").add(emailData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(ProfileActivity.this,"UserMail Dbye eklendi!!",Toast.LENGTH_LONG).show();
+                //Toast.makeText(ProfileActivity.this,"UserMail Dbye eklendi!!",Toast.LENGTH_LONG).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -152,7 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(ProfileActivity.this,"Dbye eklendi!!",Toast.LENGTH_LONG).show();
+               // Toast.makeText(ProfileActivity.this,"Dbye eklendi!!",Toast.LENGTH_LONG).show();
                 System.out.println("Profile OnSuccesstesin");
                 Intent intent = new Intent(ProfileActivity.this, EatingPreferenceActivity.class);
                 intent.putExtra("user",user);

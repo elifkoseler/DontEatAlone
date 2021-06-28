@@ -143,7 +143,7 @@ public class AvailabilityActivity extends AppCompatActivity {
                 .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(AvailabilityActivity.this," USER INFO AVAILABLE Dbye eklendi!!",Toast.LENGTH_LONG).show();
+                //Toast.makeText(AvailabilityActivity.this," USER INFO AVAILABLE Dbye eklendi!!",Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(AvailabilityActivity.this, StartActivity.class);
                 intent.putExtra("user",user);

@@ -12,6 +12,8 @@
         android:id="@+id/button11"
         android:layout_width="409dp"
         android:layout_height="60dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
         android:layout_marginBottom="15dp"
         android:onClick="ShowMatch"
         android:text="Show me match"
@@ -26,8 +28,10 @@
     <Button
         android:id="@+id/button8"
         android:layout_width="409dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="27dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="10dp"
         android:background="#DD8282"
         android:onClick="ShowAll"
         android:text="Show me all"
@@ -42,11 +46,11 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="409dp"
-        android:layout_height="50dp"
+        android:layout_width="413dp"
+        android:layout_height="54dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="16dp"
         android:background="#DD8282"
         android:onClick="CreateActivity"
         android:text="Create a meetıng"
@@ -55,68 +59,19 @@
         app:iconTint="#493B3B"
         app:layout_constraintBottom_toTopOf="@+id/button11"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="500dp"
-        android:layout_height="350dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="54dp"
-        android:background="@drawable/food2"
-        android:paddingTop="90dp"
-
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        android:layout_width="413dp"
+        android:layout_height="380dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/welcome" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintEnd_toStartOf="@+id/textView14"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintRight_toLeftOf="@id/textView14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/celeb" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="330dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/celeb2" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="246dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="80dp"
-        android:text="Let's start"
-        android:textAlignment="center"
-        android:textColor="#856FAC"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:srcCompat="@drawable/welcomm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
