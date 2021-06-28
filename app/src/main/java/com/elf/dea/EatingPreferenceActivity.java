@@ -116,7 +116,6 @@ public class EatingPreferenceActivity extends AppCompatActivity {
 
 
 
-        Toast.makeText(EatingPreferenceActivity.this, "Next", Toast.LENGTH_LONG).show();
     }
 
     public void Back(View view) {

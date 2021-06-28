@@ -82,8 +82,8 @@ public class CreatedMeetingActivity extends AppCompatActivity {
         name = findViewById(R.id.meetNameText);
         datetime = findViewById(R.id.datetimeText2);
         location = findViewById(R.id.locText);
-        restName = findViewById(R.id.restText);
-        eatType = findViewById(R.id.eatText);
+        restName = findViewById(R.id.crestText);
+        eatType = findViewById(R.id.ceatText);
         meetpr = findViewById(R.id.meetText);
         interestText = findViewById(R.id.intText);
         imageView = findViewById(R.id.imageView9);
@@ -121,6 +121,24 @@ public class CreatedMeetingActivity extends AppCompatActivity {
                         user.getInterest().setSports(sport);
                         user.getInterest().setTechnology(tech);
                         user.getInterest().setTravel(travel);
+
+                        String interest = "";
+                        if(user.getInterest().isTravel()){
+                            interest += " Travel /";
+                        }
+                        if (user.getInterest().isTechnology()){
+                            interest += " Technology /";
+                        }
+                        if (user.getInterest().isSports()){
+                            interest += " Sports /";
+                        }
+                        if (user.getInterest().isArt()){
+                            interest += " Art /";
+                        }
+                        if (user.getInterest().isMusic()){
+                            interest += " Music /";
+                        }
+                        interestText.setText(interest);
 
                         getMeetingRestaurantFromDB(user, creator, meeting);
 
@@ -171,6 +189,23 @@ public class CreatedMeetingActivity extends AppCompatActivity {
                         meeting.getRestaurant().getPlaceFeature().setInnerSpace(hasInnerSpace);
                         System.out.println("EAT TYPE1122: "+isBar);
 
+                        String meetPref = "";
+                        if(meeting.getRestaurant().getPlaceFeature().isWifi()){
+                            meetPref += " WiFi /";
+                        }
+                        if(meeting.getRestaurant().getPlaceFeature().isSmokingArea()){
+                            meetPref += " Smoking Area /";
+                        }
+                        if(meeting.getRestaurant().getPlaceFeature().isOuterSpace()){
+                            meetPref += " Outer Space /";
+                        }
+                        if(meeting.getRestaurant().getPlaceFeature().isInnerSpace()){
+                            meetPref += " Inner Space /";
+                        }
+                        if(meeting.getRestaurant().getPlaceFeature().isAvailableForAnimals()){
+                            meetPref += " Animal Friendly /";
+                        }
+                        meetpr.setText(meetPref);
 
                         meeting.getRestaurant().getEatType().setFish(isFish);
                         meeting.getRestaurant().getEatType().setMeat(isMeat);
@@ -179,6 +214,27 @@ public class CreatedMeetingActivity extends AppCompatActivity {
                         meeting.getRestaurant().getEatType().setFastfood(isFastFood);
                         meeting.getRestaurant().getEatType().setTraditional(isTraditional);
                         System.out.println("EAT TYPE11: "+ meeting.getRestaurant().getEatType().isBar());
+
+                        String eatPref = "";
+                        if(meeting.getRestaurant().getEatType().isFish()){
+                            eatPref += " Fish /";
+                        }
+                        if(meeting.getRestaurant().getEatType().isMeat()){
+                            eatPref += " Meat /";
+                        }
+                        if(meeting.getRestaurant().getEatType().isTraditional()){
+                            eatPref += " Traditional /";
+                        }
+                        if(meeting.getRestaurant().getEatType().isCafe()){
+                            eatPref += " Cafe /";
+                        }
+                        if(meeting.getRestaurant().getEatType().isFastfood()){
+                            eatPref += " Fast-food /";
+                        }
+                        if(meeting.getRestaurant().getEatType().isBar()){
+                            eatPref += " Bar /";
+                        }
+                        eatType.setText(eatPref);
 
                         meeting.getRestaurant().setExpenses(expenses);
                         meeting.getRestaurant().setName(resname);
@@ -191,6 +247,8 @@ public class CreatedMeetingActivity extends AppCompatActivity {
         });
     }
     public void getParticipantsFromDB(User user, Meeting meeting, String mail){
+        System.out.println("EAT TYPE3: "+ meeting.getRestaurant().getEatType().isBar());
+
         CollectionReference meetingCollectionReference = firebaseFirestore.collection("Meetings");
         meetingCollectionReference.document(mail).collection("Participants").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -204,7 +262,7 @@ public class CreatedMeetingActivity extends AppCompatActivity {
 
                         String participant = (String) data.get("participant");
                         participantList.add(participant);
-                        meeting.getParticipants().add(participant);
+                        meeting.setParticipants(participantList);
                         getUsernameFromDB(user, meeting, mail);
                     }
                 }
@@ -214,8 +272,9 @@ public class CreatedMeetingActivity extends AppCompatActivity {
 
     }
 
-    public void getUsernameFromDB(User user,Meeting meeting, String mail){
+    public void getUsernameFromDB(User user, Meeting meeting, String mail){
         CollectionReference userCollectionRef = firebaseFirestore.collection("Users");
+        System.out.println("EAT TYPE4: "+ meeting.getRestaurant().getEatType().isBar());
 
         for (String email : meeting.getParticipants()){
                userCollectionRef.document(email).collection("User Info").addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -246,6 +305,7 @@ public class CreatedMeetingActivity extends AppCompatActivity {
         String availablity = "";
         String interest = "";
         String datetime = "";
+        System.out.println("EAT TYPE5 "+ meeting.getRestaurant().getEatType().isBar());
 
         if(meeting.getRestaurant().getEatType().isFish()){
             eatPref += " Fish /";

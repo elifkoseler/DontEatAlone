@@ -40,7 +40,7 @@
         app:layout_constraintBottom_toTopOf="@+id/intText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eatText" />
+        app:layout_constraintTop_toBottomOf="@+id/ceatText" />
 
     <TextView
         android:id="@+id/meetNameText"
@@ -64,7 +64,7 @@
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/restText"
+        app:layout_constraintBottom_toTopOf="@+id/crestText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locText" />
@@ -85,20 +85,20 @@
         app:layout_constraintTop_toBottomOf="@+id/meetNameText" />
 
     <TextView
-        android:id="@+id/restText"
+        android:id="@+id/crestText"
         android:layout_width="411dp"
         android:layout_height="38dp"
         android:text="restaurant name"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/eatText"
+        app:layout_constraintBottom_toTopOf="@+id/ceatText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/datetimeText2" />
 
     <TextView
-        android:id="@+id/eatText"
+        android:id="@+id/ceatText"
         android:layout_width="416dp"
         android:layout_height="48dp"
         android:text="eatText"
@@ -107,7 +107,7 @@
         app:layout_constraintBottom_toTopOf="@+id/meetText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restText" />
+        app:layout_constraintTop_toBottomOf="@+id/crestText" />
 
     <TextView
         android:id="@+id/participantText"
@@ -115,7 +115,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif-black"
-        android:text="participant"
+        android:text="There is no participant yet!"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

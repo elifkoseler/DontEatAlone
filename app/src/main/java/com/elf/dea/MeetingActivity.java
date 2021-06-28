@@ -106,7 +106,7 @@ public class MeetingActivity extends AppCompatActivity {
     public void getUserInterestFromDB(String creator){
 
         CollectionReference userCollectionReference = firebaseFirestore.collection("Users");
-        userCollectionReference.document(firebaseAuth.getCurrentUser().getEmail()).collection("Interests").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        userCollectionReference.document(creator).collection("Interests").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
                 if(value != null ){
@@ -193,6 +193,7 @@ public class MeetingActivity extends AppCompatActivity {
     }
 
     public  void showMeeting(User user, Meeting meeting){
+        System.out.println("BAR: " + meeting.getRestaurant().getEatType().isBar());
         String eatPref = "";
         String meetPref = "";
         String availablity = "";
@@ -289,7 +290,6 @@ public class MeetingActivity extends AppCompatActivity {
                 alertDialog.setMessage("You have joined the meeting!");
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                     }
                 });
 

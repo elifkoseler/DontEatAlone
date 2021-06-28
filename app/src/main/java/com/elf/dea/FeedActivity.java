@@ -171,7 +171,6 @@ public class FeedActivity extends AppCompatActivity implements FeedRecyclerAdapt
             alertDialog1.setMessage("It is already yours!");
             alertDialog1.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog1, int which) {
-                    Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                 }
             });
             alertDialog1.show();
@@ -207,7 +206,6 @@ public class FeedActivity extends AppCompatActivity implements FeedRecyclerAdapt
                     alertDialog.setMessage("You have joined the meeting!");
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                         }
                     });
 
