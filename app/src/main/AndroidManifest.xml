@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dea">
-        <activity android:name=".CreatedMeetingActivity"></activity>
+        <activity android:name=".MatchedMeetingActivity"></activity>
+        <activity android:name=".CreatedMeetingActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".EditMeetingActivity" />
         <activity android:name=".MyMeetingsAdapter" />
@@ -42,7 +43,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

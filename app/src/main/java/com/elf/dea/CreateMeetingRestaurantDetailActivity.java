@@ -182,6 +182,7 @@ public class CreateMeetingRestaurantDetailActivity extends AppCompatActivity {
         data.put("create date", FieldValue.serverTimestamp());
         data.put("imageurl", meeting.getImageUrl());
         data.put("restaurant name", meeting.getRestaurant().getName());
+        data.put("participant number", meeting.getNumberOfParticipant());
 
         /*LocalDate localDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

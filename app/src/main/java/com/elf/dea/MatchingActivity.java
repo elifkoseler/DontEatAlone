@@ -50,14 +50,16 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
     ArrayList<String> meetingRestaurantNameFromDB;
     ArrayList<String> allMails;
     ArrayList<String> meetingCreators;
+    ArrayList<Integer> resultList;
 
     ArrayList<Meeting> meetingList;
     ArrayList<Meeting> tempMeetingList;
     ArrayList<User> userList;
+    ArrayList<Integer> numberOfParticipantList;
 
     User user;
 
-
+    int result;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { //menuyu bağlamak için
@@ -129,6 +131,9 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
         meetingList = new ArrayList<>();
         tempMeetingList = new ArrayList<>();
 
+        resultList = new ArrayList<>();
+        numberOfParticipantList = new ArrayList<>();
+
         user = new User();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -171,7 +176,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
                         user.getEatingPreferences().setTraditional(isTraditional);
 
                         getUserMeetingPreferenceFromDB(user);
-                        System.out.println("__get EATİNG: " + user.getEatingPreferences().isCoffee());
+                    //    System.out.println("__get EATİNG: " + user.getEatingPreferences().isCoffee());
 
 
                     }
@@ -203,7 +208,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
                         user.getMeetingPreferences().getRestaurant().getPlaceFeature().setWifi(hasWifi);
 
                         getUserInterestFromDB(user);
-                        System.out.println("__get MEETİNG: " + user.getEatingPreferences().isCoffee());
+                   //     System.out.println("__get MEETİNG: " + user.getEatingPreferences().isCoffee());
 
 
                     }
@@ -235,7 +240,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
                         user.getInterest().setTravel(travel);
 
                         getUserAvailabilityInfoFromDB(user);
-                        System.out.println("__get INTEREST: " + user.getEatingPreferences().isCoffee());
+                      //  System.out.println("__get INTEREST: " + user.getEatingPreferences().isCoffee());
 
 
                     }
@@ -269,7 +274,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
 
                         getMailDataFromFirestore(user);
 
-                        System.out.println("__get AVAİLABLE: " + user.getEatingPreferences().isCoffee());
+                      //  System.out.println("__get AVAİLABLE: " + user.getEatingPreferences().isCoffee());
 
 
                     }
@@ -308,7 +313,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
     // meetinge yolla useri zaten user tek
 
     public void getAllMeetingDataFromFirestore(String mail, User user) {
-        System.out.println("MATCHING >> getDataFromFB methoduna girdi");
+      //  System.out.println("MATCHING >> getDataFromFB methoduna girdi");
         System.out.println("MAİL: " + mail);
 
         Meeting meeting = new Meeting();
@@ -357,7 +362,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
 
                         //MatchingCalculator(user, meeting);
 
-                        System.out.println("__get INTERESTMEET: " + user.getEatingPreferences().isCoffee());
+                        //System.out.println("__get INTERESTMEET: " + user.getEatingPreferences().isCoffee());
 
 
                     }
@@ -370,10 +375,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
 
 
     public void getMeetingRestaurantFromDB(User user, Meeting meeting, String mail){
-        for (Meeting meet : meetingList){
-            System.out.println("MEETLİST => " + meetingList.indexOf(meet)+ " => " +meet.getDistrict());
-        }
-        System.out.println("+++ Second Meeting Func =>  " + meeting.getDistrict());
+      //  System.out.println("+++ Second Meeting Func =>  " + meeting.getDistrict());
 
         CollectionReference meetingCollectionReference = firebaseFirestore.collection("Meetings");
         meetingCollectionReference.document(mail).collection("Restaurant").addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -425,8 +427,8 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
                         //sonrasında bu çıkan puanların meetleriyle creatora gidip userin interestlerini karşılaştırıcaz.
                         //en son feedrecycle için basıcaz feed kaç puan üstü olacak henüz karar veremedim
 
-                        System.out.println("-- LAST MATCH DB: " + meeting.getDistrict());
-                        System.out.println("-- LAST : user:  " + user.getEatingPreferences().isCoffee());
+                        //System.out.println("-- LAST MATCH DB: " + meeting.getDistrict());
+                       // System.out.println("-- LAST : user:  " + user.getEatingPreferences().isCoffee());
 
 
                         MeetingMatchingCalculator(user, meeting);
@@ -474,25 +476,25 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
 
         //Date matching----------------------------------------------------------------------------
         if(user.getMeetingPreferences().getYear() == meeting.getYear()){ //yıllar eşitse
-            System.out.println("DatePoint = "+ datePoint);
+            //System.out.println("DatePoint = "+ datePoint);
 
             if(user.getMeetingPreferences().getMonth() == meeting.getMonth()){
                 datePoint += 10;
-                System.out.println("DatePoint = "+ datePoint);
+               // System.out.println("DatePoint = "+ datePoint);
 
                 if(user.getMeetingPreferences().getDay() == meeting.getDay()){ //perfect match
                     datePoint += 10;
-                    System.out.println("DatePoint = "+ datePoint);
+                //    System.out.println("DatePoint = "+ datePoint);
 
                 }
                 else if(Math.abs(user.getMeetingPreferences().getDay() - meeting.getDay()) <= 7){
                     datePoint += 5;
-                    System.out.println("DatePoint = "+ datePoint);
+                  //  System.out.println("DatePoint = "+ datePoint);
 
                 }
                 else if(Math.abs(user.getMeetingPreferences().getDay() - meeting.getDay()) > 7 && Math.abs(user.getMeetingPreferences().getDay() - meeting.getDay()) <= 14){
                     datePoint += 3;
-                    System.out.println("DatePoint = "+ datePoint);
+                  //  System.out.println("DatePoint = "+ datePoint);
 
                 }
                 else{
@@ -541,7 +543,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
             locPoint +=10;
         }
         if(Anatolia.contains(userLoc) && Anatolia.contains(meetLoc) && Popular.contains(userLoc) && Popular.contains(meetLoc)){
-            System.out.println("LocPoint = " + locPoint);
+       //     System.out.println("LocPoint = " + locPoint);
             locPoint += 2;
         }
         if(Europe.contains(userLoc) && Europe.contains(meetLoc) && Popular.contains(userLoc) && Popular.contains(meetLoc)){
@@ -607,13 +609,13 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
 //Buraya if koşulu gelecek şu puanı geçen meetin interestine bakılacak şeklidne sonrasında getUserInterestFormatch funcına yollanacak
 
 
-        System.out.println("-- MATCH MATCH: " + meeting.getDistrict());
-        System.out.println("-- MATCH MATCH: " + user.getMeetingPreferences().getDistrict());
-        System.out.println("DatePoint = "+ datePoint);
-        System.out.println("TimePoint = " + timePoint);
-        System.out.println("LocPoint = " + locPoint);
-        System.out.println("EatPoint = " + eatPoint);
-        System.out.println("PlacePoint = " + placePoint);
+        System.out.println("-- Meeting District: " + meeting.getDistrict());
+        System.out.println("-- User District: " + user.getMeetingPreferences().getDistrict());
+        System.out.println("DatePoint = "+  meeting.getName()+" ("+meeting.getDistrict() + ") :"+ datePoint);
+        System.out.println("TimePoint = " +  meeting.getName()+" ("+meeting.getDistrict() + ") :"+  timePoint);
+        System.out.println("LocPoint = " + meeting.getName()+" ("+meeting.getDistrict() + ") :"+  locPoint);
+        System.out.println("EatPoint = " + meeting.getName()+" ("+meeting.getDistrict() + ") :"+ eatPoint);
+        System.out.println("PlacePoint = " + meeting.getName()+" ("+meeting.getDistrict() + ") :"+  placePoint);
 
         res = datePoint + timePoint + eatPoint + intPoint + locPoint + placePoint;
         if( res >= 50 && meeting.getCreator() != firebaseAuth.getCurrentUser().getEmail()){
@@ -621,10 +623,10 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
 
         }
         else{
-            System.out.println("First RES is smaller than 50!!!!!!");
+            System.out.println("First Result is smaller than 50!! =>"+ meeting.getName()+" ("+meeting.getDistrict() + ") :");
         }
 
-        System.out.println("++ Result => " + res);
+        System.out.println("++ First Result => " + res);
     }
 
     public void getUserInterestFromDBforMatching(User user, Meeting meeting, int res){
@@ -651,7 +653,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
                         tempUser.getInterest().setTechnology(tech);
                         tempUser.getInterest().setTravel(travel);
 
-                        System.out.println("TEMP USER Interest: " + tempUser.getInterest().isArt());
+                       // System.out.println("TEMP USER Interest: " + tempUser.getInterest().isArt());
 
                         UserMatchingCalculator(user, tempUser, meeting, res);
                     }
@@ -666,39 +668,42 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
         if(user.getInterest().isArt() == userToMatch.getInterest().isArt()){
 
             intPoint += 4;
-            System.out.println("Intpoint1 = " + intPoint);
+            //System.out.println("Intpoint1 = " + intPoint);
 
         }
         if(user.getInterest().isMusic() == userToMatch.getInterest().isMusic()){
             intPoint += 4;
-            System.out.println("Intpoint2 = " + intPoint);
+            //System.out.println("Intpoint2 = " + intPoint);
 
         }
         if(user.getInterest().isSports() == userToMatch.getInterest().isSports()){
             intPoint += 4;
-            System.out.println("Intpoint3 = " + intPoint);
+            //System.out.println("Intpoint3 = " + intPoint);
 
         }
         if(user.getInterest().isTechnology() == userToMatch.getInterest().isTechnology()){
             intPoint += 4;
-            System.out.println("Intpoint4 = " + intPoint);
+           // System.out.println("Intpoint4 = " + intPoint);
 
         }
         if(user.getInterest().isTravel() == userToMatch.getInterest().isTravel()){
             intPoint += 4;
-            System.out.println("Intpoint5 = " + intPoint);
+            //System.out.println("Intpoint5 = " + intPoint);
 
         }
 
         res += intPoint;
-        System.out.println("IntpointLAST = " + intPoint);
+        System.out.println("Interest Point = " + meeting.getName()+" ("+meeting.getDistrict() + ") :"+ intPoint);
 
-        System.out.println("++ LAST Result => " + res);
+        System.out.println("++ LAST Result => "+ meeting.getName()+" ("+meeting.getDistrict() + ") vs " + user.getMeetingPreferences().getDistrict() + ": "+ res);
 
         String datetime = String.valueOf(meeting.getDay()) + "/" + String.valueOf(meeting.getMonth()) + "/" + String.valueOf(meeting.getYear()) +
                 " " + String.valueOf(meeting.getHour()) + ":" + String.valueOf(meeting.getSecond());
 
 
+        result = res;
+        resultList.add(res);
+        numberOfParticipantList.add(meeting.getNumberOfParticipant());
 
         if(!meeting.getCreator().equals(firebaseAuth.getCurrentUser().getEmail())){
             meetingCreators.add(meeting.getCreator());
@@ -707,6 +712,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
             meetingDistrictFromDB.add(meeting.getDistrict());
             meetingImageFromDB.add(meeting.getImageUrl());
             meetingRestaurantNameFromDB.add(meeting.getRestaurant().getName());
+
         }
         feedRecyclerAdapter.notifyDataSetChanged();
         //buraya da en son çıkan resulta göre feedrecycle çıkar geç
@@ -722,7 +728,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
         else{
         System.out.println("View " + meetingNameFromDB.get(position));
 
-        Intent intent = new Intent(MatchingActivity.this, MeetingActivity.class);
+        Intent intent = new Intent(MatchingActivity.this, MatchedMeetingActivity.class);
         intent.putExtra("position", position);
         intent.putExtra("meetingNameFromDB", meetingNameFromDB);
         intent.putExtra("meetingDateTimeFromDB", meetingDateTimeFromDB);
@@ -730,6 +736,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
         intent.putExtra("meetingDistrictFromDB", meetingDistrictFromDB);
         intent.putExtra("meetingImageFromDB", meetingImageFromDB);
         intent.putExtra("meetingCreators", meetingCreators);
+        intent.putExtra("result", resultList);
 
         startActivity(intent);
         }
@@ -744,7 +751,6 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
         meetingData.put("creator of meeting", creator);
 
         if (creator.equals(firebaseAuth.getCurrentUser().getEmail())) {
-            System.out.println("ILK IF");
             AlertDialog alertDialog1 = new AlertDialog.Builder(MatchingActivity.this).create();
             alertDialog1.setTitle("YOU CAN'T JOIN THIS MEETING");
             alertDialog1.setMessage("It is already yours!");
@@ -775,6 +781,7 @@ public class MatchingActivity extends AppCompatActivity implements FeedRecyclerA
                     .add(meetingData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
+
                     System.out.println("Participant: " + firebaseAuth.getCurrentUser().getEmail() + " added to: " + meetingNameFromDB.get(position));
                     AlertDialog alertDialog = new AlertDialog.Builder(MatchingActivity.this).create();
                     alertDialog.setTitle("Successfully");

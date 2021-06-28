@@ -16,8 +16,10 @@ public class Meeting implements Serializable {
     Restaurant restaurant = new Restaurant();
     String creator;
     ArrayList<String> participants = new ArrayList<>();
+    int numberOfParticipant;
 
-    public Meeting(String name, int day, int month, int year, int hour, int second, String district, String address, String imageUrl, Restaurant restaurant, String creator, ArrayList<String> participants) {
+    public Meeting(String name, int day, int month, int year, int hour, int second, String district, String address, String imageUrl,
+                   Restaurant restaurant, String creator, ArrayList<String> participants,int numberOfParticipant) {
         this.name = name;
         this.day = day;
         this.month = month;
@@ -30,6 +32,7 @@ public class Meeting implements Serializable {
         this.restaurant = restaurant;
         this.creator = creator;
         this.participants = participants;
+        this.numberOfParticipant = numberOfParticipant;
     }
 
     public Meeting(String name, int day, int month, int year, int hour, int second, String district, String address, String imageUrl, Restaurant restaurant, String creator) {
@@ -155,5 +158,13 @@ public class Meeting implements Serializable {
 
     public void setParticipants(ArrayList<String> participants) {
         this.participants = participants;
+    }
+
+    public int getNumberOfParticipant() {
+        return numberOfParticipant;
+    }
+
+    public void setNumberOfParticipant(int numberOfParticipant) {
+        this.numberOfParticipant = numberOfParticipant;
     }
 }

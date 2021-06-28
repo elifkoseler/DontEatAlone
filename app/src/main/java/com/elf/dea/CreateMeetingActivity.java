@@ -58,6 +58,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
     EditText timeText;
     EditText locationText;
     EditText restaurantText;
+    EditText numberText;
 
     User user;
     Meeting meeting = new Meeting();
@@ -89,6 +90,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
         locationText = findViewById(R.id.locationText);
         locationText.setInputType(InputType.TYPE_NULL);
         restaurantText = findViewById(R.id.editTextRestaurant);
+        numberText = findViewById(R.id.editTextNumber);
 
         dateText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +170,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
         meeting.setSecond(min);
         meeting.setDistrict(district);
         meeting.getRestaurant().setName(restaurantText.getText().toString());
+        meeting.setNumberOfParticipant(Integer.parseInt(numberText.getText().toString()));
 
         if(imageData != null) {
             UUID uuid = UUID.randomUUID();
