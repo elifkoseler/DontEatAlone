@@ -1,8 +1,21 @@
 # DontEatAlone
 #### Android mobile application that unites people based on eating denominator powered by a rank-based matching algorithm
-
+![docs/1.jpg](docs/1.jpg)
+![docs/3.jpg](docs/3.jpg)
 ![docs/4.jpg](docs/4.jpg)
-
 ![docs/5.jpg](docs/5.jpg)
-
+![docs/6.jpg](docs/6.jpg)
+![docs/7.jpg](docs/7.jpg)
+![docs/8.jpg](docs/8.jpg)
+![docs/9.jpg](docs/9.jpg)
+![docs/10.jpg](docs/10.jpg)
+![docs/11.jpg](docs/11.jpg)
 ![docs/12.jpg](docs/12.jpg)
+![docs/13.jpg](docs/13.jpg)
+![docs/14.jpg](docs/14.jpg)
+![docs/15.jpg](docs/15.jpg)
+![docs/16.jpg](docs/16.jpg)
+![docs/17.jpg](docs/17.jpg)
+![docs/18.jpg](docs/18.jpg)
+![docs/19.jpg](docs/19.jpg)
+![docs/20.jpg](docs/20.jpg)
